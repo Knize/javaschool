@@ -6,6 +6,9 @@
         <element id="directory" name="classes">
           <element id="module-output" name="javaschool" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: checkstyle:checkstyle:2.17" />
+        </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/javaschool/META-INF/MANIFEST.MF" />
