@@ -8,25 +8,15 @@ public class DB {
             if(!connection.isClosed()){
                 System.out.println("Connected to MySql");
             }
-
-            int pasID = 0;
-            Statement statement = connection.createStatement();
             PreparedStatement findTickets = connection.prepareStatement("SELECT * FROM Ticket WHERE PASSENGER =?");
             findTickets.setInt(1, 1);
             ResultSet res = findTickets.executeQuery();
-
             while (res.next()){
                 System.out.print(res.getString(1) + " ");
                 System.out.print(res.getString(2) + " ");
                 System.out.print(res.getString(3) + " ");
                 System.out.println(res.getString(4));
             }
-
-
-
-
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
