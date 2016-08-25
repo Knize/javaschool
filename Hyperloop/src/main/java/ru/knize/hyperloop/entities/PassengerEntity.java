@@ -1,5 +1,7 @@
 package ru.knize.hyperloop.entities;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 /**
@@ -13,6 +15,8 @@ public class PassengerEntity {
     private String email;
 
     @Id
+    @GenericGenerator(name = "generator", strategy = "increment")
+    @GeneratedValue(generator = "generator")
     @Column(name = "Passenger_ID", nullable = false)
     public int getPassengerId() {
         return passengerId;
