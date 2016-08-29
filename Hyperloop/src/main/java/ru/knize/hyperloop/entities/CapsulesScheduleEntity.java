@@ -4,10 +4,10 @@ import javax.persistence.*;
 import java.sql.Time;
 
 /**
- * Created by knize on 23.08.16.
+ * Created by knize on 28.08.16.
  */
 @Entity
-@Table(name = "Capsules_Schedule", schema = "Hyperloop")
+@Table(name = "Capsules_Schedule", schema = "Hyperloop", catalog = "")
 @IdClass(CapsulesScheduleEntityPK.class)
 public class CapsulesScheduleEntity {
     private int capsuleId;
@@ -16,7 +16,7 @@ public class CapsulesScheduleEntity {
     private Time arrivalTime;
 
     @Id
-    @Column(name = "Capsule_ID", nullable = false)
+    @Column(name = "Capsule_ID")
     public int getCapsuleId() {
         return capsuleId;
     }
@@ -26,7 +26,7 @@ public class CapsulesScheduleEntity {
     }
 
     @Id
-    @Column(name = "Station_ID", nullable = false)
+    @Column(name = "Station_ID")
     public int getStationId() {
         return stationId;
     }
@@ -36,7 +36,7 @@ public class CapsulesScheduleEntity {
     }
 
     @Basic
-    @Column(name = "Departure_Time", nullable = true)
+    @Column(name = "Departure_Time")
     public Time getDepartureTime() {
         return departureTime;
     }
@@ -46,7 +46,7 @@ public class CapsulesScheduleEntity {
     }
 
     @Basic
-    @Column(name = "Arrival_Time", nullable = true)
+    @Column(name = "Arrival_Time")
     public Time getArrivalTime() {
         return arrivalTime;
     }

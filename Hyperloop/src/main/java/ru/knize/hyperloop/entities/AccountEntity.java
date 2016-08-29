@@ -1,33 +1,30 @@
 package ru.knize.hyperloop.entities;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 
 /**
- * Created by knize on 23.08.16.
+ * Created by knize on 28.08.16.
  */
 @Entity
-@Table(name = "Passenger", schema = "Hyperloop")
-public class PassengerEntity {
-    private int passengerId;
+@Table(name = "Account", schema = "Hyperloop", catalog = "")
+public class AccountEntity {
+    private int accountId;
     private String name;
     private String email;
+    private Byte verified;
 
     @Id
-    @GenericGenerator(name = "generator", strategy = "increment")
-    @GeneratedValue(generator = "generator")
-    @Column(name = "Passenger_ID", nullable = false)
-    public int getPassengerId() {
-        return passengerId;
+    @Column(name = "Account_ID")
+    public int getAccountId() {
+        return accountId;
     }
 
-    public void setPassengerId(int passengerId) {
-        this.passengerId = passengerId;
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
     }
 
     @Basic
-    @Column(name = "Name", nullable = true, length = -1)
+    @Column(name = "Name")
     public String getName() {
         return name;
     }
@@ -37,7 +34,7 @@ public class PassengerEntity {
     }
 
     @Basic
-    @Column(name = "email", nullable = true, length = -1)
+    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -46,25 +43,37 @@ public class PassengerEntity {
         this.email = email;
     }
 
+    @Basic
+    @Column(name = "Verified")
+    public Byte getVerified() {
+        return verified;
+    }
+
+    public void setVerified(Byte verified) {
+        this.verified = verified;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PassengerEntity that = (PassengerEntity) o;
+        AccountEntity that = (AccountEntity) o;
 
-        if (passengerId != that.passengerId) return false;
+        if (accountId != that.accountId) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
+        if (verified != null ? !verified.equals(that.verified) : that.verified != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = passengerId;
+        int result = accountId;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (verified != null ? verified.hashCode() : 0);
         return result;
     }
 }

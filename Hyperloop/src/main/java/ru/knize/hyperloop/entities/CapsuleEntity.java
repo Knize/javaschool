@@ -3,17 +3,17 @@ package ru.knize.hyperloop.entities;
 import javax.persistence.*;
 
 /**
- * Created by knize on 23.08.16.
+ * Created by knize on 28.08.16.
  */
 @Entity
-@Table(name = "Capsule", schema = "Hyperloop")
+@Table(name = "Capsule", schema = "Hyperloop", catalog = "")
 public class CapsuleEntity {
     private int capsuleId;
     private Integer seatsNumber;
     private Integer carSlots;
 
     @Id
-    @Column(name = "Capsule_ID", nullable = false)
+    @Column(name = "Capsule_ID")
     public int getCapsuleId() {
         return capsuleId;
     }
@@ -23,7 +23,7 @@ public class CapsuleEntity {
     }
 
     @Basic
-    @Column(name = "Seats_Number", nullable = true)
+    @Column(name = "Seats_Number")
     public Integer getSeatsNumber() {
         return seatsNumber;
     }
@@ -33,7 +33,7 @@ public class CapsuleEntity {
     }
 
     @Basic
-    @Column(name = "Car_Slots", nullable = true)
+    @Column(name = "Car_Slots")
     public Integer getCarSlots() {
         return carSlots;
     }

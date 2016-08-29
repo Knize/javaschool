@@ -32,5 +32,35 @@
     </dependencies>
     <build>
         <finalName>hyperloop</finalName>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>nl.geodienstencentrum.maven</groupId>
+                    <artifactId>sass-maven-plugin</artifactId>
+                    <version>2.20</version>
+                    <configuration>
+                        <resources>
+                            <resource>
+                                <source>
+                                    <directory>${basedir}/src/main/webapp/sass</directory>
+                                </source>
+                                <destination>${basedir}/src/main/webapp/css</destination>
+                            </resource>
+                        </resources>
+                        <sassOptions>
+                            <cache>true</cache>
+                            <always_update>true</always_update>
+                        </sassOptions>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 </project>

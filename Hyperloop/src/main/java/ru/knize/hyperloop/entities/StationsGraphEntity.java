@@ -3,38 +3,38 @@ package ru.knize.hyperloop.entities;
 import javax.persistence.*;
 
 /**
- * Created by knize on 23.08.16.
+ * Created by knize on 28.08.16.
  */
 @Entity
-@Table(name = "Stations_Graph", schema = "Hyperloop")
+@Table(name = "Stations_Graph", schema = "Hyperloop", catalog = "")
 @IdClass(StationsGraphEntityPK.class)
 public class StationsGraphEntity {
-    private int stationIdOne;
-    private int stationIdTwo;
+    private int branchIndex;
+    private int stationIndex;
     private Integer rangeKm;
 
     @Id
-    @Column(name = "Station_ID_One", nullable = false)
-    public int getStationIdOne() {
-        return stationIdOne;
+    @Column(name = "Branch_Index")
+    public int getBranchIndex() {
+        return branchIndex;
     }
 
-    public void setStationIdOne(int stationIdOne) {
-        this.stationIdOne = stationIdOne;
+    public void setBranchIndex(int branchIndex) {
+        this.branchIndex = branchIndex;
     }
 
     @Id
-    @Column(name = "Station_ID_Two", nullable = false)
-    public int getStationIdTwo() {
-        return stationIdTwo;
+    @Column(name = "Station_Index")
+    public int getStationIndex() {
+        return stationIndex;
     }
 
-    public void setStationIdTwo(int stationIdTwo) {
-        this.stationIdTwo = stationIdTwo;
+    public void setStationIndex(int stationIndex) {
+        this.stationIndex = stationIndex;
     }
 
     @Basic
-    @Column(name = "Range_km", nullable = true)
+    @Column(name = "Range_km")
     public Integer getRangeKm() {
         return rangeKm;
     }
@@ -50,8 +50,8 @@ public class StationsGraphEntity {
 
         StationsGraphEntity that = (StationsGraphEntity) o;
 
-        if (stationIdOne != that.stationIdOne) return false;
-        if (stationIdTwo != that.stationIdTwo) return false;
+        if (branchIndex != that.branchIndex) return false;
+        if (stationIndex != that.stationIndex) return false;
         if (rangeKm != null ? !rangeKm.equals(that.rangeKm) : that.rangeKm != null) return false;
 
         return true;
@@ -59,8 +59,8 @@ public class StationsGraphEntity {
 
     @Override
     public int hashCode() {
-        int result = stationIdOne;
-        result = 31 * result + stationIdTwo;
+        int result = branchIndex;
+        result = 31 * result + stationIndex;
         result = 31 * result + (rangeKm != null ? rangeKm.hashCode() : 0);
         return result;
     }

@@ -27,6 +27,7 @@ public class TestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Session session = sessionFactory.openSession();
+        //Query query1 = session.createQuery("from P");
         Query query = session.createQuery("from PassengerEntity");
         List<PassengerEntity> passengerEntityList = query.list();
         req.setAttribute("passengerEntityList", passengerEntityList);

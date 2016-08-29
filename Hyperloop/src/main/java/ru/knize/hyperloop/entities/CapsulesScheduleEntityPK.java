@@ -5,13 +5,13 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
- * Created by knize on 23.08.16.
+ * Created by knize on 28.08.16.
  */
 public class CapsulesScheduleEntityPK implements Serializable {
     private int capsuleId;
     private int stationId;
 
-    @Column(name = "Capsule_ID", nullable = false)
+    @Column(name = "Capsule_ID")
     @Id
     public int getCapsuleId() {
         return capsuleId;
@@ -21,7 +21,7 @@ public class CapsulesScheduleEntityPK implements Serializable {
         this.capsuleId = capsuleId;
     }
 
-    @Column(name = "Station_ID", nullable = false)
+    @Column(name = "Station_ID")
     @Id
     public int getStationId() {
         return stationId;

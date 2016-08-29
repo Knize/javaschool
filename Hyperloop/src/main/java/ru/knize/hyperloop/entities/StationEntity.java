@@ -3,18 +3,17 @@ package ru.knize.hyperloop.entities;
 import javax.persistence.*;
 
 /**
- * Created by knize on 23.08.16.
+ * Created by knize on 28.08.16.
  */
 @Entity
-@Table(name = "Station", schema = "Hyperloop")
+@Table(name = "Station", schema = "Hyperloop", catalog = "")
 public class StationEntity {
     private int stationId;
     private String stationName;
-    private Double latitude;
-    private Double longitude;
+    private Integer timezoneIndex;
 
     @Id
-    @Column(name = "Station_ID", nullable = false)
+    @Column(name = "Station_ID")
     public int getStationId() {
         return stationId;
     }
@@ -24,7 +23,7 @@ public class StationEntity {
     }
 
     @Basic
-    @Column(name = "Station_Name", nullable = true, length = 60)
+    @Column(name = "Station_Name")
     public String getStationName() {
         return stationName;
     }
@@ -34,23 +33,13 @@ public class StationEntity {
     }
 
     @Basic
-    @Column(name = "Latitude", nullable = true, precision = 3)
-    public Double getLatitude() {
-        return latitude;
+    @Column(name = "Timezone_Index")
+    public Integer getTimezoneIndex() {
+        return timezoneIndex;
     }
 
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    @Basic
-    @Column(name = "Longitude", nullable = true, precision = 3)
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
+    public void setTimezoneIndex(Integer timezoneIndex) {
+        this.timezoneIndex = timezoneIndex;
     }
 
     @Override
@@ -62,8 +51,8 @@ public class StationEntity {
 
         if (stationId != that.stationId) return false;
         if (stationName != null ? !stationName.equals(that.stationName) : that.stationName != null) return false;
-        if (latitude != null ? !latitude.equals(that.latitude) : that.latitude != null) return false;
-        if (longitude != null ? !longitude.equals(that.longitude) : that.longitude != null) return false;
+        if (timezoneIndex != null ? !timezoneIndex.equals(that.timezoneIndex) : that.timezoneIndex != null)
+            return false;
 
         return true;
     }
@@ -72,8 +61,7 @@ public class StationEntity {
     public int hashCode() {
         int result = stationId;
         result = 31 * result + (stationName != null ? stationName.hashCode() : 0);
-        result = 31 * result + (latitude != null ? latitude.hashCode() : 0);
-        result = 31 * result + (longitude != null ? longitude.hashCode() : 0);
+        result = 31 * result + (timezoneIndex != null ? timezoneIndex.hashCode() : 0);
         return result;
     }
 }

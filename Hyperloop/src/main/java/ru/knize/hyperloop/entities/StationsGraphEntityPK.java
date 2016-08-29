@@ -5,30 +5,30 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
- * Created by knize on 23.08.16.
+ * Created by knize on 28.08.16.
  */
 public class StationsGraphEntityPK implements Serializable {
-    private int stationIdOne;
-    private int stationIdTwo;
+    private int branchIndex;
+    private int stationIndex;
 
-    @Column(name = "Station_ID_One", nullable = false)
+    @Column(name = "Branch_Index")
     @Id
-    public int getStationIdOne() {
-        return stationIdOne;
+    public int getBranchIndex() {
+        return branchIndex;
     }
 
-    public void setStationIdOne(int stationIdOne) {
-        this.stationIdOne = stationIdOne;
+    public void setBranchIndex(int branchIndex) {
+        this.branchIndex = branchIndex;
     }
 
-    @Column(name = "Station_ID_Two", nullable = false)
+    @Column(name = "Station_Index")
     @Id
-    public int getStationIdTwo() {
-        return stationIdTwo;
+    public int getStationIndex() {
+        return stationIndex;
     }
 
-    public void setStationIdTwo(int stationIdTwo) {
-        this.stationIdTwo = stationIdTwo;
+    public void setStationIndex(int stationIndex) {
+        this.stationIndex = stationIndex;
     }
 
     @Override
@@ -38,16 +38,16 @@ public class StationsGraphEntityPK implements Serializable {
 
         StationsGraphEntityPK that = (StationsGraphEntityPK) o;
 
-        if (stationIdOne != that.stationIdOne) return false;
-        if (stationIdTwo != that.stationIdTwo) return false;
+        if (branchIndex != that.branchIndex) return false;
+        if (stationIndex != that.stationIndex) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = stationIdOne;
-        result = 31 * result + stationIdTwo;
+        int result = branchIndex;
+        result = 31 * result + stationIndex;
         return result;
     }
 }

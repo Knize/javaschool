@@ -10,6 +10,8 @@
 <html>
 <head>
     <title>Passengers list</title>
+    <link href="css/materialize.css" rel="stylesheet" type="text/css"/>
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <%
@@ -24,14 +26,14 @@
 <h4>Add new passenger</h4>
 <form method="POST" action="/test">
     <p><label>
-        Passenger Email:
+        Passenger Email redeploy enabled:
         <input name="email" type="email"/>
     </label></p>
     <p><label>
         Passenger Name:
         <input name="name" type="text">
     </label></p>
-    <input type="submit">
+    <input type="submit" class="btn">
 </form>
 </body>
 </html>
