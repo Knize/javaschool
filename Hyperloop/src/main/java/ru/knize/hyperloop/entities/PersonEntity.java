@@ -1,21 +1,25 @@
 package ru.knize.hyperloop.entities;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.sql.Date;
 
 /**
- * Created by knize on 28.08.16.
+ * Created by knize on 29.08.16.
  */
 @Entity
 @Table(name = "Person", schema = "Hyperloop", catalog = "")
 public class PersonEntity {
     private int personId;
-    private Integer idRange;
-    private Integer idNumber;
+    private String idRange;
+    private String idNumber;
     private String name;
-    private Date burthdate;
+    private Date birthdate;
 
     @Id
+    @GenericGenerator(name = "generator", strategy = "increment")
+    @GeneratedValue(generator = "generator")
     @Column(name = "Person_ID")
     public int getPersonId() {
         return personId;
@@ -27,21 +31,21 @@ public class PersonEntity {
 
     @Basic
     @Column(name = "ID_Range")
-    public Integer getIdRange() {
+    public String getIdRange() {
         return idRange;
     }
 
-    public void setIdRange(Integer idRange) {
+    public void setIdRange(String idRange) {
         this.idRange = idRange;
     }
 
     @Basic
     @Column(name = "ID_Number")
-    public Integer getIdNumber() {
+    public String getIdNumber() {
         return idNumber;
     }
 
-    public void setIdNumber(Integer idNumber) {
+    public void setIdNumber(String idNumber) {
         this.idNumber = idNumber;
     }
 
@@ -56,13 +60,13 @@ public class PersonEntity {
     }
 
     @Basic
-    @Column(name = "Burthdate")
-    public Date getBurthdate() {
-        return burthdate;
+    @Column(name = "Birthdate")
+    public Date getBirthdate() {
+        return birthdate;
     }
 
-    public void setBurthdate(Date burthdate) {
-        this.burthdate = burthdate;
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
     }
 
     @Override
@@ -76,7 +80,7 @@ public class PersonEntity {
         if (idRange != null ? !idRange.equals(that.idRange) : that.idRange != null) return false;
         if (idNumber != null ? !idNumber.equals(that.idNumber) : that.idNumber != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (burthdate != null ? !burthdate.equals(that.burthdate) : that.burthdate != null) return false;
+        if (birthdate != null ? !birthdate.equals(that.birthdate) : that.birthdate != null) return false;
 
         return true;
     }
@@ -87,7 +91,7 @@ public class PersonEntity {
         result = 31 * result + (idRange != null ? idRange.hashCode() : 0);
         result = 31 * result + (idNumber != null ? idNumber.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (burthdate != null ? burthdate.hashCode() : 0);
+        result = 31 * result + (birthdate != null ? birthdate.hashCode() : 0);
         return result;
     }
 }

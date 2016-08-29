@@ -12,6 +12,7 @@ public class StationsGraphEntity {
     private int branchIndex;
     private int stationIndex;
     private Integer rangeKm;
+    private Integer stationId;
 
     @Id
     @Column(name = "Branch_Index")
@@ -63,5 +64,15 @@ public class StationsGraphEntity {
         result = 31 * result + stationIndex;
         result = 31 * result + (rangeKm != null ? rangeKm.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "Station_ID")
+    public Integer getStationId() {
+        return stationId;
+    }
+
+    public void setStationId(Integer stationId) {
+        this.stationId = stationId;
     }
 }

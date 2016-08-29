@@ -12,6 +12,11 @@ public class TicketEntity {
     private Integer children;
     private Byte carSlot;
     private Double price;
+    private Integer capsuleId;
+    private Integer departureStationId;
+    private Integer arrivalStationId;
+    private Integer accountId;
+    private Integer personId;
 
     @Id
     @Column(name = "Ticket_ID")
@@ -75,5 +80,55 @@ public class TicketEntity {
         result = 31 * result + (carSlot != null ? carSlot.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "Capsule_ID")
+    public Integer getCapsuleId() {
+        return capsuleId;
+    }
+
+    public void setCapsuleId(Integer capsuleId) {
+        this.capsuleId = capsuleId;
+    }
+
+    @Basic
+    @Column(name = "Departure_Station_ID")
+    public Integer getDepartureStationId() {
+        return departureStationId;
+    }
+
+    public void setDepartureStationId(Integer departureStationId) {
+        this.departureStationId = departureStationId;
+    }
+
+    @Basic
+    @Column(name = "Arrival_Station_ID")
+    public Integer getArrivalStationId() {
+        return arrivalStationId;
+    }
+
+    public void setArrivalStationId(Integer arrivalStationId) {
+        this.arrivalStationId = arrivalStationId;
+    }
+
+    @Basic
+    @Column(name = "Account_ID")
+    public Integer getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
+    }
+
+    @Basic
+    @Column(name = "Person_ID")
+    public Integer getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(Integer personId) {
+        this.personId = personId;
     }
 }

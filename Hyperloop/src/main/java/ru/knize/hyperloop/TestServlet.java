@@ -6,13 +6,14 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.hibernate.service.ServiceRegistry;
-import ru.knize.hyperloop.entities.PassengerEntity;
+import ru.knize.hyperloop.entities.PersonEntity;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.List;
 
 /**
@@ -27,10 +28,9 @@ public class TestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Session session = sessionFactory.openSession();
-        //Query query1 = session.createQuery("from P");
-        Query query = session.createQuery("from PassengerEntity");
-        List<PassengerEntity> passengerEntityList = query.list();
-        req.setAttribute("passengerEntityList", passengerEntityList);
+        Query query = session.createQuery("from PersonEntity");
+        List<PersonEntity> PersonEntityList = query.list();
+        req.setAttribute("PersonEntityList", PersonEntityList);
         req.getRequestDispatcher("/test.jsp").forward(req, resp);
         session.close();
     }
@@ -41,8 +41,9 @@ public class TestServlet extends HttpServlet {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        PassengerEntity pe = new PassengerEntity();
-        pe.setEmail(req.getParameter("email"));
+        PersonEntity pe = new PersonEntity();
+        req.setCharacterEncoding("UTF-8");
+        //pe.setEmail(req.getParameter("email"));
         pe.setName(req.getParameter("name"));
 
         session.persist(pe);
@@ -56,8 +57,7 @@ public class TestServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         Configuration configuration = new Configuration().configure("config.xml");
-        configuration.addAnnotatedClass(PassengerEntity.class);
-        serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+        serviceRegistry = configuration.getStandardServiceRegistryBuilder().build();
         sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 
 
