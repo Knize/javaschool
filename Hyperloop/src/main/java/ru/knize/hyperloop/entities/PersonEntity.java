@@ -24,7 +24,6 @@ public class PersonEntity {
     public int getPersonId() {
         return personId;
     }
-
     public void setPersonId(int personId) {
         this.personId = personId;
     }

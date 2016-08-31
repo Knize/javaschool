@@ -59,8 +59,6 @@ public class TestServlet extends HttpServlet {
         Configuration configuration = new Configuration().configure("config.xml");
         serviceRegistry = configuration.getStandardServiceRegistryBuilder().build();
         sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-
-
     }
 
     @Override
