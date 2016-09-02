@@ -8,14 +8,6 @@
         <servlet-name>Test</servlet-name>
         <servlet-class>ru.knize.hyperloop.TestServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>FrontServlet</servlet-name>
-        <servlet-class>ru.knize.hyperloop.FrontServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>FrontServlet</servlet-name>
-        <url-pattern>*</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/test</url-pattern>
