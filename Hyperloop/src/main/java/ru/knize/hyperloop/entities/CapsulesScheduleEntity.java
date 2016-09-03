@@ -4,36 +4,18 @@ import javax.persistence.*;
 import java.sql.Time;
 
 /**
- * Created by knize on 28.08.16.
+ * Created by knize on 03.09.16.
  */
 @Entity
 @Table(name = "Capsules_Schedule", schema = "Hyperloop", catalog = "")
-@IdClass(CapsulesScheduleEntityPK.class)
 public class CapsulesScheduleEntity {
-    private int capsuleId;
-    private int stationId;
+
+
     private Time departureTime;
     private Time arrivalTime;
-
-    @Id
-    @Column(name = "Capsule_ID")
-    public int getCapsuleId() {
-        return capsuleId;
-    }
-
-    public void setCapsuleId(int capsuleId) {
-        this.capsuleId = capsuleId;
-    }
-
-    @Id
-    @Column(name = "Station_ID")
-    public int getStationId() {
-        return stationId;
-    }
-
-    public void setStationId(int stationId) {
-        this.stationId = stationId;
-    }
+    private CapsuleEntity capsuleByCapsuleId;
+    private StationEntity stationByStationId;
+    private int capsuleScheduleId;
 
     @Basic
     @Column(name = "Departure_Time")
@@ -62,21 +44,52 @@ public class CapsulesScheduleEntity {
 
         CapsulesScheduleEntity that = (CapsulesScheduleEntity) o;
 
-        if (capsuleId != that.capsuleId) return false;
-        if (stationId != that.stationId) return false;
+        if (capsuleScheduleId != that.capsuleScheduleId) return false;
         if (departureTime != null ? !departureTime.equals(that.departureTime) : that.departureTime != null)
             return false;
         if (arrivalTime != null ? !arrivalTime.equals(that.arrivalTime) : that.arrivalTime != null) return false;
+        if (capsuleByCapsuleId != null ? !capsuleByCapsuleId.equals(that.capsuleByCapsuleId) : that.capsuleByCapsuleId != null)
+            return false;
+        return stationByStationId != null ? stationByStationId.equals(that.stationByStationId) : that.stationByStationId == null;
 
-        return true;
     }
 
     @Override
     public int hashCode() {
-        int result = capsuleId;
-        result = 31 * result + stationId;
-        result = 31 * result + (departureTime != null ? departureTime.hashCode() : 0);
+        int result = departureTime != null ? departureTime.hashCode() : 0;
         result = 31 * result + (arrivalTime != null ? arrivalTime.hashCode() : 0);
+        result = 31 * result + (capsuleByCapsuleId != null ? capsuleByCapsuleId.hashCode() : 0);
+        result = 31 * result + (stationByStationId != null ? stationByStationId.hashCode() : 0);
+        result = 31 * result + capsuleScheduleId;
         return result;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "Capsule_ID", referencedColumnName = "Capsule_ID", nullable = false)
+    public CapsuleEntity getCapsuleByCapsuleId() {
+        return capsuleByCapsuleId;
+    }
+
+    public void setCapsuleByCapsuleId(CapsuleEntity capsuleByCapsuleId) {
+        this.capsuleByCapsuleId = capsuleByCapsuleId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "Station_ID", referencedColumnName = "Station_ID", nullable = false)
+    public StationEntity getStationByStationId() {
+        return stationByStationId;
+    }
+
+    public void setStationByStationId(StationEntity stationByStationId) {
+        this.stationByStationId = stationByStationId;
+    }
+
+    @Id
+    public int getCapsuleScheduleId() {
+        return capsuleScheduleId;
+    }
+
+    public void setCapsuleScheduleId(int capsuleScheduleId) {
+        this.capsuleScheduleId = capsuleScheduleId;
     }
 }

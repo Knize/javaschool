@@ -1,9 +1,10 @@
 package ru.knize.hyperloop.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
- * Created by knize on 28.08.16.
+ * Created by knize on 03.09.16.
  */
 @Entity
 @Table(name = "Account", schema = "Hyperloop", catalog = "")
@@ -12,6 +13,7 @@ public class AccountEntity {
     private String name;
     private String email;
     private Byte verified;
+    private Collection<TicketEntity> ticketsByAccountId;
 
     @Id
     @Column(name = "Account_ID")
@@ -75,5 +77,14 @@ public class AccountEntity {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (verified != null ? verified.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "accountByAccountId")
+    public Collection<TicketEntity> getTicketsByAccountId() {
+        return ticketsByAccountId;
+    }
+
+    public void setTicketsByAccountId(Collection<TicketEntity> ticketsByAccountId) {
+        this.ticketsByAccountId = ticketsByAccountId;
     }
 }

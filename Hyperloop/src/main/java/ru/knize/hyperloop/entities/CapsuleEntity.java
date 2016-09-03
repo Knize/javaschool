@@ -1,9 +1,10 @@
 package ru.knize.hyperloop.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
- * Created by knize on 28.08.16.
+ * Created by knize on 03.09.16.
  */
 @Entity
 @Table(name = "Capsule", schema = "Hyperloop", catalog = "")
@@ -11,6 +12,8 @@ public class CapsuleEntity {
     private int capsuleId;
     private Integer seatsNumber;
     private Integer carSlots;
+    private Collection<CapsulesScheduleEntity> capsulesSchedulesByCapsuleId;
+    private Collection<TicketEntity> ticketsByCapsuleId;
 
     @Id
     @Column(name = "Capsule_ID")
@@ -62,5 +65,23 @@ public class CapsuleEntity {
         result = 31 * result + (seatsNumber != null ? seatsNumber.hashCode() : 0);
         result = 31 * result + (carSlots != null ? carSlots.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "capsuleByCapsuleId")
+    public Collection<CapsulesScheduleEntity> getCapsulesSchedulesByCapsuleId() {
+        return capsulesSchedulesByCapsuleId;
+    }
+
+    public void setCapsulesSchedulesByCapsuleId(Collection<CapsulesScheduleEntity> capsulesSchedulesByCapsuleId) {
+        this.capsulesSchedulesByCapsuleId = capsulesSchedulesByCapsuleId;
+    }
+
+    @OneToMany(mappedBy = "capsuleByCapsuleId")
+    public Collection<TicketEntity> getTicketsByCapsuleId() {
+        return ticketsByCapsuleId;
+    }
+
+    public void setTicketsByCapsuleId(Collection<TicketEntity> ticketsByCapsuleId) {
+        this.ticketsByCapsuleId = ticketsByCapsuleId;
     }
 }

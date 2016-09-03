@@ -3,6 +3,11 @@
         "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
+
+    <listener>
+        <listener-class>ru.knize.hyperloop.MyServletContextListener</listener-class>
+    </listener>
+
     <display-name>Archetype Created Web Application</display-name>
     <servlet>
         <servlet-name>Test</servlet-name>
@@ -36,6 +41,15 @@
         <servlet-name>AddStation</servlet-name>
         <url-pattern>/cms/addStation</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>WatchCapsules</servlet-name>
+        <servlet-class>ru.knize.hyperloop.WatchCapsulesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>WatchCapsules</servlet-name>
+        <url-pattern>/cms/watchCapsules</url-pattern>
+    </servlet-mapping>
+
 
     <servlet>
         <servlet-name>AboutUs</servlet-name>

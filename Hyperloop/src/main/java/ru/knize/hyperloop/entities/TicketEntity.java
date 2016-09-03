@@ -3,7 +3,7 @@ package ru.knize.hyperloop.entities;
 import javax.persistence.*;
 
 /**
- * Created by knize on 28.08.16.
+ * Created by knize on 03.09.16.
  */
 @Entity
 @Table(name = "Ticket", schema = "Hyperloop", catalog = "")
@@ -12,11 +12,11 @@ public class TicketEntity {
     private Integer children;
     private Byte carSlot;
     private Double price;
-    private Integer capsuleId;
-    private Integer departureStationId;
-    private Integer arrivalStationId;
-    private Integer accountId;
-    private Integer personId;
+    private CapsuleEntity capsuleByCapsuleId;
+    private StationEntity stationByDepartureStationId;
+    private StationEntity stationByArrivalStationId;
+    private AccountEntity accountByAccountId;
+    private PersonEntity personByPersonId;
 
     @Id
     @Column(name = "Ticket_ID")
@@ -66,7 +66,7 @@ public class TicketEntity {
         TicketEntity that = (TicketEntity) o;
 
         if (ticketId != that.ticketId) return false;
-        if (children != null ? !children.equals(that.children) : that.children != null) return false;
+      if (children != null ? !children.equals(that.children) : that.children != null) return false;
         if (carSlot != null ? !carSlot.equals(that.carSlot) : that.carSlot != null) return false;
         if (price != null ? !price.equals(that.price) : that.price != null) return false;
 
@@ -82,53 +82,53 @@ public class TicketEntity {
         return result;
     }
 
-    @Basic
-    @Column(name = "Capsule_ID")
-    public Integer getCapsuleId() {
-        return capsuleId;
+    @ManyToOne
+    @JoinColumn(name = "Capsule_ID", referencedColumnName = "Capsule_ID")
+    public CapsuleEntity getCapsuleByCapsuleId() {
+        return capsuleByCapsuleId;
     }
 
-    public void setCapsuleId(Integer capsuleId) {
-        this.capsuleId = capsuleId;
+    public void setCapsuleByCapsuleId(CapsuleEntity capsuleByCapsuleId) {
+        this.capsuleByCapsuleId = capsuleByCapsuleId;
     }
 
-    @Basic
-    @Column(name = "Departure_Station_ID")
-    public Integer getDepartureStationId() {
-        return departureStationId;
+    @ManyToOne
+    @JoinColumn(name = "Departure_Station_ID", referencedColumnName = "Station_ID")
+    public StationEntity getStationByDepartureStationId() {
+        return stationByDepartureStationId;
     }
 
-    public void setDepartureStationId(Integer departureStationId) {
-        this.departureStationId = departureStationId;
+    public void setStationByDepartureStationId(StationEntity stationByDepartureStationId) {
+        this.stationByDepartureStationId = stationByDepartureStationId;
     }
 
-    @Basic
-    @Column(name = "Arrival_Station_ID")
-    public Integer getArrivalStationId() {
-        return arrivalStationId;
+    @ManyToOne
+    @JoinColumn(name = "Arrival_Station_ID", referencedColumnName = "Station_ID")
+    public StationEntity getStationByArrivalStationId() {
+        return stationByArrivalStationId;
     }
 
-    public void setArrivalStationId(Integer arrivalStationId) {
-        this.arrivalStationId = arrivalStationId;
+    public void setStationByArrivalStationId(StationEntity stationByArrivalStationId) {
+        this.stationByArrivalStationId = stationByArrivalStationId;
     }
 
-    @Basic
-    @Column(name = "Account_ID")
-    public Integer getAccountId() {
-        return accountId;
+    @ManyToOne
+    @JoinColumn(name = "Account_ID", referencedColumnName = "Account_ID")
+    public AccountEntity getAccountByAccountId() {
+        return accountByAccountId;
     }
 
-    public void setAccountId(Integer accountId) {
-        this.accountId = accountId;
+    public void setAccountByAccountId(AccountEntity accountByAccountId) {
+        this.accountByAccountId = accountByAccountId;
     }
 
-    @Basic
-    @Column(name = "Person_ID")
-    public Integer getPersonId() {
-        return personId;
+    @ManyToOne
+    @JoinColumn(name = "Person_ID", referencedColumnName = "Person_ID")
+    public PersonEntity getPersonByPersonId() {
+        return personByPersonId;
     }
 
-    public void setPersonId(Integer personId) {
-        this.personId = personId;
+    public void setPersonByPersonId(PersonEntity personByPersonId) {
+        this.personByPersonId = personByPersonId;
     }
 }

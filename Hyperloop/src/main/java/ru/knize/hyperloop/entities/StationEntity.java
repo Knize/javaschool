@@ -1,17 +1,20 @@
 package ru.knize.hyperloop.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
- * Created by knize on 28.08.16.
+ * Created by knize on 03.09.16.
  */
 @Entity
 @Table(name = "Station", schema = "Hyperloop", catalog = "")
 public class StationEntity {
     private int stationId;
     private String stationName;
-    private Integer timezoneIndex;
-    private Integer timezoneId;
+    private String timezone;
+    private Collection<CapsulesScheduleEntity> capsulesSchedulesByStationId;
+    private Collection<TicketEntity> ticketsByStationId;
+    private Collection<TicketEntity> ticketsByStationId_0;
 
     @Id
     @Column(name = "Station_ID")
@@ -34,13 +37,13 @@ public class StationEntity {
     }
 
     @Basic
-    @Column(name = "Timezone_Index")
-    public Integer getTimezoneIndex() {
-        return timezoneIndex;
+    @Column(name = "Timezone")
+    public String getTimezone() {
+        return timezone;
     }
 
-    public void setTimezoneIndex(Integer timezoneIndex) {
-        this.timezoneIndex = timezoneIndex;
+    public void setTimezone(String timezone) {
+        this.timezone = timezone;
     }
 
     @Override
@@ -52,8 +55,7 @@ public class StationEntity {
 
         if (stationId != that.stationId) return false;
         if (stationName != null ? !stationName.equals(that.stationName) : that.stationName != null) return false;
-        if (timezoneIndex != null ? !timezoneIndex.equals(that.timezoneIndex) : that.timezoneIndex != null)
-            return false;
+        if (timezone != null ? !timezone.equals(that.timezone) : that.timezone != null) return false;
 
         return true;
     }
@@ -62,17 +64,67 @@ public class StationEntity {
     public int hashCode() {
         int result = stationId;
         result = 31 * result + (stationName != null ? stationName.hashCode() : 0);
-        result = 31 * result + (timezoneIndex != null ? timezoneIndex.hashCode() : 0);
+        result = 31 * result + (timezone != null ? timezone.hashCode() : 0);
         return result;
     }
 
-    @Basic
-    @Column(name = "Timezone_ID")
-    public Integer getTimezoneId() {
-        return timezoneId;
+    @OneToMany(mappedBy = "stationByStationId")
+    public Collection<CapsulesScheduleEntity> getCapsulesSchedulesByStationId() {
+        return capsulesSchedulesByStationId;
     }
 
-    public void setTimezoneId(Integer timezoneId) {
-        this.timezoneId = timezoneId;
+    public void setCapsulesSchedulesByStationId(Collection<CapsulesScheduleEntity> capsulesSchedulesByStationId) {
+        this.capsulesSchedulesByStationId = capsulesSchedulesByStationId;
+    }
+
+    @OneToMany(mappedBy = "stationByDepartureStationId")
+    public Collection<TicketEntity> getTicketsByStationId() {
+        return ticketsByStationId;
+    }
+
+    public void setTicketsByStationId(Collection<TicketEntity> ticketsByStationId) {
+        this.ticketsByStationId = ticketsByStationId;
+    }
+
+    @OneToMany(mappedBy = "stationByArrivalStationId")
+    public Collection<TicketEntity> getTicketsByStationId_0() {
+        return ticketsByStationId_0;
+    }
+
+    public void setTicketsByStationId_0(Collection<TicketEntity> ticketsByStationId_0) {
+        this.ticketsByStationId_0 = ticketsByStationId_0;
+    }
+
+    private int stationIndex;
+
+    @Basic
+    public int getStationIndex() {
+        return stationIndex;
+    }
+
+    public void setStationIndex(int stationIndex) {
+        this.stationIndex = stationIndex;
+    }
+
+    private int branchIndex;
+
+    @Basic
+    public int getBranchIndex() {
+        return branchIndex;
+    }
+
+    public void setBranchIndex(int branchIndex) {
+        this.branchIndex = branchIndex;
+    }
+
+    private int rangeKm;
+
+    @Basic
+    public int getRangeKm() {
+        return rangeKm;
+    }
+
+    public void setRangeKm(int rangeKm) {
+        this.rangeKm = rangeKm;
     }
 }

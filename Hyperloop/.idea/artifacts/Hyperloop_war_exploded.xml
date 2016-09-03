@@ -24,6 +24,7 @@
           <element id="library" level="project" name="Maven: javax.inject:javax.inject:1" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.37" />
           <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.5" />
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
         </element>
       </element>
       <element id="directory" name="META-INF">

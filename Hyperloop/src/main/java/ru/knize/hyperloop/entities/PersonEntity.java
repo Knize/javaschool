@@ -1,12 +1,11 @@
 package ru.knize.hyperloop.entities;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 
 /**
- * Created by knize on 29.08.16.
+ * Created by knize on 03.09.16.
  */
 @Entity
 @Table(name = "Person", schema = "Hyperloop", catalog = "")
@@ -16,14 +15,14 @@ public class PersonEntity {
     private String idNumber;
     private String name;
     private Date birthdate;
+    private Collection<TicketEntity> ticketsByPersonId;
 
     @Id
-    @GenericGenerator(name = "generator", strategy = "increment")
-    @GeneratedValue(generator = "generator")
     @Column(name = "Person_ID")
     public int getPersonId() {
         return personId;
     }
+
     public void setPersonId(int personId) {
         this.personId = personId;
     }
@@ -92,5 +91,14 @@ public class PersonEntity {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (birthdate != null ? birthdate.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "personByPersonId")
+    public Collection<TicketEntity> getTicketsByPersonId() {
+        return ticketsByPersonId;
+    }
+
+    public void setTicketsByPersonId(Collection<TicketEntity> ticketsByPersonId) {
+        this.ticketsByPersonId = ticketsByPersonId;
     }
 }
