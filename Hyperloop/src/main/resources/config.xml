@@ -19,6 +19,7 @@
         <mapping class="ru.knize.hyperloop.entities.StationEntity"/>
         <mapping class="ru.knize.hyperloop.entities.StationsGraphEntity"/>
         <mapping class="ru.knize.hyperloop.entities.TicketEntity"/>
+        <mapping class="ru.knize.hyperloop.entities.TimezoneEntity"/>
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
     </session-factory>

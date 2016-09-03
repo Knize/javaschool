@@ -8,6 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:template>
+    <h4>Our roads</h4>
+    <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=wsxWOarQ8_1H3NON4-oWldxsQWsWMTML&amp;width=1280&amp;height=720&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script>
     <h4>Our history</h4>
     <p>The general idea of trains or other transportation traveling through evacuated tubes dates back more than a century although the atmospheric railway was never a commercial success. Elon Musk's Hyperloop may make the idea economically viable[citation needed].
         Musk first mentioned that he was thinking about a concept for a "fifth mode of transport", calling it the Hyperloop, in July 2012 at a PandoDaily event in Santa Monica, California. This hypothetical high-speed mode of transportation would have the following characteristics: immunity to weather, collision free, twice the speed of a plane, low power consumption, and energy storage for 24-hour operations.[11] The name Hyperloop was chosen because it would go in a loop. Musk envisions the more advanced versions will be able to go at hypersonic speed.[12] In May 2013, Musk likened the Hyperloop to a "cross between a Concorde and a railgun and an air hockey table".[13]

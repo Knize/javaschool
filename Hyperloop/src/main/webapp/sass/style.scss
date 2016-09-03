@@ -6,3 +6,14 @@ $primary-color-dark: #20161e !default;
 html body nav{
   background-color: $primary-color-dark;
 }
+
+
+.page-flexbox-wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}

@@ -12,5 +12,54 @@
         <servlet-name>Test</servlet-name>
         <url-pattern>/test</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Index</servlet-name>
+        <servlet-class>ru.knize.hyperloop.IndexServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Index</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CMSIndex</servlet-name>
+        <servlet-class>ru.knize.hyperloop.CMSIndexServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CMSIndex</servlet-name>
+        <url-pattern>/cms</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddStation</servlet-name>
+        <servlet-class>ru.knize.hyperloop.AddStationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddStation</servlet-name>
+        <url-pattern>/cms/addStation</url-pattern>
+    </servlet-mapping>
 
+    <servlet>
+        <servlet-name>AboutUs</servlet-name>
+        <servlet-class>ru.knize.hyperloop.AboutUsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AboutUs</servlet-name>
+        <url-pattern>/aboutUs</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/css/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/js/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/fonts/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/img/*</url-pattern>
+    </servlet-mapping>
 </web-app>

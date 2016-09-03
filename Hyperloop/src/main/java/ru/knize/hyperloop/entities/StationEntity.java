@@ -11,6 +11,7 @@ public class StationEntity {
     private int stationId;
     private String stationName;
     private Integer timezoneIndex;
+    private Integer timezoneId;
 
     @Id
     @Column(name = "Station_ID")
@@ -63,5 +64,15 @@ public class StationEntity {
         result = 31 * result + (stationName != null ? stationName.hashCode() : 0);
         result = 31 * result + (timezoneIndex != null ? timezoneIndex.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "Timezone_ID")
+    public Integer getTimezoneId() {
+        return timezoneId;
+    }
+
+    public void setTimezoneId(Integer timezoneId) {
+        this.timezoneId = timezoneId;
     }
 }

@@ -16,7 +16,8 @@
 </head>
 <body>
 <%
-    List<PersonEntity> personEntityList = (List<PersonEntity>) request.getAttribute("PersonEntityList");
+    List<PersonEntity> personEntityList =
+            (List<PersonEntity>) request.getAttribute("PersonEntityList");
     for (PersonEntity pe : personEntityList) {
 %>
 <%= pe.getName() %><br>

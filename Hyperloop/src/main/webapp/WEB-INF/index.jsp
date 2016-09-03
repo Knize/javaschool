@@ -10,7 +10,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:template>
     <div class="parallax-container">
-        <div class="parallax"><img src="img/main1.png"></div>
+        <div class="parallax"><img src="../img/main1.png"></div>
     </div>
     <div class="section white">
         <div class="row container">
