@@ -60,6 +60,16 @@
         <url-pattern>/aboutUs</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>StationControl</servlet-name>
+        <servlet-class>ru.knize.hyperloop.StationControlServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StationControl</servlet-name>
+        <url-pattern>/api/stations/*</url-pattern>
+    </servlet-mapping>
+
+
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>/css/*</url-pattern>

@@ -18,6 +18,7 @@ public class StationEntity {
 
     @Id
     @Column(name = "Station_ID")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public int getStationId() {
         return stationId;
     }
@@ -106,17 +107,6 @@ public class StationEntity {
         this.stationIndex = stationIndex;
     }
 
-    private int branchIndex;
-
-    @Basic
-    public int getBranchIndex() {
-        return branchIndex;
-    }
-
-    public void setBranchIndex(int branchIndex) {
-        this.branchIndex = branchIndex;
-    }
-
     private int rangeKm;
 
     @Basic
@@ -126,5 +116,38 @@ public class StationEntity {
 
     public void setRangeKm(int rangeKm) {
         this.rangeKm = rangeKm;
+    }
+
+    private double Latitude;
+
+    @Basic
+    public double getLatitude() {
+        return Latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        Latitude = latitude;
+    }
+
+    private double Longitude;
+
+    @Basic
+    public double getLongitude() {
+        return Longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        Longitude = longitude;
+    }
+
+    private BranchEntity branch;
+
+    @ManyToOne
+    public BranchEntity getBranch() {
+        return branch;
+    }
+
+    public void setBranch(BranchEntity branchById) {
+        this.branch = branchById;
     }
 }

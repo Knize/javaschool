@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,13 +26,29 @@ public class AddStationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Query timezoneQuery = session.createQuery("from StationEntity");
-        List stationList = timezoneQuery.list();
-
-        req.setAttribute("StationList", stationList);
         req.getRequestDispatcher("/WEB-INF/cms/addStation.jsp").forward(req, resp);
-        session.close();
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        StationEntity se = new StationEntity();
+        req.setCharacterEncoding("UTF-8");
+
+
+        se.setStationIndex(Integer.parseInt(req.getParameter("station_index")));
+        se.setStationName(req.getParameter("station_name"));
+        se.setTimezone(req.getParameter("timezone"));
+        se.setRangeKm(Integer.parseInt(req.getParameter("range_km")));
+        //
+
+
+        session.persist(se);
+        session.getTransaction().commit();
+
+        doGet(req, resp);
+        session.close();
+    }
 }
