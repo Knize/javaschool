@@ -42,6 +42,22 @@
         <url-pattern>/cms/addStation</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>AddCapsule</servlet-name>
+        <servlet-class>ru.knize.hyperloop.AddCapsuleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddCapsule</servlet-name>
+        <url-pattern>/cms/addCapsule</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>StationControl</servlet-name>
+        <servlet-class>ru.knize.hyperloop.StationControlServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StationControl</servlet-name>
+        <url-pattern>/api/stations/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>WatchCapsules</servlet-name>
         <servlet-class>ru.knize.hyperloop.WatchCapsulesServlet</servlet-class>
     </servlet>
@@ -51,6 +67,7 @@
     </servlet-mapping>
 
 
+
     <servlet>
         <servlet-name>AboutUs</servlet-name>
         <servlet-class>ru.knize.hyperloop.AboutUsServlet</servlet-class>
@@ -58,15 +75,6 @@
     <servlet-mapping>
         <servlet-name>AboutUs</servlet-name>
         <url-pattern>/aboutUs</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>StationControl</servlet-name>
-        <servlet-class>ru.knize.hyperloop.StationControlServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>StationControl</servlet-name>
-        <url-pattern>/api/stations/*</url-pattern>
     </servlet-mapping>
 
 

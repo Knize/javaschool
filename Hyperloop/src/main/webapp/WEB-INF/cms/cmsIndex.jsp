@@ -6,7 +6,16 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<t:cmsTemplate>
+<html>
+<head>
+    <%@include file="../templates/head.jsp" %>
+</head>
+<body>
+<%@include file="../templates/scripts.jsp" %>
+
+<%@include file="../templates/cmsHeader.jsp" %>
     <h4>This is our cms</h4>
-</t:cmsTemplate>
+<%@include file="../templates/footer.jsp" %>
+</body>
+</html>
+

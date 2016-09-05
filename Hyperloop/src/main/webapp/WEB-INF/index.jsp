@@ -7,8 +7,14 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<t:template>
+<html>
+<head>
+    <%@include file="/WEB-INF/templates/head.jsp" %>
+</head>
+<body>
+<%@include file="/WEB-INF/templates/scripts.jsp" %>
+
+<%@include file="/WEB-INF/templates/header.jsp" %>
     <div class="parallax-container">
         <div class="parallax"><img src="../img/main1.png"></div>
     </div>
@@ -48,4 +54,4 @@
     <script>$(document).ready(function () {
         $('.parallax').parallax();
     });</script>
-</t:template>
+<%@include file="/WEB-INF/templates/footer.jsp" %>

@@ -1,6 +1,14 @@
 
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<t:cmsTemplate>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<html>
+<head>
+    <%@include file="../templates/head.jsp" %>
+</head>
+<body>
+<%@include file="../templates/scripts.jsp" %>
 
-</t:cmsTemplate>
+<%@include file="../templates/cmsHeader.jsp" %>
+<h4>This is our cms</h4>
+<%@include file="../templates/footer.jsp" %>
+</body>
