@@ -12,8 +12,8 @@
             <a href="/" class="brand-logo">Hyperloop</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="/cms/addStation">Add station</a></li>
-                <li><a href="/cms/addCapsule">Add train</a></li>
-                <li><a href="/cms/watchCapsules">Watch trains</a></li>
+                <li><a href="/cms/addCapsule">Add capsule</a></li>
+                <li><a href="/cms/watchCapsules">Watch capsules</a></li>
             </ul>
         </div>
     </nav>

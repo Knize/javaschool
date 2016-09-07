@@ -1,7 +1,7 @@
 package ru.knize.hyperloop.entities;
 
 import javax.persistence.*;
-import java.sql.Time;
+import java.sql.Timestamp;
 
 /**
  * Created by knize on 03.09.16.
@@ -11,29 +11,29 @@ import java.sql.Time;
 public class CapsulesScheduleEntity {
 
 
-    private Time departureTime;
-    private Time arrivalTime;
+    private Timestamp departureTime;
+    private Timestamp arrivalTime;
     private CapsuleEntity capsuleByCapsuleId;
     private StationEntity stationByStationId;
     private int capsuleScheduleId;
 
     @Basic
     @Column(name = "Departure_Time")
-    public Time getDepartureTime() {
+    public Timestamp getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(Time departureTime) {
+    public void setDepartureTime(Timestamp departureTime) {
         this.departureTime = departureTime;
     }
 
     @Basic
     @Column(name = "Arrival_Time")
-    public Time getArrivalTime() {
+    public Timestamp getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(Time arrivalTime) {
+    public void setArrivalTime(Timestamp arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 

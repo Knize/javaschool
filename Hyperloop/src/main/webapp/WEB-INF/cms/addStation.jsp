@@ -100,7 +100,7 @@
                     <p id="coordinates"></p>
                 </div>
                 <div class="modal-footer">
-                    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
                 </div>
             </div>
         </div>
