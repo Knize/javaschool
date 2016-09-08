@@ -33,17 +33,12 @@ public class AddStationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-
         StationEntity se = new StationEntity();
         req.setCharacterEncoding("UTF-8");
-
-
         se.setStationIndex(Integer.parseInt(req.getParameter("station_index")));
         se.setStationName(req.getParameter("station_name"));
         se.setTimezone(req.getParameter("timezone"));
         se.setRangeKm(Integer.parseInt(req.getParameter("range_km")));
-        //
-
 
         session.persist(se);
         session.getTransaction().commit();

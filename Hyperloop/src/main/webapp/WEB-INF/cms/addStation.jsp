@@ -30,7 +30,7 @@
                 function changeListener() {
                     setChanged(true);
                 }
-                function stationEditPopup(station){
+                function stationEditPopup(station) {
                     var modal = $('#stationEditModal');
                     modal.find('#stationName').val(station.name);
                     modal.find('#stationIndex').val(station.index);
@@ -53,7 +53,7 @@
                     })
                 });
 
-                $(window).bind('beforeunload', function(){
+                $(window).bind('beforeunload', function () {
                     return changed;
                 });
 
@@ -85,8 +85,6 @@
                         })
                     })
                 }
-
-
             </script>
             <div id="stationEditModal" class="modal">
                 <div class="modal-content">
