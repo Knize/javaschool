@@ -67,6 +67,15 @@
         <url-pattern>/cms/watchCapsules</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Schedule</servlet-name>
+        <servlet-class>ru.knize.hyperloop.ScheduleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Schedule</servlet-name>
+        <url-pattern>/schedule</url-pattern>
+    </servlet-mapping>
+
 
 
     <servlet>

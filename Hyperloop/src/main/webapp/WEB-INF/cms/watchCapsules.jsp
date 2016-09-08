@@ -7,8 +7,9 @@
 <html>
 <head>
     <%@include file="../templates/head.jsp" %>
-
-    </head>
+    <script src="/js/sc-date-time.js"></script>
+    <link rel="stylesheet" href="/css/sc-date-time.css">
+</head>
 <body>
 <%@include file="../templates/scripts.jsp" %>
 
@@ -21,8 +22,6 @@
             ) {
     }
 %>
-
-
 <table class="responsive-table centered">
     <thead>
     <tr>
@@ -89,10 +88,7 @@
 
             </td>
             <td>
-                <pre id="output"></pre>
-                <a class="c-btn c-datepicker-btn">
-                    <span class="material-icon">Click me</span>
-                </a>
+
             </td>
             <td>
                 <button type="submit" class="btn-floating btn-large waves-effect waves-light red"><i

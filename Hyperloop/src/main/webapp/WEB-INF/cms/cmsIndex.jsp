@@ -11,11 +11,18 @@
     <%@include file="../templates/head.jsp" %>
 </head>
 <body>
+
+
 <%@include file="../templates/scripts.jsp" %>
 
 <%@include file="../templates/cmsHeader.jsp" %>
-    <h4>This is our cms</h4>
+<div class="page-flexbox-wrapper">
+    <main>
+        <h4>This is our cms</h4>
+    </main>
+</div>
 <%@include file="../templates/footer.jsp" %>
+
 </body>
 </html>
 
