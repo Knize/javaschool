@@ -52,6 +52,17 @@
             </div>
             <input class="btn" type="submit">
         </form>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Capsule ID</th>
+                <th>From -
+                <c:out value="${fromStation}"/> </th>
+                <th>To - <c:out value="${toStation}"/></th>
+            </tr>
+            </thead>
+        </table>
         <script>
             $(document).ready(function () {
                 $('select').material_select();

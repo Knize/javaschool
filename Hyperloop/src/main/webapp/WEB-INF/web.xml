@@ -94,6 +94,14 @@
         <url-pattern>/buyTickets</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>PurchaseTickets</servlet-name>
+        <servlet-class>ru.knize.hyperloop.PurchaseTicketServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PurchaseTickets</servlet-name>
+        <url-pattern>/purchaseTicket.jsp</url-pattern>
+    </servlet-mapping>
 
 
     <servlet>
