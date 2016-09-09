@@ -23,7 +23,6 @@
         <h2 class="header">Schedule</h2>
         <h4>Choose station</h4>
         <form action="/schedule" method="get">
-
             <div class="input-field">
                 <select name="station">
                     <%--@elvariable id="selectedStationID" type="java.lang.Integer"--%>
@@ -33,7 +32,6 @@
                                 <c:if test="${selectedStationID==station.stationId}">selected</c:if>
                                 value="${station.stationId}">${station.stationName}</option>
                     </c:forEach>
-
                     <c:if test="${selectedStationID == null}">
                         <option value="" selected disabled>Choose station</option>
                     </c:if>
@@ -71,50 +69,10 @@
                     <td><c:out value="${schedule.departureTime}"/></td>
 
                 </tr>
-                <%--<tr>--%>
-                <%--<td><c:out value="${capsule.capsuleId}"/></td>--%>
-                <%--<td><c:out value="${capsule.branch.name}"/></td>--%>
-                <%--<td><c:out value="${capsule.carSlots}"/></td>--%>
-                <%--<td><c:out value="${capsule.seatsNumber}"/></td>--%>
-                <%--<td>--%>
-                <%--<table>--%>
-                <%--<tbody>--%>
-                <%--<c:forEach var="row" items="${capsule.capsulesSchedulesByCapsuleId}">--%>
-                <%--<tr>--%>
-                <%--<td><c:out value="${row.capsuleScheduleId}"/></td>--%>
-                <%--</tr>--%>
-                <%--</c:forEach>--%>
-                <%--</tbody>--%>
-                <%--</table>--%>
-                <%--</td>--%>
-                <%--<td>--%>
-                <%--<table>--%>
-                <%--<tbody>--%>
-                <%--<c:forEach var="row" items="${capsule.capsulesSchedulesByCapsuleId}">--%>
-                <%--<tr>--%>
-                <%--<td><c:out value="${row.arrivalTime}"/></td>--%>
-                <%--</tr>--%>
-                <%--</c:forEach>--%>
-                <%--</tbody>--%>
-                <%--</table>--%>
-                <%--</td>--%>
-                <%--<td>--%>
-                <%--<table>--%>
-                <%--<tbody>--%>
-                <%--<c:forEach var="row" items="${capsule.capsulesSchedulesByCapsuleId}">--%>
-                <%--<tr>--%>
-                <%--<td><c:out value="${row.departureTime}"/></td>--%>
-                <%--</tr>--%>
-                <%--</c:forEach>--%>
-                <%--</tbody>--%>
-                <%--</table>--%>
-                <%--</td>--%>
-                <%--</tr>--%>
                 <div class="divider"></div>
             </c:forEach>
             </tbody>
         </table>
-
     </main>
 </div>
 </body>

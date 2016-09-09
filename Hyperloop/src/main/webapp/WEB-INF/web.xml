@@ -76,6 +76,24 @@
         <url-pattern>/schedule</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>WatchTickets</servlet-name>
+        <servlet-class>ru.knize.hyperloop.WatchTicketsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>WatchTickets</servlet-name>
+        <url-pattern>/cms/watchTickets</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>BuyTickets</servlet-name>
+        <servlet-class>ru.knize.hyperloop.BuyTicketsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BuyTickets</servlet-name>
+        <url-pattern>/buyTickets</url-pattern>
+    </servlet-mapping>
+
 
 
     <servlet>

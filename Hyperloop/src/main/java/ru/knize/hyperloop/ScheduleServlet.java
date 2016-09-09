@@ -45,7 +45,6 @@ public class ScheduleServlet extends HttpServlet {
                 req.setAttribute("scheduleList", scheduleList);
             }
         }
-
         req.getRequestDispatcher("/WEB-INF/schedule.jsp").forward(req, resp);
         session.close();
     }

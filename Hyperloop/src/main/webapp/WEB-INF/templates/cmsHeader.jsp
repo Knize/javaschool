@@ -14,6 +14,7 @@
                 <li><a href="/cms/addStation">Add station</a></li>
                 <li><a href="/cms/addCapsule">Add capsule</a></li>
                 <li><a href="/cms/watchCapsules">Watch capsules</a></li>
+                <li><a href="/cms/watchTickets">Watch tickets</a></li>
             </ul>
         </div>
     </nav>
