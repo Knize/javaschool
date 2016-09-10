@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.List" %>
 <%@ page import="ru.knize.hyperloop.entities.StationEntity" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -19,6 +20,24 @@
             </div>
             <button disabled id="saveButton" class="btn-floating btn-large waves-effect waves-light red"><i
                     class="material-icons">save</i></button>
+            <form action="/cms/addStation" method="get">
+                <div class="input-field col s12">
+                    <select name="branch">
+                        <option value="" disabled selected>Choose branch</option>
+                        <%--@elvariable id="branchList" type="java.util.List<ru.knize.hyperloop.entities.BranchEntity>"--%>
+                        <c:forEach items="${branchList}" var="branch">
+                            <option value="${branch.id}">${branch.name}</option>
+                        </c:forEach>
+                    </select>
+                    <label>Branch Select</label>
+                    <input type="submit" class="btn" value="Add station">
+                </div>
+            </form>
+            <script>
+                $(document).ready(function () {
+                    $('select').material_select();
+                });
+            </script>
             <script type="text/javascript">
                 var map;
                 var stationData = [];
@@ -45,7 +64,7 @@
                         dataType: 'json',
                         data: JSON.stringify(stationData.map(function (station) {
                             var markerPos = station.marker.position;
-                            return {id: station.id, lat: markerPos.lat(), lng: markerPos.lng(), name: station.name}
+                            return {id: station.id, lat: markerPos.lat(), lng: markerPos.lng(), name: station.name, timezone: station.timezone, branch: station.branch}
                         }))
                     }).done(function () {
                         setChanged(false);

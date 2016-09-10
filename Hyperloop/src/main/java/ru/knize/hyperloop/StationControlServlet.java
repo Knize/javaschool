@@ -3,6 +3,7 @@ package ru.knize.hyperloop;
 import com.google.gson.*;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import ru.knize.hyperloop.entities.BranchEntity;
 import ru.knize.hyperloop.entities.StationEntity;
 
 import javax.servlet.ServletException;
@@ -47,6 +48,10 @@ public class StationControlServlet extends HttpServlet {
             result.setLatitude(jsonObject.get("lat").getAsDouble());
             result.setLongitude(jsonObject.get("lng").getAsDouble());
             result.setStationName(jsonObject.get("name").getAsString());
+            result.setTimezone(jsonObject.get("timezone").getAsString());
+            Session s = HibernateUtil.getSessionFactory().openSession();
+            result.setBranch(s.load(BranchEntity.class, jsonObject.get("branch").getAsInt()));
+            s.close();
             return result;
         }
     }

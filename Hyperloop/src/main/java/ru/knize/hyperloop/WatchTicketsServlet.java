@@ -22,33 +22,18 @@ import java.util.stream.Collectors;
 public class WatchTicketsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Integer capsuleID = null;
+
         try {
-            capsuleID = Integer.parseInt(req.getParameter("capsule"));
+            int capsuleID = Integer.parseInt(req.getParameter("capsule"));
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            Query query = session.createQuery("from TicketEntity where capsuleByCapsuleId.capsuleId = :capsuleID").
+                    setParameter("capsuleID", capsuleID);
+            req.setAttribute("ticketList", query.list());
+            session.close();
         } catch (NumberFormatException | NullPointerException e) {
 
         }
 
-
-        Query queryCapsules = session.createQuery("from TicketEntity");
-        List<CapsuleEntity> capsulesList = queryCapsules.list();
-        req.setAttribute("capsulesList", capsulesList);
-        req.setAttribute("selectedCapsuleID", capsuleID);
-        if (capsuleID != null) {
-            Integer finalCapsuleID = capsuleID; // for lambda sake
-            Optional<CapsuleEntity> foundCapsule = capsulesList.stream().filter(
-                    (capsule) -> capsule.getCapsuleId() == finalCapsuleID).findFirst();
-            if (foundCapsule.isPresent()) {
-                List<TicketEntity> ticketList = foundCapsule.get()
-                        .getTicketsByCapsuleId()
-                        .stream().sorted((a, b) -> Integer.compare(a.getTicketId(), b.getTicketId()))
-                        .collect(Collectors.toList());
-                req.setAttribute("ticketList", ticketList);
-                System.out.println("Hello!");
-                System.out.println(ticketList);
-            }
-        }
 
         req.getRequestDispatcher("/WEB-INF/cms/watchTickets.jsp").forward(req, resp);
     }

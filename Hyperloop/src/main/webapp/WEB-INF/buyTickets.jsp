@@ -15,7 +15,7 @@
         <h2>Buy tickets</h2>
         <form action="/schedule" method="get">
             <div class="input-field">
-                <select name="arrive_station">
+                <select name="from_station">
                     <%--@elvariable id="selectedStationID" type="java.lang.Integer"--%>
                     <%--@elvariable id="stationsList" type="java.util.List<ru.knize.hyperloop.entities.StationEntity>"--%>
                     <c:forEach items="${stationsList}" var="station">
@@ -30,7 +30,7 @@
                 <label>Arrive Station</label>
             </div>
             <div class="input-field">
-                <select name="departure_station">
+                <select name="to_station">
                     <%--@elvariable id="selectedStationID" type="java.lang.Integer"--%>
                     <%--@elvariable id="stationsList" type="java.util.List<ru.knize.hyperloop.entities.StationEntity>"--%>
                     <c:forEach items="${stationsList}" var="station">
@@ -45,10 +45,10 @@
                 <label>Departure Station</label>
             </div>
             <div>
-                <input name="arrival_time" type="date" class="datepicker">
+                <input name="departure_time" type="date" class="datepicker">
             </div>
             <div>
-                <input name="departure_time" type="date" class="datepicker">
+                <input name="arrival_time" type="date" class="datepicker">
             </div>
             <input class="btn" type="submit">
         </form>
@@ -58,10 +58,18 @@
             <tr>
                 <th>Capsule ID</th>
                 <th>From -
-                <c:out value="${fromStation}"/> </th>
+                    <c:out value="${fromStation}"/></th>
                 <th>To - <c:out value="${toStation}"/></th>
+                <th>Departure Time</th>
+                <th>Arrival Time</th>
+                <th>Buy Ticket</th>
             </tr>
             </thead>
+            <tbody>
+            <c:forEach items="">
+
+            </c:forEach>
+            </tbody>
         </table>
         <script>
             $(document).ready(function () {

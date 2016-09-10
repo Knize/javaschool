@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -34,11 +35,12 @@ public class ScheduleServlet extends HttpServlet {
         List<StationEntity> stationsList = queryStations.list();
         req.setAttribute("stationsList", stationsList);
         req.setAttribute("selectedStationID", stationID);
+        List<CapsulesScheduleEntity> scheduleList = new ArrayList<CapsulesScheduleEntity>();
         if (stationID != null) {
             Integer finalStationID = stationID; // for lambda sake
             Optional<StationEntity> foundStation = stationsList.stream().filter((station) -> station.getStationId() == finalStationID).findFirst();
             if (foundStation.isPresent()) {
-                List<CapsulesScheduleEntity> scheduleList = foundStation.get()
+                scheduleList = foundStation.get()
                         .getCapsulesSchedulesByStationId()
                         .stream().sorted((a, b) -> a.getArrivalTime().compareTo(b.getArrivalTime()))
                         .collect(Collectors.toList());

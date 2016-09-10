@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.hibernate.service.ServiceRegistry;
+import ru.knize.hyperloop.entities.BranchEntity;
 import ru.knize.hyperloop.entities.StationEntity;
 
 
@@ -26,7 +27,13 @@ public class AddStationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query queryBranches = session.createQuery("from BranchEntity");
+        List<BranchEntity> branchList = queryBranches.list();
+        System.out.println(branchList.get(0));
+        req.setAttribute("branchList", branchList);
         req.getRequestDispatcher("/WEB-INF/cms/addStation.jsp").forward(req, resp);
+        session.close();
     }
 
     @Override
@@ -39,6 +46,8 @@ public class AddStationServlet extends HttpServlet {
         se.setStationName(req.getParameter("station_name"));
         se.setTimezone(req.getParameter("timezone"));
         se.setRangeKm(Integer.parseInt(req.getParameter("range_km")));
+
+
 
         session.persist(se);
         session.getTransaction().commit();

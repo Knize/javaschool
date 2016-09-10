@@ -85,14 +85,4 @@ public class CapsuleEntity {
         this.ticketsByCapsuleId = ticketsByCapsuleId;
     }
 
-    private BranchEntity branch;
-
-    @ManyToOne
-    public BranchEntity getBranch() {
-        return branch;
-    }
-
-    public void setBranch(BranchEntity branch) {
-        this.branch = branch;
-    }
 }

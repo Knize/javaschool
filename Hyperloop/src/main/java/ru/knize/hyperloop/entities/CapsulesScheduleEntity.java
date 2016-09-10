@@ -92,4 +92,15 @@ public class CapsulesScheduleEntity {
     public void setCapsuleScheduleId(int capsuleScheduleId) {
         this.capsuleScheduleId = capsuleScheduleId;
     }
+
+    private int tripType;
+
+    @Basic
+    public int getTripType() {
+        return tripType;
+    }
+
+    public void setTripType(int tripType) {
+        this.tripType = tripType;
+    }
 }

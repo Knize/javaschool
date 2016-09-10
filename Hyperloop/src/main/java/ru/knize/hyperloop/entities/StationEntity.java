@@ -150,4 +150,5 @@ public class StationEntity {
     public void setBranch(BranchEntity branchById) {
         this.branch = branchById;
     }
+
 }
