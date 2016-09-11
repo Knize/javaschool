@@ -12,78 +12,78 @@
 <%@include file="/WEB-INF/templates/cmsHeader.jsp" %>
 <div class="page-flexbox-wrapper">
     <main>
-        <h2>Buy tickets</h2>
-        <form action="/schedule" method="get">
-            <div class="input-field">
-                <select name="from_station">
-                    <%--@elvariable id="selectedStationID" type="java.lang.Integer"--%>
-                    <%--@elvariable id="stationsList" type="java.util.List<ru.knize.hyperloop.entities.StationEntity>"--%>
-                    <c:forEach items="${stationsList}" var="station">
-                        <option
-                                <c:if test="${selectedStationID==station.stationId}">selected</c:if>
-                                value="${station.stationId}">${station.stationName}</option>
-                    </c:forEach>
-                    <c:if test="${selectedStationID == null}">
-                        <option value="" selected disabled>Choose station</option>
-                    </c:if>
-                </select>
-                <label>Arrive Station</label>
-            </div>
-            <div class="input-field">
-                <select name="to_station">
-                    <%--@elvariable id="selectedStationID" type="java.lang.Integer"--%>
-                    <%--@elvariable id="stationsList" type="java.util.List<ru.knize.hyperloop.entities.StationEntity>"--%>
-                    <c:forEach items="${stationsList}" var="station">
-                        <option
-                                <c:if test="${selectedStationID==station.stationId}">selected</c:if>
-                                value="${station.stationId}">${station.stationName}</option>
-                    </c:forEach>
-                    <c:if test="${selectedStationID == null}">
-                        <option value="" selected disabled>Choose station</option>
-                    </c:if>
-                </select>
-                <label>Departure Station</label>
-            </div>
-            <div>
-                <input name="departure_time" type="date" class="datepicker">
-            </div>
-            <div>
-                <input name="arrival_time" type="date" class="datepicker">
-            </div>
-            <input class="btn" type="submit">
-        </form>
+        <div class="container">
+            <h2>Buy tickets</h2>
+            <form action="/schedule" method="get">
+                <div class="input-field">
+                    <select name="from_station">
+                        <%--@elvariable id="selectedStationID" type="java.lang.Integer"--%>
+                        <%--@elvariable id="stationList" type="java.util.List<ru.knize.hyperloop.entities.StationEntity>"--%>
+                        <c:if test="${selectedStationID == null}">
+                            <option value="" selected disabled>Choose station</option>
+                        </c:if>
+                        <c:forEach items="${stationList}" var="station">
+                            <option
+                                    <c:if test="${selectedStationID==station.stationId}">selected</c:if>
+                                    value="${station.stationId}">${station.stationName}</option>
+                        </c:forEach>
 
-        <table>
-            <thead>
-            <tr>
-                <th>Capsule ID</th>
-                <th>From -
-                    <c:out value="${fromStation}"/></th>
-                <th>To - <c:out value="${toStation}"/></th>
-                <th>Departure Time</th>
-                <th>Arrival Time</th>
-                <th>Buy Ticket</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="">
+                    </select>
+                    <label>Arrive Station</label>
+                </div>
+                <div class="input-field">
+                    <select name="to_station">
+                        <%--@elvariable id="selectedStationID" type="java.lang.Integer"--%>
+                        <%--@elvariable id="stationsList" type="java.util.List<ru.knize.hyperloop.entities.StationEntity>"--%>
+                        <c:if test="${selectedStationID == null}">
+                            <option value="" selected disabled>Choose station</option>
+                        </c:if>
+                        <c:forEach items="${stationList}" var="station">
+                            <option
+                                    <c:if test="${selectedStationID==station.stationId}">selected</c:if>
+                                    value="${station.stationId}">${station.stationName}</option>
+                        </c:forEach>
+                    </select>
+                    <label>Departure Station</label>
+                </div>
+                <div>
+                    <input name="departure_time" type="date" class="datepicker">
+                </div>
+                <div>
+                    <input name="arrival_time" type="date" class="datepicker">
+                </div>
+                <input class="btn" type="submit">
+            </form>
+            <table>
+                <thead>
+                <tr>
+                    <th>Capsule ID</th>
+                    <th>From -
+                        <c:out value="${fromStation}"/></th>
+                    <th>To - <c:out value="${toStation}"/></th>
+                    <th>Departure Time</th>
+                    <th>Arrival Time</th>
+                    <th>Buy Ticket</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="">
 
-            </c:forEach>
-            </tbody>
-        </table>
-        <script>
-            $(document).ready(function () {
-                $('select').material_select();
-            });
-        </script>
-        <script>
-            $('.datepicker').pickadate({
-                selectMonths: true, // Creates a dropdown to control month
-                selectYears: 15 // Creates a dropdown of 15 years to control year
-            });
-        </script>
-
-
+                </c:forEach>
+                </tbody>
+            </table>
+            <script>
+                $(document).ready(function () {
+                    $('select').material_select();
+                });
+            </script>
+            <script>
+                $('.datepicker').pickadate({
+                    selectMonths: true, // Creates a dropdown to control month
+                    selectYears: 15 // Creates a dropdown of 15 years to control year
+                });
+            </script>
+        </div>
     </main>
 </div>
 </body>

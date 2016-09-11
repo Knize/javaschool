@@ -26,13 +26,14 @@
                         <option value="" disabled selected>Choose branch</option>
                         <%--@elvariable id="branchList" type="java.util.List<ru.knize.hyperloop.entities.BranchEntity>"--%>
                         <c:forEach items="${branchList}" var="branch">
-                            <option value="${branch.id}">${branch.name}</option>
+                            <option value="${branch.id}" ${branch.id == 0 ? 'selected="selected"' : ''}>${branch.name}</option>
                         </c:forEach>
                     </select>
                     <label>Branch Select</label>
-                    <input type="submit" class="btn" value="Add station">
+
                 </div>
             </form>
+            <button id="add_station" type="submit" class="btn">Add station</button>
             <script>
                 $(document).ready(function () {
                     $('select').material_select();
@@ -53,18 +54,70 @@
                     var modal = $('#stationEditModal');
                     modal.find('#stationName').val(station.name);
                     modal.find('#stationIndex').val(station.index);
-                    modal.find('#rangeKm').val(station.range);
+                    modal.find('#rangeKm').val(station.rangeKm);
+                    modal.data('station', station);
                     modal.openModal();
                 }
 
+                function createStation(stationProto) {
+                    stationProto.marker = new google.maps.Marker({
+                        position: {lat: stationProto.lat, lng: stationProto.lng},
+                        map: map,
+                        title: stationProto.name,
+                        draggable: true
+                    });
+                    stationProto.marker.addListener('dragend', changeListener);
+                    stationProto.marker.addListener('click', function () {
+                        stationEditPopup(stationProto);
+                    });
+                    return stationProto;
+                }
+
+                $(document).ready(function () {
+                    $('#submitStation').click(function () {
+
+                        var modal = $('#stationEditModal');
+                        var station = modal.data('station');
+
+                        station.name = $(modal.find('#stationName')).val();
+                        station.index = parseInt($(modal.find('#stationIndex')).val());
+                        station.rangeKm = parseInt($(modal.find('#rangeKm')).val());
+
+                        modal.closeModal();
+                        console.log(station);
+                        setChanged(true)
+                    });
+                });
+
+
+                $('#add_station').click(function () {
+                    var station = {
+                        name: "New Station",
+                        timezone: "UTC+0",
+                        rangeKm: 0,
+                        branch: 0,
+                        stationIndex: 0,
+                        lat: 0.322,
+                        lng: 0.228
+                    };
+                    createStation(station);
+                    stationData.push(station);
+                    setChanged(true);
+                });
+
                 $('#saveButton').click(function () {
+                    console.log(stationData);
                     $.ajax({
                         type: "POST",
                         url: '/api/stations/update',
                         dataType: 'json',
                         data: JSON.stringify(stationData.map(function (station) {
                             var markerPos = station.marker.position;
-                            return {id: station.id, lat: markerPos.lat(), lng: markerPos.lng(), name: station.name, timezone: station.timezone, branch: station.branch}
+                            return {
+                                id: station.id, lat: markerPos.lat(), lng: markerPos.lng(),
+                                name: station.name, timezone: station.timezone, branch: station.branch,
+                                index: station.index, rangeKm: station.rangeKm
+                            }
                         }))
                     }).done(function () {
                         setChanged(false);
@@ -79,7 +132,8 @@
                 function initMap() {
                     map = new google.maps.Map(document.getElementById('map'), {
                         zoom: 1,
-                        center: {lat: 0, lng: 0}
+                        center: {lat: 0, lng: 0},
+                        mapTypeId: google.maps.MapTypeId.TERRAIN
                     });
                     console.log("Map loaded");
 
@@ -88,36 +142,42 @@
                         stationData = stations;
                         console.log(stations);
                         stations.forEach(function (station) {
-                            station.marker = new google.maps.Marker({
-                                position: {lat: station.lat, lng: station.lng},
-                                map: map,
-                                title: station.name,
-                                draggable: true
+                            createStation(station);
+                        });
+
+                        var branchCoordinates = [];
+                        stations.forEach(function (stationInFor) {
+                            branchCoordinates.push({
+                                lat: stationInFor.marker.position.lat(),
+                                lng: stationInFor.marker.position.lng()
                             });
-                            station.marker.addListener('dragend', changeListener);
-                            station.marker.addListener('dragend', function () {
-                                console.log("ddd");
-                            });
-                            station.marker.addListener('click', function () {
-                                stationEditPopup(station);
-                            })
-                        })
+                        });
+                        var branch = new google.maps.Polyline({
+                            path: branchCoordinates,
+                            geodesic: true,
+                            strokeColor: '#FF0000',
+                            strokeOpacity: 1.0,
+                            strokeWeight: 2
+                        });
+                        branch.setMap(map);
+
                     })
+
                 }
             </script>
             <div id="stationEditModal" class="modal">
                 <div class="modal-content">
-                    <input id="stationName" type="text">
                     <label for="stationName">Station Name</label>
-                    <input type="number" id="stationIndex">
+                    <input id="stationName" type="text">
                     <label for="stationIndex">Station Index</label>
-                    <input type="number" id="rangeKm">
+                    <input type="number" id="stationIndex">
                     <label for="rangeKm">Range, km</label>
+                    <input type="number" id="rangeKm">
                     <p id="timezone"></p>
                     <p id="coordinates"></p>
                 </div>
                 <div class="modal-footer">
-                    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+                    <a id="submitStation" class="waves-effect waves-green btn-flat">OK</a>
                 </div>
             </div>
         </div>

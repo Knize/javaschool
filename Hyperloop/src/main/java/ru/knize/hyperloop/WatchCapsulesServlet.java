@@ -34,6 +34,7 @@ public class WatchCapsulesServlet extends HttpServlet {
             selectedCapsule = (CapsuleEntity) queryCapsule.getSingleResult();
         } catch (NumberFormatException e) {
             scheduleList = new ArrayList<CapsulesScheduleEntity>();
+            //session.close();
         }
 
         Query queryStations = session.createQuery("from StationEntity ");

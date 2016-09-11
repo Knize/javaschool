@@ -103,4 +103,15 @@ public class CapsulesScheduleEntity {
     public void setTripType(int tripType) {
         this.tripType = tripType;
     }
+
+    private boolean direction;
+
+    @Basic
+    public boolean isDirection() {
+        return direction;
+    }
+
+    public void setDirection(boolean direction) {
+        this.direction = direction;
+    }
 }

@@ -24,21 +24,21 @@ public class HibernateUtil {
     public static HibernateUtil getInstance() {
         return ourInstance;
     }
-    public void init(){
+
+    public void init() {
         try {
             Configuration configuration = new Configuration().configure("config.xml");
             serviceRegistry = configuration.getStandardServiceRegistryBuilder().build();
             sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void destroy(){
+    public void destroy() {
         sessionFactory.close();
     }
 
     private HibernateUtil() {
-
     }
 }

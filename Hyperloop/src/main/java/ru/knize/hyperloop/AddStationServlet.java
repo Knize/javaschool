@@ -47,8 +47,6 @@ public class AddStationServlet extends HttpServlet {
         se.setTimezone(req.getParameter("timezone"));
         se.setRangeKm(Integer.parseInt(req.getParameter("range_km")));
 
-
-
         session.persist(se);
         session.getTransaction().commit();
 

@@ -29,8 +29,9 @@ public class WatchTicketsServlet extends HttpServlet {
             Query query = session.createQuery("from TicketEntity where capsuleByCapsuleId.capsuleId = :capsuleID").
                     setParameter("capsuleID", capsuleID);
             req.setAttribute("ticketList", query.list());
+            req.setAttribute("capsuleID", capsuleID);
             session.close();
-        } catch (NumberFormatException | NullPointerException e) {
+        } catch (NumberFormatException e) {
 
         }
 

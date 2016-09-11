@@ -20,7 +20,6 @@ import java.util.List;
 public class StationControlServlet extends HttpServlet {
 
     private static class StationEntitySerializer implements JsonSerializer<StationEntity> {
-
         @Override
         public JsonElement serialize(StationEntity stationEntity, Type type, JsonSerializationContext jsonSerializationContext) {
             JsonObject result = new JsonObject();
@@ -28,7 +27,7 @@ public class StationControlServlet extends HttpServlet {
             result.addProperty("name", stationEntity.getStationName());
             result.addProperty("index", stationEntity.getStationIndex());
             result.addProperty("timezone", stationEntity.getTimezone());
-            result.addProperty("range", stationEntity.getRangeKm());
+            result.addProperty("rangeKm", stationEntity.getRangeKm());
             result.addProperty("branch", stationEntity.getBranch().getId());
             result.addProperty("lat", stationEntity.getLatitude());
             result.addProperty("lng", stationEntity.getLongitude());
@@ -49,6 +48,8 @@ public class StationControlServlet extends HttpServlet {
             result.setLongitude(jsonObject.get("lng").getAsDouble());
             result.setStationName(jsonObject.get("name").getAsString());
             result.setTimezone(jsonObject.get("timezone").getAsString());
+            result.setStationIndex(jsonObject.get("index").getAsInt());
+            result.setRangeKm(jsonObject.get("rangeKm").getAsInt());
             Session s = HibernateUtil.getSessionFactory().openSession();
             result.setBranch(s.load(BranchEntity.class, jsonObject.get("branch").getAsInt()));
             s.close();
@@ -62,7 +63,6 @@ public class StationControlServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-
         if (req.getPathInfo().endsWith("/list")) {
             Session session = HibernateUtil.getSessionFactory().openSession();
             Query query = session.createQuery("from StationEntity");

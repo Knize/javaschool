@@ -1,5 +1,9 @@
 package ru.knize.hyperloop;
 
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+import ru.knize.hyperloop.entities.StationEntity;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +14,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -18,25 +23,16 @@ import java.util.Date;
 public class BuyTicketsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query queryStations = session.createQuery("from StationEntity ");
+        List<StationEntity> stationList = queryStations.list();
+
+        req.setAttribute("stationList", stationList);
         req.getRequestDispatcher("/WEB-INF/buyTickets.jsp").forward(req, resp);
+
+
     }
-/*
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int fromStation = Integer.parseInt(req.getParameter("from_station"));
-        int toStation = Integer.parseInt(req.getParameter("to_station"));
-        String startDateStr = req.getParameter("departure_time");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        //surround below line with try catch block as below code throws checked exception
-        Timestamp departureTime = null;
-        try {
-            Date startDate = sdf.parse(startDateStr);
-            long time = startDate.getTime();
-            //departureTime = new Timestamp(time);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        //do further processing with Date object
-*/
+
+
 }
 

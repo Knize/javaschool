@@ -1,3 +1,4 @@
+<%--@elvariable id="capsuleID" type="int"--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
@@ -16,7 +17,7 @@
                 <div class="row">
                     <div class="input-field col s6">
                         <input name="capsule" placeholder="Enter capsule number" id="capsule_number" type="number"
-                               class="validate">
+                               class="validate" value="${capsuleID >= 0? capsuleID: ''}">
                         <label for="capsule_number">Capsule Number</label>
                     </div>
                     <input class="btn" type="submit">
