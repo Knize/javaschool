@@ -17,6 +17,7 @@ public class CapsuleEntity {
 
     @Id
     @Column(name = "Capsule_ID")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public int getCapsuleId() {
         return capsuleId;
     }

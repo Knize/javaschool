@@ -14,7 +14,7 @@
     <main>
         <div class="container">
             <h2>Buy tickets</h2>
-            <form action="/schedule" method="get">
+            <form action="/buyTickets" method="get">
                 <div class="input-field">
                     <select name="from_station">
                         <%--@elvariable id="selectedStationID" type="java.lang.Integer"--%>

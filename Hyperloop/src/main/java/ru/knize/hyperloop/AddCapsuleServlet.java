@@ -23,10 +23,31 @@ public class AddCapsuleServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("from CapsuleEntity");
-        List<CapsuleEntity> capsulesList = query.list();
-        req.setAttribute("capsulesList", capsulesList);
+        List<CapsuleEntity> capsuleList = query.list();
+        req.setAttribute("capsuleList", capsuleList);
         req.getRequestDispatcher("/WEB-INF/cms/addCapsule.jsp").forward(req, resp);
         session.close();
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        CapsuleEntity ce = new CapsuleEntity();
+        try {
+            int carSlots = Integer.parseInt(req.getParameter("carSlots"));
+            int seatsNumber = Integer.parseInt(req.getParameter("seatsNumber"));
+            session.beginTransaction();
+            ce.setCarSlots(carSlots);
+            ce.setSeatsNumber(seatsNumber);
+            session.persist(ce);
+            session.getTransaction().commit();
+            System.out.println("OK");
+        } catch (NumberFormatException e) {
+
+        }
+        session.close();
+        doGet(req, resp);
+
     }
 
     private void fillSchedule(CapsulesScheduleEntity cse, Session session) {

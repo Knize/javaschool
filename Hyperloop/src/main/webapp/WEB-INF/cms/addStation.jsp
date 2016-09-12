@@ -55,6 +55,8 @@
                     modal.find('#stationName').val(station.name);
                     modal.find('#stationIndex').val(station.index);
                     modal.find('#rangeKm').val(station.rangeKm);
+                    modal.find('#timezone').text("Timezone: " + station.timezone + ".");
+                    modal.find('#coordinates').text("Latitude: " + station.lat.toString() + ". Longitude: " + station.lng.toString() + ".");
                     modal.data('station', station);
                     modal.openModal();
                 }
@@ -174,7 +176,7 @@
                     <label for="rangeKm">Range, km</label>
                     <input type="number" id="rangeKm">
                     <p id="timezone"></p>
-                    <p id="coordinates"></p>
+                    <p id="coordinates" ></p>
                 </div>
                 <div class="modal-footer">
                     <a id="submitStation" class="waves-effect waves-green btn-flat">OK</a>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -5,7 +6,7 @@
 </head>
 <body>
 <%@include file="../templates/scripts.jsp" %>
-<script type="text/javascript" src="<%= request.getContextPath() %>/js/materialize.clockpicker.js"></script>
+
 
 <%@include file="../templates/cmsHeader.jsp" %>
 <div class="page-flexbox-wrapper">
@@ -16,38 +17,29 @@
                 <thead>
                 <tr>
                     <th data-field="capsule_id">Capsule ID</th>
-                    <th data-field="branch_index">Branch</th>
                     <th data-field="car_slots">Car Slots</th>
                     <th data-field="seats_number">Seats Number</th>
-                    <th data-field="arrival_time">Departure Time</th>
                     <th data-field="buttons">Delete/add</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>3</td>
-                    <td>28</td>
-                    <td>12:00</td>
-                    <td><a class="btn-floating btn-large waves-effect waves-light red"><i
-                            class="material-icons">clear</i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <form action="">
-                        <td><input type="number"></td>
-                        <td><input type="number"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <label for="timepicker_ampm_dark">Time am/pm</label>
-                                    <input id="timepicker_ampm_dark" class="timepicker" type="time">
-                                </div>
-                            </div>
+
+                <%--@elvariable id="capsuleList" type="java.util.List<ru.knize.hyperloop.entities.CapsuleEntity>"--%>
+                <c:forEach items="${capsuleList}" var="capsule">
+                    <tr>
+                        <td>${capsule.capsuleId}</td>
+                        <td>${capsule.carSlots}</td>
+                        <td>${capsule.seatsNumber}</td>
+                        <td><a data-id="${capsule.capsuleId}" class="btn-floating btn-large waves-effect waves-light red"><i
+                                class="material-icons">clear</i></a>
                         </td>
+                    </tr>
+                </c:forEach>
+                <tr>
+                    <form action="/cms/addCapsule" method="post">
+                        <td></td>
+                        <td><input name="carSlots" type="number"></td>
+                        <td><input name="seatsNumber" type="number"></td>
                         <td>
                             <button type="submit" class="btn-floating btn-large waves-effect waves-light red"><i
                                     class="material-icons">add</i></button>
@@ -57,15 +49,8 @@
                 </tbody>
             </table>
             <script>
-                $('.timepicker').pickatime({
-                    default: 'now',
-                    twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
-                    donetext: 'OK',
-                    autoclose: false,
-                    vibrate: true // vibrate the device when dragging clock hand
-                });
-            </script>
 
+            </script>
         </div>
     </main>
 </div>
