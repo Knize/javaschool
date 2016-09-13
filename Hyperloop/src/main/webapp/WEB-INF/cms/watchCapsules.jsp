@@ -7,8 +7,6 @@
 <html>
 <head>
     <%@include file="../templates/head.jsp" %>
-    <script src="/js/sc-date-time.js"></script>
-    <link rel="stylesheet" href="/css/sc-date-time.css">
 </head>
 <body>
 <%@include file="../templates/scripts.jsp" %>
@@ -17,16 +15,9 @@
 <main>
     <div class="container">
         <h4>Capsules list</h4>
-        <%
-            List<CapsuleEntity> capsuleEntities =
-                    (List<CapsuleEntity>) request.getAttribute("capsulesList");
-            for (CapsuleEntity ce : capsuleEntities
-                    ) {
-            }
-        %>
         <form action="/cms/watchCapsules" method="get">
             <div class="input-field col s12">
-                <select name="capsule">
+                <select id="capsule" name="capsule">
                     <option value="" disabled selected>Choose capsule</option>
                     <c:forEach items="${capsulesList}" var="capsule">
                         <option value="${capsule.capsuleId}"  ${capsule.capsuleId == selectedCapsule.capsuleId ? 'selected="selected"' : ''}>${capsule.capsuleId}</option>
@@ -60,7 +51,7 @@
             </tr>
             </tbody>
         </table>
-        <h2>Schedule</h2>
+        <h3>Schedule</h3>
         <table class="responsive-table centered">
             <thead>
             <tr>
@@ -84,30 +75,40 @@
                     </td>
                 </tr>
             </c:forEach>
-            <tr>
-                <form action="/cms/watchCapsules" method="get">
-                    <td>
-                        <div class="input-field col s12">
-                            <select name="station">
-                                <option value="" disabled selected>Choose station</option>
-                                <%--@elvariable id="stationList" type="java.util.List<ru.knize.hyperloop.entities.StationEntity>"--%>
-                                <c:forEach items="${stationList}" var="station">
-                                    <option value="${station.stationId}">${station.stationName}</option>
-                                </c:forEach>
-                            </select>
-                            <label>Station</label>
-                        </div>
-                    </td>
-                    <td><input type="datetime"></td>
-                    <td></td>
-                    <td>
-                        <button type="submit" class="btn-floating btn-large waves-effect waves-light red"><i
-                                class="material-icons">add</i></button>
-                    </td>
-                </form>
-            </tr>
             </tbody>
         </table>
+        <h4>Add schedule</h4>
+        <form action="/cms/watchCapsules" method="post">
+            <div class="input-field col s12">
+
+                <select name="station" required>
+                    <option value="" disabled selected>Choose station</option>
+                    <%--@elvariable id="stationList" type="java.util.List<ru.knize.hyperloop.entities.StationEntity>"--%>
+                    <c:forEach items="${stationList}" var="station">
+                        <option value="${station.stationId}">${station.stationName}</option>
+                    </c:forEach>
+                </select>
+                <label>Station</label>
+            </div>
+            <label for="date">Date</label>
+            <input id="date" name="date" type="date" required>
+            <label for="time">Time</label>
+            <input id="time" name="time" type="time" required>
+            <div class="input-field col s12">
+                <select name="direction" required>
+                    <option value="" disabled selected>Choose direction</option>
+                    <%--@elvariable id="stationList" type="java.util.List<ru.knize.hyperloop.entities.StationEntity>"--%>
+                    <option value="0">To Lisboa</option>
+                    <option value="1">To Tokyo</option>
+                </select>
+                <label>Direction</label>
+            </div>
+            <input name="capsuleIdHidden" id="capsuleIdHidden" type="text" value="" hidden>
+            <input type="submit" class="btn">
+        </form>
+        <script>
+            $('#capsuleIdHidden').val($('#capsule').find(':selected').val());
+        </script>
     </div>
 </main>
 <%@include file="../templates/footer.jsp" %>

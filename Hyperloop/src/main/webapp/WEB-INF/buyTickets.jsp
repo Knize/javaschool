@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.List" %>
 <%@ page import="ru.knize.hyperloop.entities.CapsuleEntity" %>
@@ -22,10 +23,10 @@
                         <c:if test="${selectedStationID == null}">
                             <option value="" selected disabled>Choose station</option>
                         </c:if>
+                        <%--@elvariable id="fromStationId" type="ru.knize.hyperloop.entities.StationEntity"--%>
                         <c:forEach items="${stationList}" var="station">
-                            <option
-                                    <c:if test="${selectedStationID==station.stationId}">selected</c:if>
-                                    value="${station.stationId}">${station.stationName}</option>
+                            <option value="${station.stationId}" ${fromStationId==station.stationId ? 'selected="selected"' : ''}>
+                                    ${station.stationName}</option>
                         </c:forEach>
 
                     </select>
@@ -38,19 +39,20 @@
                         <c:if test="${selectedStationID == null}">
                             <option value="" selected disabled>Choose station</option>
                         </c:if>
+                        <%--@elvariable id="toStationId" type="ru.knize.hyperloop.entities.StationEntity"--%>
                         <c:forEach items="${stationList}" var="station">
-                            <option
-                                    <c:if test="${selectedStationID==station.stationId}">selected</c:if>
-                                    value="${station.stationId}">${station.stationName}</option>
+                            <option value="${station.stationId}" ${toStationId==station.stationId ? 'selected="selected"' : ''}>
+                                    ${station.stationName}</option>
                         </c:forEach>
                     </select>
                     <label>Departure Station</label>
                 </div>
+                <%--@elvariable id="arrDate" type="java.lang.String"--%>
                 <div>
-                    <input name="departure_time" type="date" class="datepicker">
+                    <input name="departure_time" type="date" class="datepicker" value="${arrDate.equals(null)?"":arrDate}">
                 </div>
                 <div>
-                    <input name="arrival_time" type="date" class="datepicker">
+                    <input name="arrival_time" type="date" class="datepicker" value="${depDate.equals(null)?"":depDate}">
                 </div>
                 <input class="btn" type="submit">
             </form>
@@ -58,9 +60,9 @@
                 <thead>
                 <tr>
                     <th>Capsule ID</th>
-                    <th>From -
-                        <c:out value="${fromStation}"/></th>
-                    <th>To - <c:out value="${toStation}"/></th>
+                    <th>From
+                        <c:out value="${fromStationId.equals(null)?'': fromStationName}"/></th>
+                    <th>To <c:out value="${toStationId.equals(null)?'': toStationName}"/></th>
                     <th>Departure Time</th>
                     <th>Arrival Time</th>
                     <th>Buy Ticket</th>

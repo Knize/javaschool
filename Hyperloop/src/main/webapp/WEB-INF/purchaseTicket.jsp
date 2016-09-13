@@ -1,3 +1,4 @@
+<%--@elvariable id="capsule" type="ru.knize.hyperloop.entities.CapsuleEntity"--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
@@ -11,36 +12,15 @@
 <div class="page-flexbox-wrapper">
     <main>
         <div class="container">
-            <title>You going to purchase this ticket</title>
-            <table>
-                <thead>
-                <tr>
-                    <th>From</th>
-                    <th>To</th>
-                    <th>Departure time(local)</th>
-                    <th>Arrival time(local)</th>
-                    <th>Name</th>
-                    <th>Person ID data</th>
-                    <th>Car slot</th>
-                    <th>Children</th>
-                    <th>Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <!-- TODO -->
-                    <th>From</th>
-                    <th>To</th>
-                    <th>Departure time(local)</th>
-                    <th>Arrival time(local)</th>
-                    <th>Name</th>
-                    <th>Person ID data</th>
-                    <th>Car slot</th>
-                    <th>Children</th>
-                    <th>Price</th>
-                </tr>
-                </tbody>
-            </table>
+            <title>Ticket purchase</title>
+            <h2>You going to purchase this ticket</h2>
+            <h4>Capsule info</h4>
+            <h5>Capsule number: ${capsule.capsuleId}</h5>
+            <h5>Seats number: ${capsule.seatsNumber}</h5>
+            <h5>Car slots: ${capsule.carSlots}</h5>
+            <form action="/purchaseConfirmation" method="get">
+
+            </form>
         </div>
     </main>
 </div>

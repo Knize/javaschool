@@ -100,9 +100,17 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>PurchaseTickets</servlet-name>
-        <url-pattern>/purchaseTicket.jsp</url-pattern>
+        <url-pattern>/purchaseTicket</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>PurchaseConfirmation</servlet-name>
+        <servlet-class>ru.knize.hyperloop.PurchaseConfirmationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PurchaseConfirmation</servlet-name>
+        <url-pattern>/purchaseConfirmation</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>AboutUs</servlet-name>

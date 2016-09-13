@@ -85,6 +85,7 @@ public class CapsulesScheduleEntity {
     }
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public int getCapsuleScheduleId() {
         return capsuleScheduleId;
     }

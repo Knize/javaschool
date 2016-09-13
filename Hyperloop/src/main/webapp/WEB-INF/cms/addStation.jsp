@@ -40,6 +40,17 @@
                 });
             </script>
             <script type="text/javascript">
+                Array.prototype.remove = function () {
+                    var what, a = arguments, L = a.length, ax;
+                    while (L && this.length) {
+                        what = a[--L];
+                        while ((ax = this.indexOf(what)) !== -1) {
+                            this.splice(ax, 1);
+                        }
+                    }
+                    return this;
+                };
+
                 var map;
                 var stationData = [];
                 var changed = false;
@@ -85,6 +96,19 @@
                         station.index = parseInt($(modal.find('#stationIndex')).val());
                         station.rangeKm = parseInt($(modal.find('#rangeKm')).val());
 
+                        modal.closeModal();
+                        console.log(station);
+                        setChanged(true)
+                    });
+                });
+
+                $(document).ready(function () {
+                    $('#deleteStation').click(function () {
+
+                        var modal = $('#stationEditModal');
+                        var station = modal.data('station');
+
+                        stationData.remove(station);
                         modal.closeModal();
                         console.log(station);
                         setChanged(true)
@@ -176,10 +200,11 @@
                     <label for="rangeKm">Range, km</label>
                     <input type="number" id="rangeKm">
                     <p id="timezone"></p>
-                    <p id="coordinates" ></p>
+                    <p id="coordinates"></p>
                 </div>
                 <div class="modal-footer">
                     <a id="submitStation" class="waves-effect waves-green btn-flat">OK</a>
+                    <a id="deleteStation" class="waves-effect waves-green btn-flat red">DELETE STATION</a>
                 </div>
             </div>
         </div>

@@ -58,6 +58,7 @@
                 <%--<th data-field="station">Station</th>--%>
                 <th data-field="arrival_time">Arrival Time</th>
                 <th data-field="departure_time">Departure Time</th>
+                <th>Buy ticket</th>
             </tr>
             </thead>
             <tbody>
@@ -67,7 +68,16 @@
                     <td><c:out value="${schedule.capsuleByCapsuleId.capsuleId}"/></td>
                     <td><c:out value="${schedule.arrivalTime}"/></td>
                     <td><c:out value="${schedule.departureTime}"/></td>
+                    <td>
+                        <form method="get" action="/purchaseTicket">
+                            <button type="submit"
+                                    class="btn-floating btn-large waves-effect waves-light red"><i
+                                    class="material-icons">attach_money</i></button>
+                            <input name="capsule" value="${schedule.capsuleByCapsuleId.capsuleId}" hidden>
+                            <input name="scheduleEntry" value="${schedule.capsuleScheduleId}" hidden>
 
+                        </form>
+                    </td>
                 </tr>
                 <div class="divider"></div>
             </c:forEach>

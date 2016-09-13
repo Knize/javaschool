@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -80,9 +81,15 @@ public class StationControlServlet extends HttpServlet {
         if (req.getPathInfo().endsWith("/update")) {
             Session session = HibernateUtil.getSessionFactory().openSession();
             StationEntity[] entities = gson.fromJson(req.getReader(), StationEntity[].class);
+            Query queryStations = session.createQuery("from StationEntity ");
+            List<StationEntity> entityList = queryStations.list();
             session.beginTransaction();
-            for (StationEntity entity : entities) {
-                session.saveOrUpdate(entity);
+            if(!Arrays.asList(entities).containsAll(entityList)){
+
+            }
+
+            for (StationEntity entityView : entities) {
+                session.saveOrUpdate(entityView);
             }
             session.getTransaction().commit();
             session.close();

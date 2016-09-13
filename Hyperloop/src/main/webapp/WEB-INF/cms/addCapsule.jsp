@@ -30,8 +30,14 @@
                         <td>${capsule.capsuleId}</td>
                         <td>${capsule.carSlots}</td>
                         <td>${capsule.seatsNumber}</td>
-                        <td><a data-id="${capsule.capsuleId}" class="btn-floating btn-large waves-effect waves-light red"><i
-                                class="material-icons">clear</i></a>
+                        <td>
+                            <form method="get" action="/cms/addCapsule">
+                                <button type="submit" id="delete"
+                                        class="btn-floating btn-large waves-effect waves-light red"><i
+                                        class="material-icons">clear</i></button>
+                                <input name="deletedCapsuleNumber" type="text" value="${capsule.capsuleId}" hidden>
+                            </form>
+
                         </td>
                     </tr>
                 </c:forEach>
@@ -48,9 +54,7 @@
                 </tr>
                 </tbody>
             </table>
-            <script>
 
-            </script>
         </div>
     </main>
 </div>
