@@ -29,10 +29,12 @@ public class ScheduleServlet extends HttpServlet {
             stationID = Integer.parseInt(req.getParameter("station"));
         } catch (NumberFormatException | NullPointerException e) {
         }
+
         Query queryStations = session.createQuery("from StationEntity");
         List<StationEntity> stationsList = queryStations.list();
         req.setAttribute("stationsList", stationsList);
         req.setAttribute("selectedStationID", stationID);
+
         List<CapsulesScheduleEntity> scheduleList = new ArrayList<CapsulesScheduleEntity>();
         if (stationID != null) {
             Integer finalStationID = stationID; // for lambda sake

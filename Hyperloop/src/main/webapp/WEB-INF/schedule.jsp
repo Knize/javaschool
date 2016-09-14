@@ -40,14 +40,11 @@
                 <input class="btn" type="submit">
             </div>
         </form>
-
         <script>
             $(document).ready(function () {
                 $('select').material_select();
             });
         </script>
-
-
         <table class="responsive-table centered">
             <thead>
             <tr>
@@ -69,13 +66,13 @@
                     <td><c:out value="${schedule.arrivalTime}"/></td>
                     <td><c:out value="${schedule.departureTime}"/></td>
                     <td>
-                        <form method="get" action="/purchaseTicket">
+                        <form method="post" action="/purchaseTicket">
                             <button type="submit"
                                     class="btn-floating btn-large waves-effect waves-light red"><i
                                     class="material-icons">attach_money</i></button>
                             <input name="capsule" value="${schedule.capsuleByCapsuleId.capsuleId}" hidden>
                             <input name="scheduleEntry" value="${schedule.capsuleScheduleId}" hidden>
-
+                            <input name="trip_id" type="text" value="${schedule.trip_ID}" hidden>
                         </form>
                     </td>
                 </tr>

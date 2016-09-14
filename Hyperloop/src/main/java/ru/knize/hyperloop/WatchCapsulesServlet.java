@@ -1,6 +1,5 @@
 package ru.knize.hyperloop;
 
-import javafx.scene.input.DataFormat;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import ru.knize.hyperloop.entities.CapsuleEntity;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -59,13 +57,21 @@ public class WatchCapsulesServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        int capsuleId = Integer.parseInt(req.getParameter("capsuleIdHidden"));
-        int stationId = Integer.parseInt(req.getParameter("station"));
-        Query queryCapsules = session.createQuery("from CapsuleEntity where capsuleId=:capsuleId").setParameter("capsuleId", capsuleId);
-        CapsuleEntity capsule = (CapsuleEntity)queryCapsules.getSingleResult();
-        Query queryStations = session.createQuery("from StationEntity where stationId=:stationId").setParameter("stationId", stationId);
-        StationEntity station = (StationEntity) queryStations.getSingleResult();
-        int direction = Integer.parseInt(req.getParameter("direction"));
+        int direction = 0;
+        CapsuleEntity capsule = null;
+        StationEntity station = null;
+        try {
+            int capsuleId = Integer.parseInt(req.getParameter("capsuleIdHidden"));
+            int stationId = Integer.parseInt(req.getParameter("station"));
+            direction = Integer.parseInt(req.getParameter("direction"));
+            Query queryCapsules = session.createQuery("from CapsuleEntity where capsuleId=:capsuleId").setParameter("capsuleId", capsuleId);
+            capsule = (CapsuleEntity) queryCapsules.getSingleResult();
+            Query queryStations = session.createQuery("from StationEntity where stationId=:stationId").setParameter("stationId", stationId);
+            station = (StationEntity) queryStations.getSingleResult();
+        } catch (NumberFormatException e) {
+
+        }
+
         String dateStr = req.getParameter("date");
         String timeStr = req.getParameter("time");
         String timestampStr = dateStr + " " + timeStr;
@@ -75,7 +81,7 @@ public class WatchCapsulesServlet extends HttpServlet {
 
             long time = timestampDate.getTime();
             Timestamp timestampArrival = new Timestamp(time);
-            Timestamp timestampDeparture = new Timestamp(timestampArrival.getTime() + + 300 * 1000L);
+            Timestamp timestampDeparture = new Timestamp(timestampArrival.getTime() + +300 * 1000L);
             CapsulesScheduleEntity cse = new CapsulesScheduleEntity();
             cse.setDirection(direction == 1);
             cse.setTripType(1);
@@ -85,9 +91,11 @@ public class WatchCapsulesServlet extends HttpServlet {
             cse.setDepartureTime(timestampDeparture);
             session.beginTransaction();
             session.persist(cse);
-            fillSchedule(cse, session);
+            java.util.Date date = new java.util.Date();
+            long tripUID = date.getTime();
+            cse.setTrip_ID(tripUID);
+            fillSchedule(cse, session, tripUID);
             session.getTransaction().commit();
-
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -96,26 +104,39 @@ public class WatchCapsulesServlet extends HttpServlet {
 
     }
 
-    private void fillSchedule(CapsulesScheduleEntity cse, Session session) {
+    private void fillSchedule(CapsulesScheduleEntity cse, Session session, long tripID) {
+
         StationEntity startStation = cse.getStationByStationId();
         boolean direction = cse.isDirection();
         int tripType = cse.getTripType();
+
 
         CapsuleEntity capsule = cse.getCapsuleByCapsuleId();
         System.out.println("capsule: " + capsule.getCapsuleId());
         Query queryStations = session.createQuery("from StationEntity");
         List<StationEntity> stations = queryStations.list();
         int startIndex = startStation.getStationIndex();
-        while (startIndex < (stations.size() - 1) && startIndex >= 0) {
-            StationEntity nextStation = stations.get(startIndex + 1);
+
+
+        CapsulesScheduleEntity prevCse = cse;
+        while (startIndex < (stations.size()) && startIndex >= 0) {
+            session.beginTransaction();
+            StationEntity nextStation;
+            final int startIndexFinal = startIndex;
+            if (direction) {
+                nextStation = stations.stream().filter(station -> station.getStationIndex() == startIndexFinal + 1).findFirst().get();
+            } else {
+                nextStation = stations.stream().filter(station -> station.getStationIndex() == startIndexFinal - 1).findFirst().get();
+            }
             int range = nextStation.getRangeKm();
             System.out.println(range);
-            Duration tripTime = CapsuleMath.countTime(range);
+            Duration tripTime = CapsuleMath.computeTime(range);
             System.out.println(tripTime.getSeconds());
-            Timestamp departureTime = cse.getDepartureTime();
+            Timestamp departureTime = prevCse.getDepartureTime();
             System.out.println(departureTime);
             Timestamp nextStationArrivalTime = new Timestamp(departureTime.getTime() + (tripTime.getSeconds() * 1000L));
             Timestamp nextStationDepartureTime = new Timestamp(nextStationArrivalTime.getTime() + 300 * 1000L);
+
             CapsulesScheduleEntity newCse = new CapsulesScheduleEntity();
             newCse.setCapsuleByCapsuleId(capsule);
             newCse.setStationByStationId(nextStation);
@@ -123,11 +144,17 @@ public class WatchCapsulesServlet extends HttpServlet {
             newCse.setDirection(direction);
             newCse.setArrivalTime(nextStationArrivalTime);
             newCse.setDepartureTime(nextStationDepartureTime);
+            newCse.setTrip_ID(tripID);
+
             session.persist(newCse);
-            if (direction)
+            prevCse = newCse;
+            if (direction) {
                 startIndex++;
-            else
+
+            } else {
                 startIndex--;
+            }
+            session.getTransaction().commit();
         }
     }
 }

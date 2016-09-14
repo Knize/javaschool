@@ -1,6 +1,9 @@
 package ru.knize.hyperloop;
 
 import com.google.gson.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import ru.knize.hyperloop.entities.BranchEntity;
@@ -19,6 +22,7 @@ import java.util.List;
  * Created by knize on 04.09.16.
  */
 public class StationControlServlet extends HttpServlet {
+    private static final Logger logger = LoggerFactory.getLogger(StationControlServlet.class);
 
     private static class StationEntitySerializer implements JsonSerializer<StationEntity> {
         @Override
@@ -80,16 +84,19 @@ public class StationControlServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         if (req.getPathInfo().endsWith("/update")) {
             Session session = HibernateUtil.getSessionFactory().openSession();
-            StationEntity[] entities = gson.fromJson(req.getReader(), StationEntity[].class);
-            Query queryStations = session.createQuery("from StationEntity ");
-            List<StationEntity> entityList = queryStations.list();
-            session.beginTransaction();
-            if(!Arrays.asList(entities).containsAll(entityList)){
 
-            }
+            session.beginTransaction();
+            StationEntity[] entities = gson.fromJson(req.getReader(), StationEntity[].class);
+
+            Query queryStations = session.createQuery("from StationEntity");
+            List<StationEntity> entityList = queryStations.list();
+
+            logger.debug("Debug");
+            entityList.removeAll(Arrays.asList(entities));
+            entityList.forEach(session::delete);
 
             for (StationEntity entityView : entities) {
-                session.saveOrUpdate(entityView);
+                session.merge(entityView);
             }
             session.getTransaction().commit();
             session.close();

@@ -20,6 +20,7 @@
         <mapping class="ru.knize.hyperloop.entities.StationEntity"/>
         <mapping class="ru.knize.hyperloop.entities.TicketEntity"/>
         <mapping class="ru.knize.hyperloop.entities.BranchEntity"/>
+        <mapping class="ru.knize.hyperloop.entities.TrafficEntity"/>
         <!-- DB schema will be updated if needed -->
 
     </session-factory>

@@ -131,4 +131,15 @@ public class TicketEntity {
     public void setPersonByPersonId(PersonEntity personByPersonId) {
         this.personByPersonId = personByPersonId;
     }
+
+    private long tripID;
+
+    @Basic
+    public long getTripID() {
+        return tripID;
+    }
+
+    public void setTripID(long tripID) {
+        this.tripID = tripID;
+    }
 }

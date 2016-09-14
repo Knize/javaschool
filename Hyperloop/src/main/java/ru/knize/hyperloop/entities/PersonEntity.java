@@ -11,40 +11,19 @@ import java.util.Collection;
 @Table(name = "Person", schema = "Hyperloop", catalog = "")
 public class PersonEntity {
     private int personId;
-    private String idRange;
-    private String idNumber;
     private String name;
     private Date birthdate;
     private Collection<TicketEntity> ticketsByPersonId;
 
     @Id
     @Column(name = "Person_ID")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public int getPersonId() {
         return personId;
     }
 
     public void setPersonId(int personId) {
         this.personId = personId;
-    }
-
-    @Basic
-    @Column(name = "ID_Range")
-    public String getIdRange() {
-        return idRange;
-    }
-
-    public void setIdRange(String idRange) {
-        this.idRange = idRange;
-    }
-
-    @Basic
-    @Column(name = "ID_Number")
-    public String getIdNumber() {
-        return idNumber;
-    }
-
-    public void setIdNumber(String idNumber) {
-        this.idNumber = idNumber;
     }
 
     @Basic
@@ -75,8 +54,6 @@ public class PersonEntity {
         PersonEntity that = (PersonEntity) o;
 
         if (personId != that.personId) return false;
-        if (idRange != null ? !idRange.equals(that.idRange) : that.idRange != null) return false;
-        if (idNumber != null ? !idNumber.equals(that.idNumber) : that.idNumber != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (birthdate != null ? !birthdate.equals(that.birthdate) : that.birthdate != null) return false;
 
@@ -86,8 +63,6 @@ public class PersonEntity {
     @Override
     public int hashCode() {
         int result = personId;
-        result = 31 * result + (idRange != null ? idRange.hashCode() : 0);
-        result = 31 * result + (idNumber != null ? idNumber.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (birthdate != null ? birthdate.hashCode() : 0);
         return result;

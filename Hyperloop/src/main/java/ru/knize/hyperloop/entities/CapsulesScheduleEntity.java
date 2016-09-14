@@ -115,4 +115,15 @@ public class CapsulesScheduleEntity {
     public void setDirection(boolean direction) {
         this.direction = direction;
     }
+
+    private long trip_ID;
+
+    @Basic
+    public long getTrip_ID() {
+        return trip_ID;
+    }
+
+    public void setTrip_ID(long trip_ID) {
+        this.trip_ID = trip_ID;
+    }
 }
