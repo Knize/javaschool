@@ -113,6 +113,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>PurchaseSuccess</servlet-name>
+        <servlet-class>ru.knize.hyperloop.PurchaseSuccessServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PurchaseSuccess</servlet-name>
+        <url-pattern>/purchaseSuccess</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>AboutUs</servlet-name>
         <servlet-class>ru.knize.hyperloop.AboutUsServlet</servlet-class>
     </servlet>

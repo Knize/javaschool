@@ -20,6 +20,7 @@
                                class="validate" value="${capsuleID >= 0? capsuleID: ''}">
                         <label for="capsule_number">Capsule Number</label>
                     </div>
+                    <input name="date" type="date">
                     <input class="btn" type="submit">
                 </div>
             </form>
@@ -33,7 +34,6 @@
                 <tr>
                     <th>Ticket ID</th>
                     <th>Passenger</th>
-                    <th>Person ID data</th>
                     <th>Car slot</th>
                     <th>Children</th>
                     <th>Departure Station</th>
@@ -47,8 +47,6 @@
                     <tr>
                         <td><c:out value="${ticket.ticketId}"/></td>
                         <td><c:out value="${ticket.personByPersonId.name}"/></td>
-                        <td><c:out value="${ticket.personByPersonId.idRange}
-                        ${ticket.personByPersonId.idNumber}"/></td>
                         <!-- Car slot -->
                         <c:if test="${ticket.carSlot == 1}">
                             <td>Yes</td>

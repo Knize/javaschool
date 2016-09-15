@@ -28,7 +28,6 @@
                             <option value="${station.stationId}" ${fromStationId==station.stationId ? 'selected="selected"' : ''}>
                                     ${station.stationName}</option>
                         </c:forEach>
-
                     </select>
                     <label>Arrive Station</label>
                 </div>

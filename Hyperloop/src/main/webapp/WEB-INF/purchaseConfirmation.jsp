@@ -12,7 +12,7 @@
 </head>
 <body>
 <%@include file="/WEB-INF/templates/scripts.jsp" %>
-<%@include file="/WEB-INF/templates/cmsHeader.jsp" %>
+<%@include file="/WEB-INF/templates/header.jsp" %>
 <div class="page-flexbox-wrapper">
     <main>
         <div class="container">
@@ -46,7 +46,7 @@
                 </tr>
                 </tbody>
             </table>
-            <form action="/purchaseSuccess">
+            <form action="/purchaseSuccess" method="post">
                 <input value="${depStation.stationId}" name="fromStation" type="text" hidden>
                 <input value="${arrStation.stationId}" name="toStation" type="text" hidden>
                 <input value="${schedule.departureTime}" name="departureTime" type="text" hidden>
@@ -60,7 +60,6 @@
                 <input value="${schedule.capsuleScheduleId}" name="schedule" type="text" hidden>
                 <input type="submit" class="btn">
             </form>
-
         </div>
     </main>
 </div>

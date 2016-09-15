@@ -147,7 +147,7 @@
                         }))
                     }).done(function () {
                         setChanged(false);
-                        Materialize.toast("Saved!");
+                        Materialize.toast("Saved!", 2000);
                     })
                 });
 
@@ -168,6 +168,14 @@
                         });
 
                         var branchCoordinates = [];
+                        stations.sort(function (a,b) {
+                            var indexA = a.index;
+                            var indexB = b.index;
+                            if(indexA < indexB) return -1;
+                            if(indexA > indexB) return 1;
+                            return 0
+
+                        });
                         stations.forEach(function (stationInFor) {
                             branchCoordinates.push({
                                 lat: stationInFor.marker.position.lat(),

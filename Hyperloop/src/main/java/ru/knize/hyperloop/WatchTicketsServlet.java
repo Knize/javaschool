@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -25,12 +27,40 @@ public class WatchTicketsServlet extends HttpServlet {
 
         try {
             int capsuleID = Integer.parseInt(req.getParameter("capsule"));
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            Query query = session.createQuery("from TicketEntity where capsuleByCapsuleId.capsuleId = :capsuleID").
-                    setParameter("capsuleID", capsuleID);
-            req.setAttribute("ticketList", query.list());
-            req.setAttribute("capsuleID", capsuleID);
-            session.close();
+            String dateStr = req.getParameter("date");
+            SimpleDateFormat timestampFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+            try {
+                Date date = new Date(timestampFormat.parse(dateStr).getTime());
+                Calendar c = Calendar.getInstance();
+                c.setTime(date);
+                c.add(Calendar.DATE, 1);
+                java.util.Date nextDayUtil = c.getTime();
+                Date nextDay = new java.sql.Date(nextDayUtil.getTime());
+                Session session = HibernateUtil.getSessionFactory().openSession();
+                Query queryShedule = session.createQuery("from CapsulesScheduleEntity " +
+                        "where capsuleByCapsuleId.capsuleId = :capsuleID " +
+                        "and arrivalTime between :date and :nextDay")
+                        .setParameter("capsuleID", capsuleID)
+                        .setParameter("date", date)
+                        .setParameter("nextDay", nextDay);
+                List<CapsulesScheduleEntity> cseList = (List<CapsulesScheduleEntity>) queryShedule.list();
+                List<TicketEntity> ticketList = Collections.emptyList();
+                if (cseList.size() > 0) {
+                    long tripId = cseList.get(0).getTrip_ID();
+                    Query queryTickets = session.createQuery("from TicketEntity " +
+                            "where capsuleByCapsuleId.capsuleId = :capsuleID " +
+                            "and tripID=:tripId").
+                            setParameter("capsuleID", capsuleID)
+                            .setParameter("tripId", tripId);
+                    ticketList = queryTickets.list();
+                }
+                req.setAttribute("ticketList", ticketList);
+                req.setAttribute("capsuleID", capsuleID);
+                session.close();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
         } catch (NumberFormatException e) {
 
         }

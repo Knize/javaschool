@@ -56,8 +56,8 @@
             <thead>
             <tr>
                 <th data-field="station">Station</th>
-                <th data-field="arrival_time">Arrival Time</th>
-                <th data-field="departure_time">Departure Time</th>
+                <th data-field="arrival_time">Arrival Time UTC+0</th>
+                <th data-field="departure_time">Departure Time UTC+0</th>
                 <th>Delete/Add</th>
             </tr>
             </thead>
@@ -88,7 +88,7 @@
                         <option value="${station.stationId}">${station.stationName}</option>
                     </c:forEach>
                 </select>
-                <label>Station</label>
+                <label>Start station</label>
             </div>
             <label for="date">Date</label>
             <input id="date" name="date" type="date" required>

@@ -10,7 +10,7 @@
 </head>
 <body>
 <%@include file="/WEB-INF/templates/scripts.jsp" %>
-<%@include file="/WEB-INF/templates/cmsHeader.jsp" %>
+<%@include file="/WEB-INF/templates/header.jsp" %>
 <div class="page-flexbox-wrapper">
     <main>
         <div class="container">

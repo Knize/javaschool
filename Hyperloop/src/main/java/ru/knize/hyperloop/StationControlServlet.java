@@ -91,7 +91,7 @@ public class StationControlServlet extends HttpServlet {
             Query queryStations = session.createQuery("from StationEntity");
             List<StationEntity> entityList = queryStations.list();
 
-            logger.debug("Debug");
+            //logger.debug("Debug");
             entityList.removeAll(Arrays.asList(entities));
             entityList.forEach(session::delete);
 

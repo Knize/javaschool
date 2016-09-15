@@ -120,7 +120,7 @@ public class WatchCapsulesServlet extends HttpServlet {
 
         CapsulesScheduleEntity prevCse = cse;
         while (startIndex < (stations.size()) && startIndex >= 0) {
-            session.beginTransaction();
+
             StationEntity nextStation;
             final int startIndexFinal = startIndex;
             if (direction) {
@@ -150,11 +150,9 @@ public class WatchCapsulesServlet extends HttpServlet {
             prevCse = newCse;
             if (direction) {
                 startIndex++;
-
             } else {
                 startIndex--;
             }
-            session.getTransaction().commit();
         }
     }
 }

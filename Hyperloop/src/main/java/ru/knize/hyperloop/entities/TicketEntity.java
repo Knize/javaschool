@@ -20,6 +20,7 @@ public class TicketEntity {
 
     @Id
     @Column(name = "Ticket_ID")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public int getTicketId() {
         return ticketId;
     }

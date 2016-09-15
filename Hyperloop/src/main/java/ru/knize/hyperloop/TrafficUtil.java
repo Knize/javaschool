@@ -59,18 +59,17 @@ public class TrafficUtil {
                 "where stationIndex between :fromIndex and :toIndex")
                 .setParameter("fromIndex", fromIndex)
                 .setParameter("toIndex", toIndex);
+
         List<StationEntity> stationsOfTrip = queryStationsTrip.list();
         stationsOfTrip.sort((StationEntity a, StationEntity b) -> Integer.compare(a.getStationIndex(), b.getStationIndex()));
 
         for (int i = 0; i < stationsOfTrip.size() - 1; i++) {
-            session.beginTransaction();
             TrafficEntity te = new TrafficEntity();
             te.setTripID(ticket.getTripID());
             te.setTicket(ticket);
             te.setFromStation(stationsOfTrip.get(i));
             te.setToStation(stationsOfTrip.get(i + 1));
             session.persist(te);
-            session.getTransaction().commit();
         }
     }
 }

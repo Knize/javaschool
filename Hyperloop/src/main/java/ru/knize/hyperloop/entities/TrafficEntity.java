@@ -1,9 +1,6 @@
 package ru.knize.hyperloop.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * Created by knize on 14.09.16.
@@ -24,6 +21,7 @@ public class TrafficEntity {
     private long id;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public long getId() {
         return id;
     }
