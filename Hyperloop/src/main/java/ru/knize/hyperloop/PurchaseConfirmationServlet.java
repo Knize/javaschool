@@ -10,10 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -67,7 +63,7 @@ public class PurchaseConfirmationServlet extends HttpServlet {
                 .setParameter("arrStationIndex",arrStationIndex)
                 .setParameter("tripId", tripId);
         CapsulesScheduleEntity cseArr = (CapsulesScheduleEntity) queryArrSchedule.getSingleResult();
-        double price = CapsuleMath.computePrice(range);
+        double price = CapsuleTravelingMath.computePrice(range);
         System.out.println(arrStation.getStationName());
         System.out.println(depStation.getStationName());
         req.setAttribute("depStation", depStation);

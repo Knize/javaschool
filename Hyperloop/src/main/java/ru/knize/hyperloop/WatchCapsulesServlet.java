@@ -130,7 +130,7 @@ public class WatchCapsulesServlet extends HttpServlet {
             }
             int range = nextStation.getRangeKm();
             System.out.println(range);
-            Duration tripTime = CapsuleMath.computeTime(range);
+            Duration tripTime = CapsuleTravelingMath.computeTime(range);
             System.out.println(tripTime.getSeconds());
             Timestamp departureTime = prevCse.getDepartureTime();
             System.out.println(departureTime);

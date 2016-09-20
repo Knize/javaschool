@@ -10,8 +10,17 @@ import java.util.List;
 /**
  * Created by knize on 14.09.16.
  */
+
+/**
+ * This class dedicated to computing, getting and saving
+ * information about number of passengers in capsule by stages of the trip.
+ */
 public class TrafficUtil {
 
+    /**
+     * @param cse First schedule entry of the trip
+     * @return List of Integers with number of tickets for each stage of trip.
+     */
     public static List<Integer> getTrafficList(CapsulesScheduleEntity cse) {
         List<Integer> trafficList = Collections.emptyList();
 
@@ -38,6 +47,12 @@ public class TrafficUtil {
         return trafficList;
     }
 
+    /**
+     * @param from departure station
+     * @param to   arrival station
+     * @param cse  First schedule entry of the trip
+     * @return true if there is free places in capsule
+     */
     public static boolean canGo(StationEntity from, StationEntity to, CapsulesScheduleEntity cse) {
         boolean can = true;
         int fromIndex = from.getStationIndex();
@@ -52,6 +67,14 @@ public class TrafficUtil {
         return can;
     }
 
+    /**
+     * This method saves data about all stages where this passenger will be inside capsule in Traffic table.
+     *
+     * @param from    departure station
+     * @param to      arrival station
+     * @param session session instance (function will write to DB). There is no transaction inside.
+     * @param ticket  Bought ticket
+     */
     public static void persistTraffic(StationEntity from, StationEntity to, Session session, TicketEntity ticket) {
         int fromIndex = from.getStationIndex();
         int toIndex = to.getStationIndex();

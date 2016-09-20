@@ -6,7 +6,11 @@ import java.time.Duration;
 /**
  * Created by knize on 11.09.16.
  */
-public class CapsuleMath {
+
+/**
+ * This class computes time of the way and price of the ticket.
+ */
+public class CapsuleTravelingMath {
     private final static long
             accelerationTimeSec = 280,
             decelerationTimeSec = 185,
@@ -16,7 +20,12 @@ public class CapsuleMath {
             decelerationRangeKm = (decelerationTimeSec / 2) * 0.3333333f,
             totalOverloadRangeKm = accelerationRangeKm + decelerationRangeKm;
 
-    static double computePrice(int range) {
+    /**
+     *
+     * @param range total range of the trip
+     * @return price
+     */
+    public static double computePrice(int range) {
         double coefficient = 1;
         if (range < 500) {
             coefficient = 10.0 / 100; // $10 per 100 km
@@ -30,7 +39,12 @@ public class CapsuleMath {
         return (double) range * coefficient;
     }
 
-    static Duration computeTime(int range) {
+    /**
+     *
+     * @param range range of one stage of trip.
+     * @return time of travel for this stage in Duration
+     */
+    public static Duration computeTime(int range) {
         float maxSpeedRange = range - totalOverloadRangeKm;
         long maxSpeedTimeSec = (long) (maxSpeedRange / 0.3333333f);
         return Duration.ofSeconds(maxSpeedTimeSec + totalOverloadTimeSec);

@@ -1,4 +1,3 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.List" %>
 <%@ page import="ru.knize.hyperloop.entities.CapsuleEntity" %>
@@ -48,10 +47,10 @@
                 </div>
                 <%--@elvariable id="arrDate" type="java.lang.String"--%>
                 <div>
-                    <input name="departure_time" type="date" class="datepicker" value="${arrDate.equals(null)?"":arrDate}">
+                    <input name="from_time" type="date" class="datepicker" value="${arrDate.equals(null)?"":arrDate}">
                 </div>
                 <div>
-                    <input name="arrival_time" type="date" class="datepicker" value="${depDate.equals(null)?"":depDate}">
+                    <input name="to_time" type="date" class="datepicker" value="${depDate.equals(null)?"":depDate}">
                 </div>
                 <input class="btn" type="submit">
             </form>
@@ -59,16 +58,29 @@
                 <thead>
                 <tr>
                     <th>Capsule ID</th>
-                    <th>From
-                        <c:out value="${fromStationId.equals(null)?'': fromStationName}"/></th>
-                    <th>To <c:out value="${toStationId.equals(null)?'': toStationName}"/></th>
+                    <th>Station</th>
                     <th>Departure Time</th>
                     <th>Arrival Time</th>
                     <th>Buy Ticket</th>
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="">
+                <%--@elvariable id="cseList" type="java.util.List<ru.knize.hyperloop.entities.CapsulesScheduleEntity>"--%>
+                <c:forEach items="${cseList}" var="cse">
+                    <tr>
+                        <td>${cse.capsuleByCapsuleId.capsuleId}</td>
+                        <td>${cse.stationByStationId.stationName}</td>
+                        <td>${cse.departureTime}</td>
+                        <td>${cse.arrivalTime}</td>
+                        <td><form method="post" action="/purchaseTicket">
+                            <button type="submit"
+                                    class="btn-floating btn-large waves-effect waves-light red"><i
+                                    class="material-icons">attach_money</i></button>
+                            <input name="capsule" value="${cse.capsuleByCapsuleId.capsuleId}" hidden>
+                            <input name="scheduleEntry" value="${cse.capsuleScheduleId}" hidden>
+                            <input name="trip_id" type="text" value="${cse.trip_ID}" hidden>
+                        </form></td>
+                    </tr>
 
                 </c:forEach>
                 </tbody>

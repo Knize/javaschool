@@ -11,10 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.*;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -43,6 +41,17 @@ public class ScheduleServlet extends HttpServlet {
                 scheduleList = foundStation.get()
                         .getCapsulesSchedulesByStationId()
                         .stream().sorted((a, b) -> a.getArrivalTime().compareTo(b.getArrivalTime()))
+                        .collect(Collectors.toList());
+
+                long ONE_MINUTE_IN_MILLIS = 60000;//millisecs
+
+                Calendar date = Calendar.getInstance();
+                long t = date.getTimeInMillis();
+                Date currentDatePlus = new Date(t + (10 * ONE_MINUTE_IN_MILLIS));
+                Timestamp currentDatePlusTimestamp = new Timestamp(currentDatePlus.getTime());
+
+                scheduleList = scheduleList.stream()
+                        .filter(s -> s.getArrivalTime().after(currentDatePlusTimestamp))
                         .collect(Collectors.toList());
                 req.setAttribute("scheduleList", scheduleList);
             }
