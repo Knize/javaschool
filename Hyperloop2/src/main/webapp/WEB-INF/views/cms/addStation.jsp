@@ -5,12 +5,12 @@
 
 <html>
 <head>
-    <%@include file="../templates/head.jsp" %>
+    <%@include file="../../templates/head.jsp" %>
 </head>
 <body>
-<%@include file="../templates/scripts.jsp" %>
+<%@include file="../../templates/scripts.jsp" %>
 
-<%@include file="../templates/cmsHeader.jsp" %>
+<%@include file="../../templates/cmsHeader.jsp" %>
 <div class="page-flexbox-wrapper">
 
     <main>
@@ -25,15 +25,16 @@
                     <select name="branch">
                         <option value="" disabled selected>Choose branch</option>
                         <%--@elvariable id="branchList" type="java.util.List<ru.knize.hyperloop.entities.BranchEntity>"--%>
+                        <%--@elvariable id="selectedBranch" type="ru.knize.hyperloop.entities.BranchEntity"--%>
                         <c:forEach items="${branchList}" var="branch">
-                            <option value="${branch.id}" ${branch.id == 0 ? 'selected="selected"' : ''}>${branch.name}</option>
+                            <option value="${branch.id}" ${branch.id == selectedBranch.id ? 'selected="selected"' : ''}>${branch.name}</option>
                         </c:forEach>
                     </select>
                     <label>Branch Select</label>
 
                 </div>
             </form>
-            <button id="add_station" type="submit" class="btn">Add station</button>
+            <button id="add_station" type="submit" class="btn">Add stationId</button>
             <script>
                 $(document).ready(function () {
                     $('select').material_select();
@@ -61,14 +62,14 @@
                 function changeListener() {
                     setChanged(true);
                 }
-                function stationEditPopup(station) {
+                function stationEditPopup(stationId) {
                     var modal = $('#stationEditModal');
-                    modal.find('#stationName').val(station.name);
-                    modal.find('#stationIndex').val(station.index);
-                    modal.find('#rangeKm').val(station.rangeKm);
-                    modal.find('#timezone').text("Timezone: " + station.timezone + ".");
-                    modal.find('#coordinates').text("Latitude: " + station.lat.toString() + ". Longitude: " + station.lng.toString() + ".");
-                    modal.data('station', station);
+                    modal.find('#stationName').val(stationId.name);
+                    modal.find('#stationIndex').val(stationId.index);
+                    modal.find('#rangeKm').val(stationId.rangeKm);
+                    modal.find('#timezone').text("Timezone: " + stationId.timezone + ".");
+                    modal.find('#coordinates').text("Latitude: " + stationId.lat.toString() + ". Longitude: " + stationId.lng.toString() + ".");
+                    modal.data('stationId', stationId);
                     modal.openModal();
                 }
 
@@ -90,14 +91,14 @@
                     $('#submitStation').click(function () {
 
                         var modal = $('#stationEditModal');
-                        var station = modal.data('station');
+                        var stationId = modal.data('stationId');
 
-                        station.name = $(modal.find('#stationName')).val();
-                        station.index = parseInt($(modal.find('#stationIndex')).val());
-                        station.rangeKm = parseInt($(modal.find('#rangeKm')).val());
+                        stationId.name = $(modal.find('#stationName')).val();
+                        stationId.index = parseInt($(modal.find('#stationIndex')).val());
+                        stationId.rangeKm = parseInt($(modal.find('#rangeKm')).val());
 
                         modal.closeModal();
-                        console.log(station);
+                        console.log(stationId);
                         setChanged(true)
                     });
                 });
@@ -106,30 +107,30 @@
                     $('#deleteStation').click(function () {
 
                         var modal = $('#stationEditModal');
-                        var station = modal.data('station');
+                        var stationId = modal.data('stationId');
 
-                        stationData.remove(station);
+                        stationData.remove(stationId);
                         modal.closeModal();
-                        console.log(station);
+                        console.log(stationId);
                         setChanged(true)
                     });
                 });
 
 
                 $('#add_station').click(function () {
-                    var selectedBranch =
+                    var selectedBranch = $( "#branch").find("option:selected" ).index();
 
-                    var station = {
+                    var stationId = {
                         name: "New Station",
                         timezone: "UTC+0",
                         rangeKm: 0,
                         branch: 0,
-                        stationIndex: 0,
+                        stationIndex: selectedBranch,
                         lat: 0.322,
                         lng: 0.228
                     };
-                    createStation(station);
-                    stationData.push(station);
+                    createStation(stationId);
+                    stationData.push(stationId);
                     setChanged(true);
                 });
 
@@ -139,12 +140,12 @@
                         type: "POST",
                         url: '/api/stations/update',
                         dataType: 'json',
-                        data: JSON.stringify(stationData.map(function (station) {
-                            var markerPos = station.marker.position;
+                        data: JSON.stringify(stationData.map(function (stationId) {
+                            var markerPos = stationId.marker.position;
                             return {
-                                id: station.id, lat: markerPos.lat(), lng: markerPos.lng(),
-                                name: station.name, timezone: station.timezone, branch: station.branch,
-                                index: station.index, rangeKm: station.rangeKm
+                                id: stationId.id, lat: markerPos.lat(), lng: markerPos.lng(),
+                                name: stationId.name, timezone: stationId.timezone, branch: stationId.branch,
+                                index: stationId.index, rangeKm: stationId.rangeKm
                             }
                         }))
                     }).done(function () {
@@ -165,8 +166,8 @@
                     $.getJSON("/api/stations/list", function (stations) {
                         stationData = stations;
                         console.log(stations);
-                        stations.forEach(function (station) {
-                            createStation(station);
+                        stations.forEach(function (stationId) {
+                            createStation(stationId);
                         });
 
                         var branchCoordinates = [];
@@ -216,8 +217,8 @@
         </div>
     </main>
 </div>
-<%@include file="../templates/footer.jsp" %>
-<%@include file="../templates/googleMaps.jsp" %>
+<%@include file="../../templates/footer.jsp" %>
+<%@include file="../../templates/googleMaps.jsp" %>
 </body>
 
 </html>
