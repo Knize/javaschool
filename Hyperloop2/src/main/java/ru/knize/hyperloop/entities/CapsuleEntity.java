@@ -9,25 +9,24 @@ import java.util.Collection;
 @Entity
 @Table(name = "Capsule", schema = "Hyperloop")
 public class CapsuleEntity {
-    private int capsuleId;
+    private int id;
     private Integer seatsNumber;
     private Integer carSlots;
-    private Collection<CapsulesScheduleEntity> capsulesSchedulesByCapsuleId;
-    private Collection<TicketEntity> ticketsByCapsuleId;
+    private Collection<CapsulesScheduleEntity> capsulesSchedules;
+    private Collection<TicketEntity> tickets;
 
     @Id
-    @Column(name = "Capsule_ID")
     @GeneratedValue
-    public int getCapsuleId() {
-        return capsuleId;
+    public int getId() {
+        return id;
     }
 
-    public void setCapsuleId(int capsuleId) {
-        this.capsuleId = capsuleId;
+    public void setId(int capsuleId) {
+        this.id = capsuleId;
     }
 
     @Basic
-    @Column(name = "Seats_Number")
+
     public Integer getSeatsNumber() {
         return seatsNumber;
     }
@@ -37,7 +36,7 @@ public class CapsuleEntity {
     }
 
     @Basic
-    @Column(name = "Car_Slots")
+
     public Integer getCarSlots() {
         return carSlots;
     }
@@ -53,7 +52,7 @@ public class CapsuleEntity {
 
         CapsuleEntity that = (CapsuleEntity) o;
 
-        if (capsuleId != that.capsuleId) return false;
+        if (id != that.id) return false;
         if (seatsNumber != null ? !seatsNumber.equals(that.seatsNumber) : that.seatsNumber != null) return false;
         if (carSlots != null ? !carSlots.equals(that.carSlots) : that.carSlots != null) return false;
 
@@ -62,28 +61,28 @@ public class CapsuleEntity {
 
     @Override
     public int hashCode() {
-        int result = capsuleId;
+        int result = id;
         result = 31 * result + (seatsNumber != null ? seatsNumber.hashCode() : 0);
         result = 31 * result + (carSlots != null ? carSlots.hashCode() : 0);
         return result;
     }
 
-    @OneToMany(mappedBy = "capsuleByCapsuleId")
-    public Collection<CapsulesScheduleEntity> getCapsulesSchedulesByCapsuleId() {
-        return capsulesSchedulesByCapsuleId;
+    @OneToMany(mappedBy = "capsule")
+    public Collection<CapsulesScheduleEntity> getCapsulesSchedules() {
+        return capsulesSchedules;
     }
 
-    public void setCapsulesSchedulesByCapsuleId(Collection<CapsulesScheduleEntity> capsulesSchedulesByCapsuleId) {
-        this.capsulesSchedulesByCapsuleId = capsulesSchedulesByCapsuleId;
+    public void setCapsulesSchedules(Collection<CapsulesScheduleEntity> capsulesSchedulesByCapsuleId) {
+        this.capsulesSchedules = capsulesSchedulesByCapsuleId;
     }
 
-    @OneToMany(mappedBy = "capsuleByCapsuleId")
-    public Collection<TicketEntity> getTicketsByCapsuleId() {
-        return ticketsByCapsuleId;
+    @OneToMany(mappedBy = "capsule")
+    public Collection<TicketEntity> getTickets() {
+        return tickets;
     }
 
-    public void setTicketsByCapsuleId(Collection<TicketEntity> ticketsByCapsuleId) {
-        this.ticketsByCapsuleId = ticketsByCapsuleId;
+    public void setTickets(Collection<TicketEntity> ticketsByCapsuleId) {
+        this.tickets = ticketsByCapsuleId;
     }
 
 }

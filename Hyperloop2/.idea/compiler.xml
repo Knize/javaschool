@@ -22,11 +22,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="Hyperloop2" />
+        <module name="hyperloop2" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Hyperloop2" target="1.8" />
+      <module name="hyperloop2" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

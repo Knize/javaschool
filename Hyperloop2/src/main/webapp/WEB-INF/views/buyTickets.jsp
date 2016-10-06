@@ -24,8 +24,8 @@
                         </c:if>
                         <%--@elvariable id="fromStationId" type="ru.knize.hyperloop.entities.StationEntity"--%>
                         <c:forEach items="${stationList}" var="stationId">
-                            <option value="${stationId.stationId}" ${fromStationId == stationId.stationId ? 'selected="selected"' : ''}>
-                                    ${stationId.stationName}</option>
+                            <option value="${stationId.id}" ${fromStationId == stationId.id ? 'selected="selected"' : ''}>
+                                    ${stationId.name}</option>
                         </c:forEach>
                     </select>
                     <label>Arrive Station</label>
@@ -39,8 +39,8 @@
                         </c:if>
                         <%--@elvariable id="toStationId" type="ru.knize.hyperloop.entities.StationEntity"--%>
                         <c:forEach items="${stationList}" var="stationId">
-                            <option value="${stationId.stationId}" ${toStationId==stationId.stationId ? 'selected="selected"' : ''}>
-                                    ${stationId.stationName}</option>
+                            <option value="${stationId.id}" ${toStationId==stationId.id ? 'selected="selected"' : ''}>
+                                    ${stationId.name}</option>
                         </c:forEach>
                     </select>
                     <label>Departure Station</label>
@@ -68,8 +68,8 @@
                 <%--@elvariable id="cseList" type="java.util.List<ru.knize.hyperloop.entities.CapsulesScheduleEntity>"--%>
                 <c:forEach items="${cseList}" var="cse">
                     <tr>
-                        <td>${cse.capsuleByCapsuleId.capsuleId}</td>
-                        <td>${cse.stationByStationId.stationName}</td>
+                        <td>${cse.capsule.id}</td>
+                        <td>${cse.station.name}</td>
                         <td>${cse.departureTime}</td>
                         <td>${cse.arrivalTime}</td>
                         <td>
@@ -77,9 +77,9 @@
                                 <button type="submit"
                                         class="btn-floating btn-large waves-effect waves-light red"><i
                                         class="material-icons">attach_money</i></button>
-                                <input name="capsule" value="${cse.capsuleByCapsuleId.capsuleId}" hidden>
-                                <input name="scheduleEntry" value="${cse.capsuleScheduleId}" hidden>
-                                <input name="trip_id" type="text" value="${cse.trip_ID}" hidden>
+                                <input name="capsule" value="${cse.capsule.id}" hidden>
+                                <input name="scheduleEntry" value="${cse.id}" hidden>
+                                <input name="trip_id" type="text" value="${cse.tripID}" hidden>
                             </form>
                         </td>
                     </tr>

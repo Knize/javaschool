@@ -9,6 +9,6 @@ import ru.knize.hyperloop.entities.StationEntity;
  */
 public interface StationRepository extends JpaRepository<StationEntity, Integer> {
 
-    StationEntity findByStationId(int id);
+    StationEntity findById(int id);
 
 }

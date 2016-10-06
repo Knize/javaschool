@@ -57,8 +57,8 @@
                 <%--@elvariable id="ticketList" type="java.util.List<ru.knize.hyperloop.entities.TicketEntity>"--%>
                 <c:forEach var="ticket" items="${ticketList}">
                     <tr>
-                        <td><c:out value="${ticket.ticketId}"/></td>
-                        <td><c:out value="${ticket.personByPersonId.name}"/></td>
+                        <td><c:out value="${ticket.id}"/></td>
+                        <td><c:out value="${ticket.person.name}"/></td>
                         <!-- Car slot -->
                         <c:if test="${ticket.carSlot == 1}">
                             <td>Yes</td>
@@ -73,8 +73,8 @@
                         <c:if test="${ticket.children == 0}">
                             <td>No</td>
                         </c:if>
-                        <td><c:out value="${ticket.stationByDepartureStationId.stationName}"/></td>
-                        <td><c:out value="${ticket.stationByArrivalStationId.stationName}"/></td>
+                        <td><c:out value="${ticket.fromStation.name}"/></td>
+                        <td><c:out value="${ticket.toStation.name}"/></td>
                         <td><c:out value="${ticket.price}"/></td>
                     </tr>
                 </c:forEach>

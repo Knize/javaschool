@@ -27,7 +27,7 @@
                 <%--@elvariable id="capsuleList" type="java.util.List<ru.knize.hyperloop.entities.CapsuleEntity>"--%>
                 <c:forEach items="${capsuleList}" var="capsule">
                     <tr>
-                        <td>${capsule.capsuleId}</td>
+                        <td>${capsule.id}</td>
                         <td>${capsule.carSlots}</td>
                         <td>${capsule.seatsNumber}</td>
                         <td>
@@ -35,7 +35,7 @@
                                 <button type="submit" id="delete"
                                         class="btn-floating btn-large waves-effect waves-light red"><i
                                         class="material-icons">clear</i></button>
-                                <input name="deletedCapsuleNumber" type="text" value="${capsule.capsuleId}" hidden>
+                                <input name="deletedCapsuleNumber" type="text" value="${capsule.id}" hidden>
                             </form>
 
                         </td>

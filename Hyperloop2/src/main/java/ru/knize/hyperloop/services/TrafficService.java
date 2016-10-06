@@ -25,8 +25,8 @@ public class TrafficService {
             long tripId){
         List<TrafficEntity> trafficList = trafficRepository.findAll();
         trafficList.stream().filter(trafficEntry ->
-                trafficEntry.getFromStation().getStationId() == fromStation.getStationId() &&
-                trafficEntry.getToStation().getStationId() == toStation.getStationId() &&
+                trafficEntry.getFromStation().getId() == fromStation.getId() &&
+                trafficEntry.getToStation().getId() == toStation.getId() &&
                 trafficEntry.getTripID() == tripId).
                 collect(Collectors.toList());
         return trafficList;

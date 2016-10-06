@@ -34,8 +34,8 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <th>${depStation.stationName}</th>
-                    <th>${arrStation.stationName}</th>
+                    <th>${depStation.name}</th>
+                    <th>${arrStation.name}</th>
                     <th>${schedule.departureTime}</th>
                     <th>${cseArr.arrivalTime}</th>
                     <th>${name}</th>
@@ -47,8 +47,8 @@
                 </tbody>
             </table>
             <form action="/purchaseSuccess" method="post">
-                <input value="${depStation.stationId}" name="fromStation" type="text" hidden>
-                <input value="${arrStation.stationId}" name="toStation" type="text" hidden>
+                <input value="${depStation.id}" name="fromStation" type="text" hidden>
+                <input value="${arrStation.id}" name="toStation" type="text" hidden>
                 <input value="${schedule.departureTime}" name="departureTime" type="text" hidden>
                 <input value="${cseArr.arrivalTime}" name="arrivalTime" type="text" hidden>
                 <input value="${name}" name="name" type="text" hidden>
@@ -56,8 +56,8 @@
                 <input value="${car}" name="car" type="text" hidden>
                 <input value="${children}" name="children" type="text" hidden>
                 <input value="${price}" name="price" type="text" hidden>
-                <input value="${schedule.capsuleByCapsuleId.capsuleId}" name="capsule" type="text" hidden>
-                <input value="${schedule.capsuleScheduleId}" name="schedule" type="text" hidden>
+                <input value="${schedule.capsule.id}" name="capsule" type="text" hidden>
+                <input value="${schedule.id}" name="schedule" type="text" hidden>
                 <input type="submit" class="btn">
             </form>
         </div>

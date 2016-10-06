@@ -31,10 +31,9 @@
                         </c:forEach>
                     </select>
                     <label>Branch Select</label>
-
                 </div>
             </form>
-            <button id="add_station" type="submit" class="btn">Add stationId</button>
+            <button id="add_station" type="submit" class="btn">Add station</button>
             <script>
                 $(document).ready(function () {
                     $('select').material_select();
@@ -59,9 +58,10 @@
                     changed = v;
                     $('#saveButton').prop("disabled", !changed);
                 }
-                function changeListener() {
+                function setChangedTrue() {
                     setChanged(true);
                 }
+
                 function stationEditPopup(stationId) {
                     var modal = $('#stationEditModal');
                     modal.find('#stationName').val(stationId.name);
@@ -80,7 +80,7 @@
                         title: stationProto.name,
                         draggable: true
                     });
-                    stationProto.marker.addListener('dragend', changeListener);
+                    stationProto.marker.addListener('dragend', setChangedTrue);
                     stationProto.marker.addListener('click', function () {
                         stationEditPopup(stationProto);
                     });
@@ -98,7 +98,6 @@
                         stationId.rangeKm = parseInt($(modal.find('#rangeKm')).val());
 
                         modal.closeModal();
-                        console.log(stationId);
                         setChanged(true)
                     });
                 });
@@ -111,7 +110,6 @@
 
                         stationData.remove(stationId);
                         modal.closeModal();
-                        console.log(stationId);
                         setChanged(true)
                     });
                 });

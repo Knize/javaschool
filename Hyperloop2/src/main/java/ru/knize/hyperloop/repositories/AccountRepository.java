@@ -8,5 +8,5 @@ import ru.knize.hyperloop.entities.AccountEntity;
  */
 public interface AccountRepository extends JpaRepository<AccountEntity, Integer> {
 
-    AccountEntity findByAccountId(int id);
+    AccountEntity findById(int id);
 }

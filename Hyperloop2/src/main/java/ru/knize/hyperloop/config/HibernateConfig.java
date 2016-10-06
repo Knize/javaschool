@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -30,7 +31,7 @@ import java.util.Properties;
  * Created by knize on 30.09.16.
  */
 @EnableTransactionManagement()
-@EnableJpaRepositories(basePackages = "ru.knize.hyperloop.repositories")
+@ImportResource("classpath:repositories.xml")
 @EntityScan("ru.knize.hyperloop.entities")
 @Configuration
 public class HibernateConfig {
@@ -44,8 +45,9 @@ public class HibernateConfig {
         return dataSource;
     }
 
+    /*
     @Bean
-    public EntityManagerFactory entityManagerFactory() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
         em.setPackagesToScan("ru.knize.hyperloop.entities");
@@ -59,8 +61,8 @@ public class HibernateConfig {
         em.setJpaProperties(additionalProperties());
 
         em.afterPropertiesSet();
-        return em.getObject();
-    }
+        return em;
+    }*/
 
     @Bean
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {

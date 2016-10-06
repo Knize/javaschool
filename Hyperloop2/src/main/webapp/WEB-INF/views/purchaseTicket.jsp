@@ -17,12 +17,12 @@
             <title>Ticket purchase</title>
             <h2>You going to purchase a ticket</h2>
             <h4>Capsule info</h4>
-            <h5>Capsule number: ${capsule.capsuleId}</h5>
+            <h5>Capsule number: ${capsule.id}</h5>
             <h5>Seats number: ${capsule.seatsNumber}</h5>
             <h5>Car slots: ${capsule.carSlots}</h5>
             <h4>Tell us about your trip</h4>
             <form action="/purchaseConfirmation" method="post">
-                <h5>Your start stationId is ${scheduleEntry.stationByStationId.stationName}</h5>
+                <h5>Your start stationId is ${scheduleEntry.station.name}</h5>
                 <div class="input-field">
                     <select name="arrStation">
                         <%--@elvariable id="selectedStationID" type="java.lang.Integer"--%>
@@ -63,9 +63,9 @@
                     </select>
                     <label>Children</label>
                 </div>
-                <input name="capsule" type="text" value="${capsule.capsuleId}" hidden>
-                <input name="schedule" type="text" value="${scheduleEntry.capsuleScheduleId}" hidden>
-                <input name="depStation" type="text" value="${scheduleEntry.stationByStationId.stationId}" hidden>
+                <input name="capsule" type="text" value="${capsule.id}" hidden>
+                <input name="schedule" type="text" value="${scheduleEntry.id}" hidden>
+                <input name="depStation" type="text" value="${scheduleEntry.station.id}" hidden>
                 <input name="trip_id" type="text" value="${tripID}" hidden>
                 <input type="submit" class="btn">
             </form>

@@ -20,7 +20,7 @@ public class CapsuleService {
 
     @Transactional
     public CapsuleEntity getCapsuleById(int capsuleId){
-        return capsuleRepository.findByCapsuleId(capsuleId);
+        return capsuleRepository.findById(capsuleId);
     }
 
     @Transactional

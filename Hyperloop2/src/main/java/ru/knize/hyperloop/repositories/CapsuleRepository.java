@@ -9,7 +9,7 @@ import ru.knize.hyperloop.entities.CapsuleEntity;
 
 public interface CapsuleRepository extends JpaRepository<CapsuleEntity, Integer> {
 
-    CapsuleEntity findByCapsuleId(int id);
+    CapsuleEntity findById(int id);
 
 }
 

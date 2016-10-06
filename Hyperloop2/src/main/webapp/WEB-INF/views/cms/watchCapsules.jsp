@@ -64,7 +64,7 @@
             <%--@elvariable id="scheduleList" type="java.util.List<ru.knize.hyperloop.entities.CapsulesScheduleEntity>"--%>
             <c:forEach var="row" items="${scheduleList}" varStatus="loop">
                 <tr>
-                    <td><c:out value="${row.stationByStationId.stationName}"/></td>
+                    <td><c:out value="${row.station.name}"/></td>
                     <td><c:out value="${row.arrivalTime}"/></td>
                     <td><c:out value="${row.departureTime}"/></td>
                     <td>
@@ -83,7 +83,7 @@
                     <option value="" disabled selected>Choose stationId</option>
                     <%--@elvariable id="stationList" type="java.util.List<ru.knize.hyperloop.entities.StationEntity>"--%>
                     <c:forEach items="${stationList}" var="stationId">
-                        <option value="${stationId.stationId}">${stationId.stationName}</option>
+                        <option value="${stationId.id}">${stationId.name}</option>
                     </c:forEach>
                 </select>
                 <label>Start stationId</label>

@@ -9,5 +9,5 @@ import ru.knize.hyperloop.entities.TrafficEntity;
  */
 public interface PersonRepository extends JpaRepository<PersonEntity, Integer> {
 
-    PersonEntity findByPersonId(int id);
+    PersonEntity findById(int id);
 }

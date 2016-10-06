@@ -10,24 +10,23 @@ import java.util.Collection;
 @Entity
 @Table(name = "Person", schema = "Hyperloop", catalog = "")
 public class PersonEntity {
-    private int personId;
+    private int id;
     private String name;
     private Date birthdate;
-    private Collection<TicketEntity> ticketsByPersonId;
+    private Collection<TicketEntity> tickets;
 
     @Id
-    @Column(name = "Person_ID")
     @GeneratedValue(strategy=GenerationType.AUTO)
-    public int getPersonId() {
-        return personId;
+    public int getId() {
+        return id;
     }
 
-    public void setPersonId(int personId) {
-        this.personId = personId;
+    public void setId(int personId) {
+        this.id = personId;
     }
 
     @Basic
-    @Column(name = "Name")
+
     public String getName() {
         return name;
     }
@@ -37,7 +36,7 @@ public class PersonEntity {
     }
 
     @Basic
-    @Column(name = "Birthdate")
+
     public Date getBirthdate() {
         return birthdate;
     }
@@ -53,7 +52,7 @@ public class PersonEntity {
 
         PersonEntity that = (PersonEntity) o;
 
-        if (personId != that.personId) return false;
+        if (id != that.id) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (birthdate != null ? !birthdate.equals(that.birthdate) : that.birthdate != null) return false;
 
@@ -62,18 +61,18 @@ public class PersonEntity {
 
     @Override
     public int hashCode() {
-        int result = personId;
+        int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (birthdate != null ? birthdate.hashCode() : 0);
         return result;
     }
 
-    @OneToMany(mappedBy = "personByPersonId")
-    public Collection<TicketEntity> getTicketsByPersonId() {
-        return ticketsByPersonId;
+    @OneToMany(mappedBy = "person")
+    public Collection<TicketEntity> getTickets() {
+        return tickets;
     }
 
-    public void setTicketsByPersonId(Collection<TicketEntity> ticketsByPersonId) {
-        this.ticketsByPersonId = ticketsByPersonId;
+    public void setTickets(Collection<TicketEntity> ticketsByPersonId) {
+        this.tickets = ticketsByPersonId;
     }
 }

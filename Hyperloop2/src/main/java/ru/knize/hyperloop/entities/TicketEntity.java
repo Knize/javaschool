@@ -8,29 +8,27 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Ticket", schema = "Hyperloop", catalog = "")
 public class TicketEntity {
-    private int ticketId;
+    private int id;
     private Integer children;
     private Byte carSlot;
     private Double price;
-    private CapsuleEntity capsuleByCapsuleId;
-    private StationEntity stationByDepartureStationId;
-    private StationEntity stationByArrivalStationId;
-    private AccountEntity accountByAccountId;
-    private PersonEntity personByPersonId;
+    private CapsuleEntity capsule;
+    private StationEntity fromStation;
+    private StationEntity toStation;
+    private AccountEntity account;
+    private PersonEntity person;
 
     @Id
-    @Column(name = "Ticket_ID")
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    public int getTicketId() {
-        return ticketId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public int getId() {
+        return id;
     }
 
-    public void setTicketId(int ticketId) {
-        this.ticketId = ticketId;
+    public void setId(int ticketId) {
+        this.id = ticketId;
     }
 
     @Basic
-    @Column(name = "Children")
     public Integer getChildren() {
         return children;
     }
@@ -40,7 +38,6 @@ public class TicketEntity {
     }
 
     @Basic
-    @Column(name = "Car_Slot")
     public Byte getCarSlot() {
         return carSlot;
     }
@@ -50,7 +47,6 @@ public class TicketEntity {
     }
 
     @Basic
-    @Column(name = "Price")
     public Double getPrice() {
         return price;
     }
@@ -66,8 +62,8 @@ public class TicketEntity {
 
         TicketEntity that = (TicketEntity) o;
 
-        if (ticketId != that.ticketId) return false;
-      if (children != null ? !children.equals(that.children) : that.children != null) return false;
+        if (id != that.id) return false;
+        if (children != null ? !children.equals(that.children) : that.children != null) return false;
         if (carSlot != null ? !carSlot.equals(that.carSlot) : that.carSlot != null) return false;
         if (price != null ? !price.equals(that.price) : that.price != null) return false;
 
@@ -76,7 +72,7 @@ public class TicketEntity {
 
     @Override
     public int hashCode() {
-        int result = ticketId;
+        int result = id;
         result = 31 * result + (children != null ? children.hashCode() : 0);
         result = 31 * result + (carSlot != null ? carSlot.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
@@ -84,53 +80,53 @@ public class TicketEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "Capsule_ID", referencedColumnName = "Capsule_ID")
-    public CapsuleEntity getCapsuleByCapsuleId() {
-        return capsuleByCapsuleId;
+    @JoinColumn()
+    public CapsuleEntity getCapsule() {
+        return capsule;
     }
 
-    public void setCapsuleByCapsuleId(CapsuleEntity capsuleByCapsuleId) {
-        this.capsuleByCapsuleId = capsuleByCapsuleId;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "Departure_Station_ID", referencedColumnName = "Station_ID")
-    public StationEntity getStationByDepartureStationId() {
-        return stationByDepartureStationId;
-    }
-
-    public void setStationByDepartureStationId(StationEntity stationByDepartureStationId) {
-        this.stationByDepartureStationId = stationByDepartureStationId;
+    public void setCapsule(CapsuleEntity capsuleByCapsuleId) {
+        this.capsule = capsuleByCapsuleId;
     }
 
     @ManyToOne
-    @JoinColumn(name = "Arrival_Station_ID", referencedColumnName = "Station_ID")
-    public StationEntity getStationByArrivalStationId() {
-        return stationByArrivalStationId;
+    @JoinColumn()
+    public StationEntity getFromStation() {
+        return fromStation;
     }
 
-    public void setStationByArrivalStationId(StationEntity stationByArrivalStationId) {
-        this.stationByArrivalStationId = stationByArrivalStationId;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "Account_ID", referencedColumnName = "Account_ID")
-    public AccountEntity getAccountByAccountId() {
-        return accountByAccountId;
-    }
-
-    public void setAccountByAccountId(AccountEntity accountByAccountId) {
-        this.accountByAccountId = accountByAccountId;
+    public void setFromStation(StationEntity stationByDepartureStationId) {
+        this.fromStation = stationByDepartureStationId;
     }
 
     @ManyToOne
-    @JoinColumn(name = "Person_ID", referencedColumnName = "Person_ID")
-    public PersonEntity getPersonByPersonId() {
-        return personByPersonId;
+    @JoinColumn()
+    public StationEntity getToStation() {
+        return toStation;
     }
 
-    public void setPersonByPersonId(PersonEntity personByPersonId) {
-        this.personByPersonId = personByPersonId;
+    public void setToStation(StationEntity stationByArrivalStationId) {
+        this.toStation = stationByArrivalStationId;
+    }
+
+    @ManyToOne
+    @JoinColumn()
+    public AccountEntity getAccount() {
+        return account;
+    }
+
+    public void setAccount(AccountEntity accountByAccountId) {
+        this.account = accountByAccountId;
+    }
+
+    @ManyToOne
+    @JoinColumn()
+    public PersonEntity getPerson() {
+        return person;
+    }
+
+    public void setPerson(PersonEntity personByPersonId) {
+        this.person = personByPersonId;
     }
 
     private long tripID;

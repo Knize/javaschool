@@ -13,12 +13,12 @@ public class CapsulesScheduleEntity {
 
     private Timestamp departureTime;
     private Timestamp arrivalTime;
-    private CapsuleEntity capsuleByCapsuleId;
-    private StationEntity stationByStationId;
-    private int capsuleScheduleId;
+    private CapsuleEntity capsule;
+    private StationEntity station;
+    private int id;
 
     @Basic
-    @Column(name = "Departure_Time")
+
     public Timestamp getDepartureTime() {
         return departureTime;
     }
@@ -28,7 +28,7 @@ public class CapsulesScheduleEntity {
     }
 
     @Basic
-    @Column(name = "Arrival_Time")
+
     public Timestamp getArrivalTime() {
         return arrivalTime;
     }
@@ -44,13 +44,13 @@ public class CapsulesScheduleEntity {
 
         CapsulesScheduleEntity that = (CapsulesScheduleEntity) o;
 
-        if (capsuleScheduleId != that.capsuleScheduleId) return false;
+        if (id != that.id) return false;
         if (departureTime != null ? !departureTime.equals(that.departureTime) : that.departureTime != null)
             return false;
         if (arrivalTime != null ? !arrivalTime.equals(that.arrivalTime) : that.arrivalTime != null) return false;
-        if (capsuleByCapsuleId != null ? !capsuleByCapsuleId.equals(that.capsuleByCapsuleId) : that.capsuleByCapsuleId != null)
+        if (capsule != null ? !capsule.equals(that.capsule) : that.capsule != null)
             return false;
-        return stationByStationId != null ? stationByStationId.equals(that.stationByStationId) : that.stationByStationId == null;
+        return station != null ? station.equals(that.station) : that.station == null;
 
     }
 
@@ -58,40 +58,40 @@ public class CapsulesScheduleEntity {
     public int hashCode() {
         int result = departureTime != null ? departureTime.hashCode() : 0;
         result = 31 * result + (arrivalTime != null ? arrivalTime.hashCode() : 0);
-        result = 31 * result + (capsuleByCapsuleId != null ? capsuleByCapsuleId.hashCode() : 0);
-        result = 31 * result + (stationByStationId != null ? stationByStationId.hashCode() : 0);
-        result = 31 * result + capsuleScheduleId;
+        result = 31 * result + (capsule != null ? capsule.hashCode() : 0);
+        result = 31 * result + (station != null ? station.hashCode() : 0);
+        result = 31 * result + id;
         return result;
     }
 
     @ManyToOne
-    @JoinColumn(name = "Capsule_ID", referencedColumnName = "Capsule_ID", nullable = false)
-    public CapsuleEntity getCapsuleByCapsuleId() {
-        return capsuleByCapsuleId;
+    @JoinColumn(nullable = false)
+    public CapsuleEntity getCapsule() {
+        return capsule;
     }
 
-    public void setCapsuleByCapsuleId(CapsuleEntity capsuleByCapsuleId) {
-        this.capsuleByCapsuleId = capsuleByCapsuleId;
+    public void setCapsule(CapsuleEntity capsuleByCapsuleId) {
+        this.capsule = capsuleByCapsuleId;
     }
 
     @ManyToOne
-    @JoinColumn(name = "Station_ID", referencedColumnName = "Station_ID", nullable = false)
-    public StationEntity getStationByStationId() {
-        return stationByStationId;
+    @JoinColumn(nullable = false)
+    public StationEntity getStation() {
+        return station;
     }
 
-    public void setStationByStationId(StationEntity stationByStationId) {
-        this.stationByStationId = stationByStationId;
+    public void setStation(StationEntity stationByStationId) {
+        this.station = stationByStationId;
     }
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    public int getCapsuleScheduleId() {
-        return capsuleScheduleId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public int getId() {
+        return id;
     }
 
-    public void setCapsuleScheduleId(int capsuleScheduleId) {
-        this.capsuleScheduleId = capsuleScheduleId;
+    public void setId(int capsuleScheduleId) {
+        this.id = capsuleScheduleId;
     }
 
     private int tripType;
@@ -116,14 +116,14 @@ public class CapsulesScheduleEntity {
         this.direction = direction;
     }
 
-    private long trip_ID;
+    private long tripID;
 
     @Basic
-    public long getTrip_ID() {
-        return trip_ID;
+    public long getTripID() {
+        return tripID;
     }
 
-    public void setTrip_ID(long trip_ID) {
-        this.trip_ID = trip_ID;
+    public void setTripID(long trip_ID) {
+        this.tripID = trip_ID;
     }
 }

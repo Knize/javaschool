@@ -30,8 +30,8 @@
                         <%--@elvariable id="stationList" type="java.util.List<ru.knize.hyperloop.entities.StationEntity>"--%>
                         <c:forEach items="${stationList}" var="stationId">
                             <option
-                                    <c:if test="${selectedStationID==stationId.stationId}">selected</c:if>
-                                    value="${stationId.stationId}">${stationId.stationName}</option>
+                                    <c:if test="${selectedStationID==stationId.id}">selected</c:if>
+                                    value="${stationId.id}">${stationId.name}</option>
                         </c:forEach>
                         <c:if test="${selectedStationID == null}">
                             <option value="" selected disabled>Choose station</option>
@@ -59,7 +59,7 @@
                 <%--@elvariable id="scheduleList" type="java.util.List<ru.knize.hyperloop.entities.CapsulesScheduleEntity>"--%>
                 <c:forEach var="schedule" items="${scheduleList}">
                     <tr>
-                        <td><c:out value="${schedule.capsuleByCapsuleId.capsuleId}"/></td>
+                        <td><c:out value="${schedule.capsule.id}"/></td>
                         <td><c:out value="${schedule.arrivalTime}"/></td>
                         <td><c:out value="${schedule.departureTime}"/></td>
                         <td>
@@ -67,9 +67,9 @@
                                 <button type="submit"
                                         class="btn-floating btn-large waves-effect waves-light red"><i
                                         class="material-icons">attach_money</i></button>
-                                <input name="capsule" value="${schedule.capsuleByCapsuleId.capsuleId}" hidden>
-                                <input name="scheduleEntry" value="${schedule.capsuleScheduleId}" hidden>
-                                <input name="trip_id" type="text" value="${schedule.trip_ID}" hidden>
+                                <input name="capsule" value="${schedule.capsule.id}" hidden>
+                                <input name="scheduleEntry" value="${schedule.id}" hidden>
+                                <input name="trip_id" type="text" value="${schedule.tripID}" hidden>
                             </form>
                         </td>
                     </tr>

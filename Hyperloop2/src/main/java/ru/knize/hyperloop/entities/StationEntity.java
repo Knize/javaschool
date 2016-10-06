@@ -9,36 +9,34 @@ import java.util.Collection;
 @Entity
 @Table(name = "Station", schema = "Hyperloop", catalog = "")
 public class StationEntity {
-    private int stationId;
-    private String stationName;
+    private int id;
+    private String name;
     private String timezone;
-    private Collection<CapsulesScheduleEntity> capsulesSchedulesByStationId;
-    private Collection<TicketEntity> ticketsByStationId;
-    private Collection<TicketEntity> ticketsByStationId_0;
+    private Collection<CapsulesScheduleEntity> capsulesSchedules;
+    private Collection<TicketEntity> tickets;
 
     @Id
-    @Column(name = "Station_ID")
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    public int getStationId() {
-        return stationId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public int getId() {
+        return id;
     }
 
-    public void setStationId(int stationId) {
-        this.stationId = stationId;
-    }
-
-    @Basic
-    @Column(name = "Station_Name")
-    public String getStationName() {
-        return stationName;
-    }
-
-    public void setStationName(String stationName) {
-        this.stationName = stationName;
+    public void setId(int stationId) {
+        this.id = stationId;
     }
 
     @Basic
-    @Column(name = "Timezone")
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String stationName) {
+        this.name = stationName;
+    }
+
+    @Basic
+
     public String getTimezone() {
         return timezone;
     }
@@ -54,8 +52,8 @@ public class StationEntity {
 
         StationEntity that = (StationEntity) o;
 
-        if (stationId != that.stationId) return false;
-        if (stationName != null ? !stationName.equals(that.stationName) : that.stationName != null) return false;
+        if (id != that.id) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (timezone != null ? !timezone.equals(that.timezone) : that.timezone != null) return false;
 
         return true;
@@ -63,48 +61,28 @@ public class StationEntity {
 
     @Override
     public int hashCode() {
-        int result = stationId;
-        result = 31 * result + (stationName != null ? stationName.hashCode() : 0);
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (timezone != null ? timezone.hashCode() : 0);
         return result;
     }
 
-    @OneToMany(mappedBy = "stationByStationId")
-    public Collection<CapsulesScheduleEntity> getCapsulesSchedulesByStationId() {
-        return capsulesSchedulesByStationId;
+    @OneToMany(mappedBy = "station")
+    public Collection<CapsulesScheduleEntity> getCapsulesSchedules() {
+        return capsulesSchedules;
     }
 
-    public void setCapsulesSchedulesByStationId(Collection<CapsulesScheduleEntity> capsulesSchedulesByStationId) {
-        this.capsulesSchedulesByStationId = capsulesSchedulesByStationId;
+    public void setCapsulesSchedules(Collection<CapsulesScheduleEntity> capsulesSchedulesByStationId) {
+        this.capsulesSchedules = capsulesSchedulesByStationId;
     }
 
-    @OneToMany(mappedBy = "stationByDepartureStationId")
-    public Collection<TicketEntity> getTicketsByStationId() {
-        return ticketsByStationId;
+    @OneToMany(mappedBy = "fromStation")
+    public Collection<TicketEntity> getTickets() {
+        return tickets;
     }
 
-    public void setTicketsByStationId(Collection<TicketEntity> ticketsByStationId) {
-        this.ticketsByStationId = ticketsByStationId;
-    }
-
-    @OneToMany(mappedBy = "stationByArrivalStationId")
-    public Collection<TicketEntity> getTicketsByStationId_0() {
-        return ticketsByStationId_0;
-    }
-
-    public void setTicketsByStationId_0(Collection<TicketEntity> ticketsByStationId_0) {
-        this.ticketsByStationId_0 = ticketsByStationId_0;
-    }
-
-    private int stationIndex;
-
-    @Basic
-    public int getStationIndex() {
-        return stationIndex;
-    }
-
-    public void setStationIndex(int stationIndex) {
-        this.stationIndex = stationIndex;
+    public void setTickets(Collection<TicketEntity> ticketsByStationId) {
+        this.tickets = ticketsByStationId;
     }
 
     private int rangeKm;
@@ -138,17 +116,6 @@ public class StationEntity {
 
     public void setLongitude(double longitude) {
         Longitude = longitude;
-    }
-
-    private BranchEntity branch;
-
-    @ManyToOne
-    public BranchEntity getBranch() {
-        return branch;
-    }
-
-    public void setBranch(BranchEntity branchById) {
-        this.branch = branchById;
     }
 
 }

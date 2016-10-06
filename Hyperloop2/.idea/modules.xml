@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Hyperloop2.iml" filepath="$PROJECT_DIR$/Hyperloop2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hyperloop2.iml" filepath="$PROJECT_DIR$/hyperloop2.iml" />
     </modules>
   </component>
 </project>

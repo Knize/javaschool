@@ -12,6 +12,7 @@ import ru.knize.hyperloop.services.StationService;
  */
 @Controller
 public class BuyTicketsController {
+
     @Autowired
     StationService stationService;
 
