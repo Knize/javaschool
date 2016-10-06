@@ -22,7 +22,7 @@
     <main>
         <div class="container">
             <h2 class="header">Schedule</h2>
-            <h4>Choose stationId</h4>
+            <h4>Choose station</h4>
             <form action="/schedule" method="get">
                 <div class="input-field">
                     <select name="stationId">

@@ -1,10 +1,7 @@
 package ru.knize.hyperloop.entities;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by knize on 06.10.16.
@@ -54,5 +51,16 @@ public class EdgeEntity {
 
     public void setToStation(StationEntity toStation) {
         this.toStation = toStation;
+    }
+
+    private int rangeKm;
+
+    @Basic
+    public int getRangeKm() {
+        return rangeKm;
+    }
+
+    public void setRangeKm(int rangeKm) {
+        this.rangeKm = rangeKm;
     }
 }

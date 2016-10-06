@@ -4,34 +4,42 @@ package ru.knize.hyperloop.DTO;
  * Created by knize on 04.10.16.
  */
 public class StationDTO {
-    private String stationIndex;
-    private String stationName;
+    private String name;
     private String timezone;
-    private String rangeKm;
-    private String branch;
+    private int rangeKm;
+    private int latitude;
+    private int longtitude;
 
-    public String getBranch() {
-        return branch;
+    public int getLatitude() {
+        return latitude;
     }
 
-    public void setBranch(String branch) {
-        this.branch = branch;
+    public void setLatitude(int latitude) {
+        this.latitude = latitude;
     }
 
-    public String getStationIndex() {
-        return stationIndex;
+    public void setLatitude(String latitudeStr) {
+        this.latitude = Integer.parseInt(latitudeStr);
     }
 
-    public void setStationIndex(String stationIndex) {
-        this.stationIndex = stationIndex;
+    public int getLongtitude() {
+        return longtitude;
     }
 
-    public String getStationName() {
-        return stationName;
+    public void setLongtitude(int longtitude) {
+        this.longtitude = longtitude;
     }
 
-    public void setStationName(String stationName) {
-        this.stationName = stationName;
+    public void setLongtitude(String longtitude) {
+        this.longtitude = Integer.parseInt(longtitude);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getTimezone() {
@@ -42,11 +50,19 @@ public class StationDTO {
         this.timezone = timezone;
     }
 
-    public String getRangeKm() {
+    public int getRangeKm() {
         return rangeKm;
     }
 
-    public void setRangeKm(String rangeKm) {
+    public void setRangeKm(String rangeKmStr) {
+        try {
+            this.rangeKm = Integer.parseInt(rangeKmStr);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setRangeKm(int rangeKm) {
         this.rangeKm = rangeKm;
     }
 }

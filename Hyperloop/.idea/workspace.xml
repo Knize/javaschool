@@ -4,17 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/cms/addStation.jsp" line="65" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd444c51-0415-468f-a235-4b7ec6a28c9b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Hyperloop2/META-INF/persistence.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Hyperloop2/Hyperloop2.iml" afterPath="$PROJECT_DIR$/../Hyperloop2/Hyperloop2.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Hyperloop2/pom.xml" afterPath="$PROJECT_DIR$/../Hyperloop2/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Hyperloop2/src/main/java/ru/knize/hyperloop/controller/BuyTicketsController.java" afterPath="$PROJECT_DIR$/../Hyperloop2/src/main/java/ru/knize/hyperloop/controller/BuyTicketsController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Hyperloop2/src/main/java/ru/knize/hyperloop/repositories/BranchRepository.java" afterPath="$PROJECT_DIR$/../Hyperloop2/src/main/java/ru/knize/hyperloop/repositories/BranchRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Hyperloop2/src/main/java/ru/knize/hyperloop/services/CapsuleScheduleService.java" afterPath="$PROJECT_DIR$/../Hyperloop2/src/main/java/ru/knize/hyperloop/services/CapsuleScheduleService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Hyperloop2/src/main/webapp/WEB-INF/templates/footer.jsp" afterPath="$PROJECT_DIR$/../Hyperloop2/src/main/webapp/WEB-INF/templates/footer.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Hyperloop2/src/main/webapp/WEB-INF/views/cms/addStation.jsp" afterPath="$PROJECT_DIR$/../Hyperloop2/src/main/webapp/WEB-INF/views/cms/addStation.jsp" />
-    </list>
+    <list default="true" id="cd444c51-0415-468f-a235-4b7ec6a28c9b" name="Default" comment="" />
     <ignored path="Hyperloop.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -141,7 +131,7 @@
       <file leaf-file-name="StationControlServlet.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ru/knize/hyperloop/StationControlServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
+            <state relative-caret-position="-107">
               <caret line="64" column="22" selection-start-line="64" selection-start-column="22" selection-end-line="64" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -456,7 +446,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -694,6 +683,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1472,6 +1462,7 @@
       <workItem from="1475113886010" duration="21000" />
       <workItem from="1475114608625" duration="15383000" />
       <workItem from="1475712153275" duration="1235000" />
+      <workItem from="1475722576365" duration="10000" />
     </task>
     <task id="LOCAL-00001" summary="hibernate classes">
       <created>1472100666081</created>
@@ -1656,7 +1647,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="424476000" />
+    <option name="totallyTimeSpent" value="424486000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1680,13 +1671,13 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.11534335" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27142859" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18791209" sideWeight="0.48922414" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27142859" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23406594" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1713362" sideWeight="0.5153846" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1826923" sideWeight="0.4846154" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22115384" sideWeight="0.4846154" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18963675" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2245,7 +2236,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ru/knize/hyperloop/StationControlServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
+        <state relative-caret-position="-107">
           <caret line="64" column="22" selection-start-line="64" selection-start-column="22" selection-end-line="64" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />

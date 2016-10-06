@@ -32,11 +32,11 @@ public class StationService {
     @Transactional
     public void addStation(StationDTO stationDTO){
         StationEntity se = new StationEntity();
-        se.setRangeKm(Integer.parseInt(stationDTO.getRangeKm()));
+        se.setRangeKm(stationDTO.getRangeKm());
         se.setTimezone(stationDTO.getTimezone());
         se.setLongitude(0);
         se.setLatitude(0);
-        se.setName(stationDTO.getStationName());
+        se.setName(stationDTO.getName());
 
         stationRepository.save(se);
     }

@@ -20,7 +20,7 @@
                 <select id="capsule" name="capsule">
                     <option value="" disabled selected>Choose capsule</option>
                     <c:forEach items="${capsuleList}" var="capsule">
-                        <option value="${capsule.capsuleId}"  ${capsule.capsuleId == selectedCapsule.capsuleId ? 'selected="selected"' : ''}>${capsule.capsuleId}</option>
+                        <option value="${capsule.id}"  ${capsule.id == selectedCapsule.id ? 'selected="selected"' : ''}>${capsule.id}</option>
                     </c:forEach>
                 </select>
                 <label>Select capsule</label>
@@ -41,7 +41,7 @@
                     </div>
                     <div class="card-stacked">
                         <div class="card-content">
-                            <h5>Capsule ID: <c:out value="${selectedCapsule.capsuleId}"/></h5>
+                            <h5>Capsule ID: <c:out value="${selectedCapsule.id}"/></h5>
                             <h5>Car Slots: <c:out value="${selectedCapsule.carSlots}"/></h5>
                             <h5>Seats Number: <c:out value="${selectedCapsule.carSlots}"/></h5>
                         </div>

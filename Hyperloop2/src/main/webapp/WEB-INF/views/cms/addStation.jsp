@@ -54,17 +54,19 @@
                 var map;
                 var stationData = [];
                 var changed = false;
+
                 function setChanged(v) {
                     changed = v;
                     $('#saveButton').prop("disabled", !changed);
                 }
+
                 function setChangedTrue() {
                     setChanged(true);
                 }
 
                 function stationEditPopup(stationId) {
                     var modal = $('#stationEditModal');
-                    modal.find('#stationName').val(stationId.name);
+                    modal.find('#name').val(stationId.name);
                     modal.find('#stationIndex').val(stationId.index);
                     modal.find('#rangeKm').val(stationId.rangeKm);
                     modal.find('#timezone').text("Timezone: " + stationId.timezone + ".");
@@ -93,7 +95,7 @@
                         var modal = $('#stationEditModal');
                         var stationId = modal.data('stationId');
 
-                        stationId.name = $(modal.find('#stationName')).val();
+                        stationId.name = $(modal.find('#name')).val();
                         stationId.index = parseInt($(modal.find('#stationIndex')).val());
                         stationId.rangeKm = parseInt($(modal.find('#rangeKm')).val());
 
@@ -116,7 +118,7 @@
 
 
                 $('#add_station').click(function () {
-                    var selectedBranch = $( "#branch").find("option:selected" ).index();
+                    var selectedBranch = $("#branch").find("option:selected").index();
 
                     var stationId = {
                         name: "New Station",
@@ -169,11 +171,11 @@
                         });
 
                         var branchCoordinates = [];
-                        stations.sort(function (a,b) {
+                        stations.sort(function (a, b) {
                             var indexA = a.index;
                             var indexB = b.index;
-                            if(indexA < indexB) return -1;
-                            if(indexA > indexB) return 1;
+                            if (indexA < indexB) return -1;
+                            if (indexA > indexB) return 1;
                             return 0
 
                         });
@@ -198,8 +200,8 @@
             </script>
             <div id="stationEditModal" class="modal">
                 <div class="modal-content">
-                    <label for="stationName">Station Name</label>
-                    <input id="stationName" type="text">
+                    <label for="name">Station Name</label>
+                    <input id="name" type="text">
                     <label for="stationIndex">Station Index</label>
                     <input type="number" id="stationIndex">
                     <label for="rangeKm">Range, km</label>

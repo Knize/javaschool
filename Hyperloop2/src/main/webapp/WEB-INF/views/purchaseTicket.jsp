@@ -30,7 +30,7 @@
                         <c:forEach items="${stationList}" var="stationId">
                             <option
                                     <c:if test="${selectedStationID==stationId.stationId}">selected</c:if>
-                                    value="${stationId.stationId}">${stationId.stationName}</option>
+                                    value="${stationId.stationId}">${stationId.name}</option>
                         </c:forEach>
                         <c:if test="${selectedStationID == null}">
                             <option value="" selected disabled>Choose destination stationId</option>
