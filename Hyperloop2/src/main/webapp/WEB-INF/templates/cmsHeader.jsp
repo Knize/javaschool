@@ -11,6 +11,10 @@
         <div class="nav-wrapper">
             <a href="/" class="brand-logo">Hyperloop</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <c:if test="${pageContext.request.userPrincipal.name != null}">
+                    <li>Hello, ${pageContext.request.userPrincipal.name}</li>
+                    <li><a href="/logout">Logout</a></li>
+                </c:if>
                 <li><a href="/cms/addStation">Add station</a></li>
                 <li><a href="/cms/addCapsule">Add capsule</a></li>
                 <li><a href="/cms/watchCapsules">Watch capsules</a></li>
