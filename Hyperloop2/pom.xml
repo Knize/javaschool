@@ -119,6 +119,12 @@
         </dependency>
 
 
+        <!-- Spring REST -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
         <!-- Spring security -->
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -168,6 +174,10 @@
                         <source>1.8</source>
                         <target>1.8</target>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
                 </plugin>
                 <plugin>
                     <groupId>nl.geodienstencentrum.maven</groupId>
