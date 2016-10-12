@@ -1,6 +1,7 @@
 package ru.knize.hyperloop.DTO;
 
-import org.springframework.web.bind.annotation.RequestBody;
+
+import ru.knize.hyperloop.entities.StationEntity;
 
 /**
  * Created by knize on 06.10.16.
@@ -9,12 +10,21 @@ public class StationDTOID {
     private int id;
     private String name;
     private String timezone;
-    private int rangeKm;
     private double latitude;
     private double longitude;
 
-
     public StationDTOID() {
+    }
+
+    @Override
+    public String toString() {
+        return "StationDTOID{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", timezone='" + timezone + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
     }
 
     public double getLatitude() {
@@ -71,21 +81,21 @@ public class StationDTOID {
         StationDTO stationDTO = new StationDTO();
         stationDTO.setName(this.name);
         stationDTO.setTimezone(this.timezone);
-        stationDTO.setRangeKm(this.rangeKm);
         stationDTO.setLatitude(Double.toString(this.latitude));
         stationDTO.setLongitude(Double.toString(this.longitude));
         return stationDTO;
     }
 
-    @Override
-    public String toString() {
-        return "StationDTOID{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", timezone='" + timezone + '\'' +
-                ", rangeKm=" + rangeKm +
-                ", latitude=" + latitude +
-                ", longitude=" + longitude +
-                '}';
+    public static StationDTOID fromStationEntity(StationEntity se){
+        StationDTOID stationDTOID = new StationDTOID();
+        stationDTOID.setId(Integer.toString(se.getId()));
+        stationDTOID.setName(se.getName());
+        stationDTOID.setTimezone(se.getTimezone());
+        stationDTOID.setLatitude(Double.toString(se.getLatitude()));
+        stationDTOID.setLongitude(Double.toString(se.getLongitude()));
+
+        return stationDTOID;
     }
+
+
 }

@@ -6,11 +6,20 @@ package ru.knize.hyperloop.DTO;
 public class StationDTO {
     private String name;
     private String timezone;
-    private int rangeKm;
     private double latitude;
     private double longitude;
 
     public StationDTO() { }
+
+    @Override
+    public String toString() {
+        return "StationDTO{" +
+                "name='" + name + '\'' +
+                ", timezone='" + timezone + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
+    }
 
     public double getLatitude() {
         return latitude;
@@ -52,32 +61,6 @@ public class StationDTO {
         this.timezone = timezone;
     }
 
-    public int getRangeKm() {
-        return rangeKm;
-    }
-
-    public void setRangeKm(int rangeKm) {
-        this.rangeKm = rangeKm;
-    }
-
-    public void setRangeKm(String rangeKmStr) {
-        try {
-            this.rangeKm = Integer.parseInt(rangeKmStr);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
-    }
 
 
-
-    @Override
-    public String toString() {
-        return "StationDTO{" +
-                "name='" + name + '\'' +
-                ", timezone='" + timezone + '\'' +
-                ", rangeKm=" + rangeKm +
-                ", latitude=" + latitude +
-                ", longitude=" + longitude +
-                '}';
-    }
 }

@@ -1,5 +1,6 @@
 package ru.knize.hyperloop.DTO;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 /**
@@ -7,10 +8,29 @@ import java.util.List;
  */
 
 public class StationDTOWrapper {
-    private List<StationDTOID> create;
-    private List<StationDTOID> update;
-    private List<Integer> delete;
-    private List<EdgeDTO> edges;
+    private List<StationDTOID> stationsCreate;
+    private List<StationDTOID> stationsUpdate;
+    private List<Integer> stationsDelete;
+    private List<EdgeDTO> edgesCreate;
+    private List<EdgeDTO> edgesUpgrade;
+    private List<Integer> edgesDelete;
+
+
+    public List<EdgeDTO> getEdgesUpgrade() {
+        return edgesUpgrade;
+    }
+
+    public void setEdgesUpgrade(List<EdgeDTO> edgesUpgrade) {
+        this.edgesUpgrade = edgesUpgrade;
+    }
+
+    public List<Integer> getEdgesDelete() {
+        return edgesDelete;
+    }
+
+    public void setEdgesDelete(List<Integer> edgesDelete) {
+        this.edgesDelete = edgesDelete;
+    }
 
     public StationDTOWrapper() {
     }
@@ -18,42 +38,44 @@ public class StationDTOWrapper {
     @Override
     public String toString() {
         return "StationDTOWrapper{" +
-                "create=" + create +
-                ", update=" + update +
-                ", delete=" + delete +
-                ", edges=" + edges +
+                "stationsCreate=" + stationsCreate +
+                ", stationsUpdate=" + stationsUpdate +
+                ", stationsDelete=" + stationsDelete +
+                ", edgesCreate=" + edgesCreate +
+                ", edgesUpgrade=" + edgesUpgrade +
+                ", edgesDelete=" + edgesDelete +
                 '}';
     }
 
-    public List<EdgeDTO> getEdges() {
-        return edges;
+    public List<EdgeDTO> getEdgesCreate() {
+        return edgesCreate;
     }
 
-    public void setEdges(List<EdgeDTO> edges) {
-        this.edges = edges;
+    public void setEdgesCreate(List<EdgeDTO> edgesCreate) {
+        this.edgesCreate = edgesCreate;
     }
 
-    public List<StationDTOID> getUpdate() {
-        return update;
+    public List<StationDTOID> getStationsUpdate() {
+        return stationsUpdate;
     }
 
-    public void setUpdate(List<StationDTOID> update) {
-        this.update = update;
+    public void setStationsUpdate(List<StationDTOID> stationsUpdate) {
+        this.stationsUpdate = stationsUpdate;
     }
 
-    public List<Integer> getDelete() {
-        return delete;
+    public List<Integer> getStationsDelete() {
+        return stationsDelete;
     }
 
-    public void setDelete(List<Integer> delete) {
-        this.delete = delete;
+    public void setStationsDelete(List<Integer> stationsDelete) {
+        this.stationsDelete = stationsDelete;
     }
 
-    public List<StationDTOID> getCreate() {
-        return create;
+    public List<StationDTOID> getStationsCreate() {
+        return stationsCreate;
     }
 
-    public void setCreate(List<StationDTOID> create) {
-        this.create = create;
+    public void setStationsCreate(List<StationDTOID> stationsCreate) {
+        this.stationsCreate = stationsCreate;
     }
 }

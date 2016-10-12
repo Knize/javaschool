@@ -33,7 +33,7 @@
                         <td>${capsule.seatsNumber}</td>
                         <td>
                             <form method="get" action="/cms/addCapsule">
-                                <button type="submit" id="delete"
+                                <button type="submit" id="stationsDelete"
                                         class="btn-floating btn-large waves-effect waves-light red"><i
                                         class="material-icons">clear</i></button>
                                 <input name="deletedCapsuleNumber" type="text" value="${capsule.id}" hidden>

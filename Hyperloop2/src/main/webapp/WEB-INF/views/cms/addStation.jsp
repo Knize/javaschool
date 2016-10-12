@@ -44,22 +44,44 @@
                 <div class="modal-content">
                     <label for="name">Station Name</label>
                     <input id="name" type="text">
-                    <label for="prevStation">Previous Station</label>
-                    <select name="prevStation" id="prevStation">
-                        <option value="" disabled selected>Choose station</option>
-                        <%--@elvariable id="stationList" type="java.util.List<ru.knize.hyperloop.entities.StationEntity>"--%>
-                        <c:forEach items="${stationList}" var="station">
-                            <option value="${station.id}" >${station.name}</option>
-                        </c:forEach>
-                    </select>
-                    <label for="rangeKm">Range, km</label>
-                    <input type="number" id="rangeKm">
-                    <p id="timezone"></p>
+                    <label for="timezone">Time zone</label>
+                    <input id="timezone" type="text" value="">
                     <p id="coordinates"></p>
                 </div>
                 <div class="modal-footer">
                     <a id="submitStation" class="waves-effect waves-green btn-flat">OK</a>
                     <a id="deleteStation" class="waves-effect waves-green btn-flat red">DELETE STATION</a>
+                </div>
+            </div>
+            <div id="edgeEditModal" class="modal">
+                <div class="modal-content">
+                    <label for="fromStation">From Station</label>
+                    <select name="fromStation" id="fromStation">
+                        <option value="" disabled selected>Choose station</option>
+                        <c:forEach items="${stationList}" var="station">
+                            <option value="${station.id}">${station.name}</option>
+                        </c:forEach>
+                    </select>
+                    <label for="toStation">To Station</label>
+                    <select name="toStation" id="toStation">
+                        <option value="" disabled selected>Choose station</option>
+                        <c:forEach items="${stationList}" var="station">
+                            <option value="${station.id}">${station.name}</option>
+                        </c:forEach>
+                    </select>
+                    <label for="edgeBranch">To Station</label>
+                    <select name="edgeBranch" id="edgeBranch">
+                        <option value="" disabled selected>Choose branch</option>
+                        <c:forEach items="${branchList}" var="branch">
+                            <option value="${branch.id}">${branch.name}</option>
+                        </c:forEach>
+                    </select>
+                    <label for="rangeKm">Range, km</label>
+                    <input type="number" id="rangeKm">
+                </div>
+                <div class="modal-footer">
+                    <a id="submitEdge" class="waves-effect waves-green btn-flat">OK</a>
+                    <a id="deleteEdge" class="waves-effect waves-green btn-flat red">DELETE STAGE</a>
                 </div>
             </div>
         </div>

@@ -6,36 +6,53 @@ import ru.knize.hyperloop.entities.StationEntity;
  * Created by knize on 11.10.16.
  */
 public class EdgeDTO {
-    private int fromStationId;
-    private int toStationId;
+    private StationDTOID fromStation;
+    private StationDTOID toStation;
+    private BranchDTO branch;
+    private int id;
     private int rangeKm;
-    private int branch;
 
     public EdgeDTO() {
     }
 
-    public int getFromStationId() {
-        return fromStationId;
+    public StationDTOID getFromStation() {
+        return fromStation;
     }
 
-    public void setFromStationId(String fromStationId) {
-        this.fromStationId = Integer.parseInt(fromStationId);
+    public void setFromStation(StationDTOID fromStation) {
+        this.fromStation = fromStation;
     }
 
-    public int getToStationId() {
-        return toStationId;
+    public StationDTOID getToStation() {
+        return toStation;
     }
 
-    public void setToStationId(String toStationId) {
-        this.toStationId = Integer.parseInt(toStationId);
+    public void setToStation(StationDTOID toStation) {
+        this.toStation = toStation;
+    }
+
+    public BranchDTO getBranch() {
+        return branch;
+    }
+
+    public void setBranch(BranchDTO branch) {
+        this.branch = branch;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = Integer.parseInt(id);
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getRangeKm() {
         return rangeKm;
-    }
-
-    public void setRangeKm(int rangeKm) {
-        this.rangeKm = rangeKm;
     }
 
     public void setRangeKm(String rangeKmStr) {
@@ -46,21 +63,9 @@ public class EdgeDTO {
         }
     }
 
-    public int getBranch() {
-        return branch;
+    public void setRangeKm(int rangeKm) {
+        this.rangeKm = rangeKm;
     }
 
-    public void setBranch(String branch) {
-        this.branch = Integer.parseInt(branch);
-    }
 
-    @Override
-    public String toString() {
-        return "EdgeDTO{" +
-                "fromStationId=" + fromStationId +
-                ", toStationId=" + toStationId +
-                ", rangeKm=" + rangeKm +
-                ", branch=" + branch +
-                '}';
-    }
 }

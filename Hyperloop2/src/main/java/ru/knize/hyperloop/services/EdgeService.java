@@ -31,11 +31,11 @@ public class EdgeService {
         return edgeRepository.findAll();
     }
 
-    public void addEdge(EdgeDTO edgeDTO) {
+    public void add(EdgeDTO edgeDTO) {
         EdgeEntity edge = new EdgeEntity();
-        StationEntity fromStation = stationService.getStationById(edgeDTO.getFromStationId());
-        StationEntity toStation = stationService.getStationById(edgeDTO.getToStationId());
-        BranchEntity branch = branchService.getBranchById(edgeDTO.getBranch());
+        StationEntity fromStation = stationService.getStationById(edgeDTO.getFromStation().getId());
+        StationEntity toStation = stationService.getStationById(edgeDTO.getToStation().getId());
+        BranchEntity branch = branchService.getBranchById(edgeDTO.getBranch().getId());
         System.out.println(edgeDTO);
         edge.setRangeKm(edgeDTO.getRangeKm());
         edge.setFromStation(fromStation);
@@ -46,5 +46,25 @@ public class EdgeService {
         edgeRepository.save(edge);
     }
 
+    public void update(EdgeDTO edgeDTO){
+        EdgeEntity edge = new EdgeEntity();
+        StationEntity fromStation = stationService.getStationById(edgeDTO.getFromStation().getId());
+        StationEntity toStation = stationService.getStationById(edgeDTO.getToStation().getId());
+        BranchEntity branch = branchService.getBranchById(edgeDTO.getBranch().getId());
+        System.out.println(edgeDTO);
+        edge.setId(edgeDTO.getId());
+        edge.setRangeKm(edgeDTO.getRangeKm());
+        edge.setFromStation(fromStation);
+        edge.setToStation(toStation);
+        edge.setBranch(branch);
+        System.out.println("From station id: " + fromStation.getId());
+        System.out.println("To station id: " + toStation.getId());
+        edgeRepository.save(edge);
+    }
+
+    public void delete(int edgeId){
+        EdgeEntity edge = edgeRepository.findById(edgeId);
+        edgeRepository.delete(edge);
+    }
 
 }

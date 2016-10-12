@@ -35,7 +35,10 @@ var stationData = [];
 var newStations = [];
 var deletedStations = [];
 var updatedStations = [];
-var edges = [];
+var edgesData = [];
+var newEdges = [];
+var deletedEdges = [];
+var updatedEdges = [];
 var color;
 var changed = false;
 var drawOn = false;
@@ -64,10 +67,46 @@ function setChangedTrue() {
 function stationEditPopup(station) {
     var modal = $('#stationEditModal');
     modal.find('#name').val(station.name);
-    modal.find('#timezone').text("Timezone: " + station.timezone + ".");
+    modal.find('#timezone').val(station.timezone);
     modal.find('#coordinates').text("Latitude: " + station.latitude.toString() + ". Longitude: " + station.longitude.toString() + ".");
     modal.data('station', station);
     modal.openModal();
+}
+
+function edgeEditPopup(edge) {
+    console.log(edge);
+    var modal = $('#edgeEditModal');
+    modal.find('#fromStation').prop("selectedIndex", parseInt(edge.fromStation.id));
+    modal.find('#toStation').prop("selectedIndex", parseInt(edge.toStation.id));
+    modal.find('#edgeBranch').prop("selectedIndex", parseInt(edge.branch));
+    modal.find('#rangeKm').val(edge.rangeKm);
+    modal.data('edge', edge);
+    modal.openModal();
+}
+
+function createEdge(edgeProto) {
+    var fromStationPos = {lat: edgeProto.fromStation.latitude,
+    lng: edgeProto.fromStation.longitude};
+    var toStationPos = {lat: edgeProto.toStation.latitude,
+        lng: edgeProto.toStation.longitude};
+    edgeProto.drawLine = new google.maps.Polyline({
+        path: [fromStationPos, toStationPos],
+        geodesic: false,
+        strokeColor: colors[edgeProto.branch.id],
+        strokeOpacity: 0.7,
+        strokeWeight: 6,
+        map: map
+    });
+    currentEdge.drawLine.addListener('click', function () {
+        edgeEditPopup(currentEdge);
+
+    });
+    currentEdge.drawLine.addListener('rightclick', function () {
+        edgesData.remove(currentEdge);
+        deletedEdges.push(currentEdge);
+        currentEdge.drawLine.setMap(null);
+        setChanged(true);
+    });
 }
 
 function createStation(stationProto) {
@@ -83,16 +122,15 @@ function createStation(stationProto) {
             updatedStations.push(stationProto);
         }
 
-        function updateEdges(_edges, i){
+        function updateEdges(_edges, i) {
             var edgesToUpdate = _edges[stationProto.id];
-            if(edgesToUpdate != undefined)
+            if (edgesToUpdate != undefined)
                 edgesToUpdate.forEach(function (it) {
                     it.drawLine.getPath().setAt(i, stationProto.marker.getPosition());
                 });
         }
-
-        updateEdges(_.groupBy(edges, "toStation.id"),1);
-        updateEdges(_.groupBy(edges, "fromStation.id"),0);
+        updateEdges(_.groupBy(newEdges, "toStation.id"), 1);
+        updateEdges(_.groupBy(newEdges, "fromStation.id"), 0);
 
         setChangedTrue();
     });
@@ -106,19 +144,33 @@ function createStation(stationProto) {
         if (!drawOn) {
             currentEdge = {};
             currentEdge.branch = $('#branch').prop('selectedIndex');
+            currentEdge.rangeKm = 0;
             currentEdge.fromStation = stationProto;
             currentEdge.drawLine = new google.maps.Polyline({
                 path: [self.getPosition(), self.getPosition()],
                 geodesic: false,
                 strokeColor: colors[currentEdge.branch],
-                strokeOpacity: 1.0,
-                strokeWeight: 2,
+                strokeOpacity: 0.7,
+                strokeWeight: 6,
                 map: map
             });
         } else {
             currentEdge.toStation = stationProto;
             currentEdge.drawLine.getPath().setAt(1, stationProto.marker.getPosition());
-            edges.push(currentEdge);
+            currentEdge.drawLine.addListener('click', function () {
+                edgeEditPopup(currentEdge);
+
+            });
+            currentEdge.drawLine.addListener('rightclick', function () {
+                edgesData.remove(currentEdge);
+                deletedEdges.push(currentEdge);
+                currentEdge.drawLine.setMap(null);
+                setChanged(true);
+            });
+
+            console.log("Listener: ");
+            console.log(currentEdge);
+            newEdges.push(currentEdge);
             setChangedTrue();
         }
 
@@ -143,29 +195,42 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+    $('#submitEdge').click(function () {
+        var modal = $('#edgeEditModal');
+        var edge = modal.data('edge');
+        var fromStation = parseInt($(modal.find('#fromStation')).val());
+        var toStation = parseInt($(modal.find('#toStation')).val());
+        var branch = parseInt($(modal.find('#branch')).val());
+
+        selectedBranch = $("#branch").prop('selectedIndex');
+        station.name = $(modal.find('#name')).val();
+        station.rangeKm = parseInt($(modal.find('#rangeKm')).val());
+        modal.closeModal();
+        setChanged(true);
+    });
+});
+
+$(document).ready(function () {
     $('#deleteStation').click(function () {
 
         var modal = $('#stationEditModal');
         var station = modal.data('station');
-
+        station.marker.setMap(null);
         modal.closeModal();
-
         stationData.remove(station);
         deletedStations.push(station);
         setChanged(true);
     });
 });
 
-
 $('#add_station').click(function () {
-
 
     var station = {
         name: "New Station",
         timezone: "UTC+0",
         rangeKm: 0,
-        latitude: 0.322,
-        longitude: 0.228
+        latitude: 0,
+        longitude: 0
     };
     createStation(station);
     stationData.push(station);
@@ -193,8 +258,8 @@ $('#saveButton').click(function () {
         console.log("From station to DTO:");
         console.log(edge.toStation);
         return {
-            fromStation: edge.fromStation,
-            toStation: edge.toStation,
+            fromStation: edge.fromStation.id,
+            toStation: edge.toStation.id,
             rangeKm: edge.rangeKm,
             branch: edge.branch
         }
@@ -202,10 +267,12 @@ $('#saveButton').click(function () {
 
 
     var requestData = {
-        create: _.map(newStations, clientStationToStationDTO),
-        update: _.map(updatedStations, clientStationToStationDTO),
-        delete: _.map(deletedStations, "id"),
-        edges: _.map(edges, clientEdgesToEdgesDTO)
+        stationsCreate: _.map(newStations, clientStationToStationDTO),
+        stationsUpdate: _.map(updatedStations, clientStationToStationDTO),
+        stationsDelete: _.map(deletedStations, "id"),
+        edgesCreate: _.map(newEdges, clientEdgesToEdgesDTO),
+        edgesUpdate: _.map(updatedEdges, clientEdgesToEdgesDTO),
+        edgesDelete: _.map(deletedEdges, "id")
     };
     console.log(requestData);
     var JSONstring = JSON.stringify(requestData);
@@ -241,11 +308,18 @@ function initMap() {
     });
 
 
-    $.getJSON("/api/stations/list", function (stations) {
+    $.getJSON("/api/stations/list", function (wrapper) {
+        console.log(wrapper);
+        var stations = wrapper.stations;
         stationData = stations;
-        console.log(stations);
         stations.forEach(function (station) {
             createStation(station);
         });
+        var edges = wrapper.edges;
+        edgesData = edges;
+        edges.forEach(function (edge) {
+            createEdge(edge);
+        });
+
     })
 }
