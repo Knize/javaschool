@@ -7,31 +7,33 @@ public class StationDTO {
     private String name;
     private String timezone;
     private int rangeKm;
-    private int latitude;
-    private int longtitude;
+    private double latitude;
+    private double longitude;
 
-    public int getLatitude() {
+    public StationDTO() { }
+
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(int latitude) {
-        this.latitude = latitude;
-    }
-
     public void setLatitude(String latitudeStr) {
-        this.latitude = Integer.parseInt(latitudeStr);
+        try {
+            this.latitude = Integer.parseInt(latitudeStr);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
     }
 
-    public int getLongtitude() {
-        return longtitude;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setLongtitude(int longtitude) {
-        this.longtitude = longtitude;
-    }
-
-    public void setLongtitude(String longtitude) {
-        this.longtitude = Integer.parseInt(longtitude);
+    public void setLongitude(String longitude) {
+        try {
+            this.longitude = Integer.parseInt(longitude);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getName() {
@@ -54,6 +56,10 @@ public class StationDTO {
         return rangeKm;
     }
 
+    public void setRangeKm(int rangeKm) {
+        this.rangeKm = rangeKm;
+    }
+
     public void setRangeKm(String rangeKmStr) {
         try {
             this.rangeKm = Integer.parseInt(rangeKmStr);
@@ -62,7 +68,16 @@ public class StationDTO {
         }
     }
 
-    public void setRangeKm(int rangeKm) {
-        this.rangeKm = rangeKm;
+
+
+    @Override
+    public String toString() {
+        return "StationDTO{" +
+                "name='" + name + '\'' +
+                ", timezone='" + timezone + '\'' +
+                ", rangeKm=" + rangeKm +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
     }
 }

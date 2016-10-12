@@ -1,18 +1,17 @@
 package ru.knize.hyperloop.controller;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.http.HttpEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+import ru.knize.hyperloop.DTO.EdgeDTO;
+import ru.knize.hyperloop.DTO.StationDTOID;
+import ru.knize.hyperloop.DTO.StationDTOWrapper;
+import ru.knize.hyperloop.entities.StationEntity;
+import ru.knize.hyperloop.services.EdgeService;
+import ru.knize.hyperloop.services.StationService;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
@@ -22,28 +21,50 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 @RestController
 public class MapAPI {
 
-    @RequestMapping(method = RequestMethod.GET,
+    @Autowired
+    StationService stationService;
+    @Autowired
+    EdgeService edgeService;
+
+    @RequestMapping(method = RequestMethod.POST,
             value = "/api/stations/update",
-            consumes = APPLICATION_JSON_VALUE,
-            produces = APPLICATION_JSON_VALUE)
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public void update(HttpEntity<String> httpEntity) {
-        String json = httpEntity.getBody();
-        System.out.println(json);
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            Map<String, Object> map = new HashMap<String, Object>();
-            map = mapper.readValue(json, new TypeReference<Map<String, String>>() {
-            });
-            System.out.println(map);
-        } catch (JsonGenerationException e) {
-            e.printStackTrace();
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void update(@RequestBody StationDTOWrapper stationDTOWrapper) {
+        for (StationDTOID station : stationDTOWrapper.getUpdate()) {
+            stationService.update(station);
+        }
+        for (StationDTOID station : stationDTOWrapper.getCreate()){
+            stationService.add(station.toStationDTO());
+        }
+        for(Integer stationId : stationDTOWrapper.getDelete()){
+            stationService.delete(stationId);
+        }
+        for(EdgeDTO edge : stationDTOWrapper.getEdges()){
+            edgeService.addEdge(edge);
         }
     }
+
+    @RequestMapping(method = RequestMethod.GET,
+            value = "/api/stations/list",
+            produces = APPLICATION_JSON_VALUE)
+    public List<StationDTOID> getList() {
+        List<StationEntity> stationsList = stationService.getStations();
+        List<StationDTOID> stationDTOIDList = new ArrayList<>();
+        for (StationEntity aStation : stationsList) {
+            StationDTOID station = new StationDTOID();
+            station.setId(Integer.toString(aStation.getId()));
+            station.setName(aStation.getName());
+            station.setTimezone(aStation.getTimezone());
+            station.setLatitude(Double.toString(aStation.getLatitude()));
+            station.setLongitude(Double.toString(aStation.getLongitude()));
+            System.out.println(station);
+            stationDTOIDList.add(station);
+        }
+        return stationDTOIDList;
+    }
+
 
 }
 

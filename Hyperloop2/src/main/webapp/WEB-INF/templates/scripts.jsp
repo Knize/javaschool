@@ -9,4 +9,5 @@
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.1.0.js"></script>
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-2.1.1.js"></script>
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/materialize.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/g/lodash@4.16.4(lodash.min.js+lodash.core.min.js+lodash.fp.min.js+lodash.fp.js+lodash.core.js+lodash.js+mapping.fp.js)"></script>
 

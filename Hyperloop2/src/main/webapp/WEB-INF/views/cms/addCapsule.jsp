@@ -3,6 +3,7 @@
 <html>
 <head>
     <%@include file="../../templates/head.jsp" %>
+    <%@include file="../../templates/CSRF.jsp" %>
 </head>
 <body>
 <%@include file="../../templates/scripts.jsp" %>
@@ -50,6 +51,9 @@
                             <button type="submit" class="btn-floating btn-large waves-effect waves-light red"><i
                                     class="material-icons">add</i></button>
                         </td>
+                        <td><input type="hidden"
+                                   name="${_csrf.parameterName}"
+                                   value="${_csrf.token}"/></td>
                     </form>
                 </tr>
                 </tbody>

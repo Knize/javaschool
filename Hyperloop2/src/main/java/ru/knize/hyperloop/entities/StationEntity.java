@@ -85,17 +85,6 @@ public class StationEntity {
         this.tickets = ticketsByStationId;
     }
 
-    private int rangeKm;
-
-    @Basic
-    public int getRangeKm() {
-        return rangeKm;
-    }
-
-    public void setRangeKm(int rangeKm) {
-        this.rangeKm = rangeKm;
-    }
-
     private double Latitude;
 
     @Basic

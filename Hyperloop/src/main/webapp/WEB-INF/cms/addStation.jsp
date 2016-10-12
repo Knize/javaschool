@@ -117,7 +117,7 @@
 
 
                 $('#add_station').click(function () {
-                    var selectedBranch =
+                    /*var selectedBranch =*/
 
                     var station = {
                         name: "New Station",
@@ -147,7 +147,7 @@
                                 index: station.index, rangeKm: station.rangeKm
                             }
                         }))
-                    }).done(function () {
+                    }).finish(function () {
                         setChanged(false);
                         Materialize.toast("Saved!", 2000);
                     })
@@ -170,13 +170,12 @@
                         });
 
                         var branchCoordinates = [];
-                        stations.sort(function (a,b) {
+                        stations.sort(function (a, b) {
                             var indexA = a.index;
                             var indexB = b.index;
-                            if(indexA < indexB) return -1;
-                            if(indexA > indexB) return 1;
+                            if (indexA < indexB) return -1;
+                            if (indexA > indexB) return 1;
                             return 0
-
                         });
                         stations.forEach(function (stationInFor) {
                             branchCoordinates.push({

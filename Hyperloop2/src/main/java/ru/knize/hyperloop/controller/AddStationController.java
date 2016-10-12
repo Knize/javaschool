@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.knize.hyperloop.DTO.StationDTO;
 import ru.knize.hyperloop.entities.BranchEntity;
+import ru.knize.hyperloop.entities.StationEntity;
 import ru.knize.hyperloop.services.BranchService;
 import ru.knize.hyperloop.services.StationService;
 
@@ -29,8 +30,10 @@ public class AddStationController {
         BranchEntity selectedBranch = branchService.getBranchById(
                 Integer.parseInt(selectedBranchIdStr));
         List<BranchEntity> branches = branchService.getBranches();
+        List<StationEntity> stations = stationService.getStations();
         model.addAttribute("branchList", branches);
         model.addAttribute("selectedBranch", selectedBranch);
+        model.addAttribute("stationList", stations);
         return "/cms/addStation";
     }
 

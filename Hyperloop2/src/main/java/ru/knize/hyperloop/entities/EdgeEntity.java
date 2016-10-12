@@ -12,6 +12,7 @@ public class EdgeEntity {
     private int id;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId() {
         return id;
     }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.knize.hyperloop.DTO.StationDTO;
+import ru.knize.hyperloop.DTO.StationDTOID;
 import ru.knize.hyperloop.entities.StationEntity;
 import ru.knize.hyperloop.repositories.StationRepository;
 
@@ -30,14 +31,30 @@ public class StationService {
     }
 
     @Transactional
-    public void addStation(StationDTO stationDTO){
+    public void add(StationDTO stationDTO){
         StationEntity se = new StationEntity();
-        se.setRangeKm(stationDTO.getRangeKm());
         se.setTimezone(stationDTO.getTimezone());
         se.setLongitude(0);
         se.setLatitude(0);
         se.setName(stationDTO.getName());
 
+        stationRepository.save(se);
+    }
+
+    @Transactional
+    public void delete(int stationId){
+        stationRepository.delete(getStationById(stationId));
+    }
+
+    @Transactional
+    public void update(StationDTOID stationDTOID){
+        StationEntity se = new StationEntity();
+        se.setId(stationDTOID.getId());
+        se.setTimezone(stationDTOID.getTimezone());
+        se.setLongitude(stationDTOID.getLongitude());
+        se.setLatitude(stationDTOID.getLatitude());
+        se.setName(stationDTOID.getName());
+        System.out.println("Going to persist station: " + se);
         stationRepository.save(se);
     }
 
