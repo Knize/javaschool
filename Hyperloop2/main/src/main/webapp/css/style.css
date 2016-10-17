@@ -1,0 +1,12 @@
+html body nav {
+  background-color: #694963; }
+
+.page-flexbox-wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column; }
+
+main {
+  flex: 1 0 auto; }
+
+/*# sourceMappingURL=style.css.map */

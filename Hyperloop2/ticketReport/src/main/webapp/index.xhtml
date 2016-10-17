@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:head>
+        <h:outputStylesheet name="/css/materialize.css"/>
+        <h:outputScript name="/js/materialize.js"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <h2>Watch tickets</h2>
+            <h:form>
+                <div class="input-field">
+                    <label for="from_date">From date</label>
+                    <h:inputText id="from_date" name="date" type="date" class="datepicker" required="true"/>
+                </div>
+                <div class="input-field">
+                    <label for="to_date">To date</label>
+                    <h:inputText id="to_date" name="date" type="date" class="datepicker" required="true"/>
+                </div>
+                <h:dataTable value="#{controller.tickets.tickets}" var="ticket">
+                    <h:column>#{ticket.id}</h:column>
+                    <h:column>#{ticket.personId}</h:column>
+                </h:dataTable>
+                <h:commandButton styleClass="btn" value="Submit" action="welcome"/>
+            </h:form>
+        </div>
+    </h:body>
+</f:view>
+</html>

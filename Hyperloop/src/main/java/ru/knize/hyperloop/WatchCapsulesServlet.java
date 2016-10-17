@@ -128,6 +128,7 @@ public class WatchCapsulesServlet extends HttpServlet {
             } else {
                 nextStation = stations.stream().filter(station -> station.getStationIndex() == startIndexFinal - 1).findFirst().get();
             }
+
             int range = nextStation.getRangeKm();
             System.out.println(range);
             Duration tripTime = CapsuleTravelingMath.computeTime(range);
